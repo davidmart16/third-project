@@ -8,7 +8,7 @@ const commentSchema = new Schema({
     maxlength: 140
   },
 
-  isValidate: {
+  isValidated: {
     type: Boolean,
     default: false
   },

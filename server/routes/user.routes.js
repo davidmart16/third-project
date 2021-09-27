@@ -22,6 +22,58 @@ router.get("/:id", (req, res) => {
     .findById(id)
     .then(user => res.status(200).json({ user, message: "User getted" }))
     .catch(err => res.status(500).json({ code: 500, message: "Error retrieving a single user", err }))
+}) 
+
+router.delete("/:id", (req, res) => {
+  
+  const { id } = req.params;
+
+  User
+    .findByIdAndDelete(id)
+    .then(() => res.status(200).json({ message: `User ${id} deleted` }))
+    .catch(err => res.status(500).json({ code: 500, message: "Error deleting user", err }))
+})
+
+
+//PREGUNTAR A TEO SI METER ESTO EN LA PROPIA CREACION DEL AUDIO
+router.put('/my-audios', (req, res)=> {
+
+  const currentUser = '6151918fa7b0cf1ddb4c95fb' //req.session.currentUser
+  const { audioId } = req.body
+
+  User
+  .findByIdAndUpdate( currentUser, { $push: {myAudios: audioId}}, {new: true} )
+  //.populate('audioId')
+  .then(user => res.status(200).json({ user, message: "User updated with my new audio" }))
+  .catch(err => res.status(500).json({ code: 500, message: 'Error adding my audio', err}))
+})
+
+router.put('/fav-audios', (req, res)=> {
+  
+  const currentUser = '6151918fa7b0cf1ddb4c95fb' //req.session.currentUser
+  const {audioId} = req.body
+
+  User
+  .findById(currentUser)
+  .then(user => {
+
+      if (user.favAudios.includes(audioId)){
+        
+        User   
+            .findByIdAndUpdate( currentUser, { $pull: {favAudios: audioId} }, {new: true})
+            .then(user => res.status(200).json({ user, message: "User updated with my favourites audios" }))
+            .catch(err => res.status(500).json({ code: 500, message: 'Error adding fav audios', err}))
+            
+      } else {
+            
+        User   
+        .findByIdAndUpdate( currentUser, { $push: {favAudios: audioId} }, {new: true})
+        .then(user => res.status(200).json({ user, message: "User updated with my favourites audios" }))
+        .catch(err => res.status(500).json({ code: 500, message: 'Error adding fav audios', err}))
+        
+      }
+    }
+  )
 })
 
 

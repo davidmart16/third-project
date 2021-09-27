@@ -18,11 +18,11 @@ const userSchema = new Schema({
 
   email: {
     type: String,
-    // validate: {
-    //         validator: value => value.endsWith('.com') || value.endsWith('.es'),
-    //         message: 'Solo emails validos, acabados en (.com) o (.es)'
-    //     },
-    // required: true 
+    validate: {
+            validator: value => value.endsWith('.com') || value.endsWith('.es'),
+            message: 'Solo emails validos, acabados en (.com) o (.es)'
+        },
+    required: true 
   },  
 
   icon: {

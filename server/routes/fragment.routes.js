@@ -4,13 +4,18 @@ const Fragment = require("../models/Fragment.model");
 
 router.get("/", (req, res) => {
 
-  // const { bookId } = req.body
-
   Fragment
-    .find()   // {bookId}
-    //.populate('bookId')
+    .find()
     .then(fragments => res.status(200).json(fragments))
     .catch(err => res.status(500).json({ code: 500, message: "Error retrieving fragments", err }))
+})
+
+router.get("/validate", (req, res) => {
+
+  Fragment
+    .find({isValidated: false})
+    .then(fragments => res.status(200).json(fragments, {message:'Search by validated'}))
+    .catch(err => res.status(500).json({ code: 500, message: "Error retrieving fragments by validated", err }))
 })
 
 router.get("/:id", (req, res) => {
@@ -46,13 +51,13 @@ router.delete("/:id", (req, res) => {
 
 router.put("/:id", (req, res) => {
 
+  const { content } = req.body
   const { id } = req.params;
 
   Fragment
-    .findByIdAndUpdate(id, req.body, { new: true })
-    .populate('bookId')
+    .findByIdAndUpdate(id, { content }, { new: true })
     .then(fragment => res.status(200).json({ fragment, message: "Fragment edited" }))
-    .catch(err => res.status(500).json({ code: 500, message: "Error editing", err }))
+    .catch(err => res.status(500).json({ code: 500, message: "Error editing fragment", err }))
 })
 
 

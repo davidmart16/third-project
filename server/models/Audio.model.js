@@ -29,7 +29,7 @@ const audioSchema = new Schema({
       ref: 'Comment'                       
   }],
 
-  isValidate: {
+  isValidated: {
     type: Boolean,
     default: false
   }
