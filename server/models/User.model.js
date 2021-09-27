@@ -10,11 +10,6 @@ const userSchema = new Schema({
     unique: true
   },
 
-  id: {
-    type: Number,
-
-  },
-
   password: {
     type: String,
     match: /[0-9][A-Z][a-z]/,
@@ -23,17 +18,12 @@ const userSchema = new Schema({
 
   email: {
     type: String,
-    validate: {
-            validator: value => value.endsWith('.com') || value.endsWith('.es'),
-            message: 'Solo emails validos, acabados en (.com) o (.es)'
-        },
-    required: true 
-  },
-
-  counter: {
-    type: Number,
-    default: 0
-  },
+    // validate: {
+    //         validator: value => value.endsWith('.com') || value.endsWith('.es'),
+    //         message: 'Solo emails validos, acabados en (.com) o (.es)'
+    //     },
+    // required: true 
+  },  
 
   icon: {
     type: String,
@@ -47,11 +37,11 @@ const userSchema = new Schema({
         ref: 'Audio'                       
     }],
 
-  rate: {
-    type: Number,
-    min: 0,
-    max: 5
-  },
+  // rate: {
+  //   type: Number,
+  //   min: 0,
+  //   max: 5
+  // },
 
   role: {
     type: String,

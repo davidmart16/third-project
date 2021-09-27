@@ -1,5 +1,6 @@
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
+const mongoose = require("mongoose");
 
 module.exports = app => {
   app.use(
@@ -10,10 +11,10 @@ module.exports = app => {
       cookie: {
         // sameSite: 'none',
         httpOnly: true,
-        maxAge: 1000 * 60 * 60 * 24
+        maxAge: 1000 * 60 * 60
       },
       store: MongoStore.create({
-        mongoUrl: process.env.MONGODB_URI || 'mongodb://localhost/basicAuth'
+        mongoUrl:process.env.DB_REMOTE
       })
     })
   );

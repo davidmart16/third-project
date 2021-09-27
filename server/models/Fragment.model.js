@@ -13,13 +13,13 @@ const fragmentSchema = new Schema({
     ref: 'Book'                       
   },
 
-  audios: 
-  [{
-      type: Schema.Types.ObjectId,   
-      ref: 'Audio'                       //SE PONE DEFAULT: [] PARA UNA ARRAY VACIA?
-  }],
+  // audios: 
+  // [{
+  //     type: Schema.Types.ObjectId,   
+  //     ref: 'Audio'                       //SE PONE DEFAULT: [] PARA UNA ARRAY VACIA?
+  // }],
 
-  isValidate: {
+  isValidated: {
     type: Boolean,
     default: false
   },

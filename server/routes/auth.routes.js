@@ -8,7 +8,7 @@ const bcryptSalt = 10
 // Signup (post)
 router.post('/signup', (req, res) => {
 
-  const { username, pwd } = req.body
+  const { username, password } = req.body
 
   User
     .findOne({ username })
@@ -20,7 +20,8 @@ router.post('/signup', (req, res) => {
       }
 
       const salt = bcrypt.genSaltSync(bcryptSalt)
-      const hashPass = bcrypt.hashSync(pwd, salt)
+      const hashPass = bcrypt.hashSync(password, salt)
+      
       User
         .create({ username, password: hashPass })
         .then(() => res.json({ code: 200, message: 'User created' }))
@@ -32,7 +33,7 @@ router.post('/signup', (req, res) => {
 // Login (post)
 router.post('/login', (req, res) => {
 
-  const { username, pwd } = req.body
+  const { username, password } = req.body
 
   User
     .findOne({ username })
@@ -43,7 +44,7 @@ router.post('/login', (req, res) => {
         return
       }
 
-      if (bcrypt.compareSync(pwd, user.password) === false) {
+      if (bcrypt.compareSync(password, user.password) === false) {
         res.status(401).json({ code: 401, message: 'Incorrect password' })
         return
       }

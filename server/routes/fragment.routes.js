@@ -3,9 +3,12 @@ const Fragment = require("../models/Fragment.model");
 
 
 router.get("/", (req, res) => {
+
+  // const { bookId } = req.body
+
   Fragment
-    .find({bookId})
-    .populate('bookId')
+    .find()   // {bookId}
+    //.populate('bookId')
     .then(fragments => res.status(200).json(fragments))
     .catch(err => res.status(500).json({ code: 500, message: "Error retrieving fragments", err }))
 })
@@ -16,7 +19,7 @@ router.get("/:id", (req, res) => {
 
   Fragment
     .findById(id)
-    .populate('bookId')
+    //.populate('bookId')
     .then(fragment => res.status(200).json({ fragment, message: "Fragment getted" }))
     .catch(err => res.status(500).json({ code: 500, message: "Error retrieving a single fragment", err }))
 })

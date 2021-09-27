@@ -3,14 +3,16 @@ const { Schema, model } = require("mongoose");
 const bookSchema = new Schema({
 
     bookId: {
-        type: Schema.Types.ObjectId
+        type: String,
+        // required: true
     }, 
 
     fragment: [{
         type: Schema.Types.ObjectId,
         ref: 'Fragment'
-    }]
-    
+    }],
+
+    name: String
 
 }, {
   timestamps: true

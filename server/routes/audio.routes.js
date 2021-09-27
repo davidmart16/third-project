@@ -1,5 +1,6 @@
 const router = require("express").Router();
-const Audio = require('../models/Audio.model')
+const Audio = require('../models/Audio.model');
+const Fragment = require("../models/Fragment.model");
 
 
 
@@ -7,7 +8,7 @@ router.get("/", (req, res) => {
 
   Audio
     .find()
-    .select('audioFile rate')
+    //.select('audioFile')//rate
     .then(audios => res.status(200).json(audios))
     .catch(err => res.status(500).json({ code: 500, message: "Error retrieving audios", err }))
 })
@@ -27,13 +28,14 @@ router.get("/:id", (req, res) => {
 
 router.post("/", (req, res) => {
 
-  const {audioFile} = req.body;
-  const fragmentId= req.params
+   const {audioFile, fragment, rate} = req.body;
 
-  Audio
-    .create({audioFile, fragment: fragmentId})
-    .then(audio => res.status(200).json({ audio, message: "Audio created" }))
-    .catch(err => res.status(500).json({ code: 500, message: "Error creating audio", err }))
+  Fragment
+  .findOne({content: fragment})
+  .then(oneFragment=> Audio.create({audioFile, fragment: oneFragment.id, rate})) // {audioFile, fragment: fragmentId} dentro del create? fragment: fragmentId}
+  .then(audio => res.status(200).json({ audio, message: "Audio created" }))
+  .catch(err => res.status(500).json({ code: 500, message: "Error creating audio", err }))
+
 })
 
 router.delete("/:id", (req, res) => {
