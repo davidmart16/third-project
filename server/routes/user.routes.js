@@ -63,6 +63,15 @@ router.put('/fav-audios', (req, res)=> {
   )
 })
 
+router.get("/:id/my-fav-audios", (req, res) => {
 
+  const {id} =  req.params  // '6151918fa7b0cf1ddb4c95fb' //req.session.currentUser._id
+  
+  User
+    .findById(id)
+    .populate('favAudios')
+    .then(user => res.status(200).json({ user }))
+    .catch(err => res.status(500).json({ code: 500, message: "Error retrieving favourites audios for my user", err }))
+})
 
 module.exports = router;

@@ -8,8 +8,8 @@ class AuthService {
     })
   }
 
-  signup = (username, password) => this.instance.post("/signup", { username, password })
-  login = (username, password) => this.instance.post("/login", { username, password })
+  signup = (username, password, email) => this.instance.post("/signup", { username, password, email})
+  login = (username, password, email) => this.instance.post("/login", { username, password, email })
   logout = () => this.instance.get("/logout")
   isloggedin = () => this.instance.post("/isloggedin")
 }

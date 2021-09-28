@@ -48,7 +48,6 @@ router.get("/:id", (req, res) => {
     .catch(err => res.status(500).json({ code: 500, message: "Error retrieving a single audio", err }))
 })
 
-//create audio
 router.post("/", (req, res) => {
 
   const currentUser = '6151918fa7b0cf1ddb4c95fb' //req.session.currentUser._id

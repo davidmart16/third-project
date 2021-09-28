@@ -10,11 +10,11 @@ router.get("/", (req, res) => {
     .catch(err => res.status(500).json({ code: 500, message: "Error retrieving fragments", err }))
 })
 
-router.get("/validate", (req, res) => {
+router.get("/validated", (req, res) => {
 
   Fragment
     .find({isValidated: false})
-    .then(fragments => res.status(200).json(fragments, {message:'Search by validated'}))
+    .then(fragments => res.status(200).json({fragments, message:'Search by validated'}))
     .catch(err => res.status(500).json({ code: 500, message: "Error retrieving fragments by validated", err }))
 })
 
