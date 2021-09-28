@@ -7,7 +7,7 @@ const bookSchema = new Schema({
         // required: true
     }, 
 
-    fragment: [{
+    fragments: [{
         type: Schema.Types.ObjectId,
         ref: 'Fragment'
     }],

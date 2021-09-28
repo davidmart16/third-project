@@ -7,6 +7,7 @@ router.get("/", (req, res) => {
 
   Book
     .find()
+    //.populate('fragment')
     .then(books => res.status(200).json(books))
     .catch(err => res.status(500).json({ code: 500, message: "Error retrieving books", err }))
 })

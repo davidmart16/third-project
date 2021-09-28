@@ -1,5 +1,6 @@
 import { Component } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import BooksService from "../../../../services/books.service"
 
 
@@ -29,12 +30,16 @@ class BooksList extends Component {
                 this.state.books.map(book => {
                     return (
                         <Row>
-                            <Col>
+                            {/* <Col>
                                 <img className='img-home' src={book.image_url} alt='no es una imagen'></img>
-                            </Col>
+                            </Col> */}
                             <Col>
                                 <h2>{book.name}</h2>
-                                <p>{book.fragment[0]}</p>
+                                {book.fragment?.map(fragment => <p>hola{fragment.content}</p>               
+                                )}
+                                <Link to={`/libros/${book.id}`}>
+                                    <Button>Detalles</Button>
+                                </Link>
                             </Col>
                         </Row>
                     )
