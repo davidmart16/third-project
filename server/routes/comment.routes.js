@@ -6,7 +6,7 @@ const Audio = require('../models/Audio.model')
 router.get("/", (req, res) => {
 
   Comment
-    .find()
+    .find({isValidated: true})
     //.populate('user')
     .then(comments => res.status(200).json(comments))
     .catch(err => res.status(500).json({ code: 500, message: "Error retrieving comments", err }))
@@ -25,7 +25,7 @@ router.get('/by-user', (req, res) => {
   const userId = '6151918fa7b0cf1ddb4c95fb'
 
   Comment
-  .find({user: userId})
+  .find({user: userId, isValidated: true})
   .populate('user')
   .then(comments => res.status(200).json(comments))
   .catch(err => res.status(500).json({ code: 500, message: 'Error retrieving comments by user', err} ))
@@ -34,12 +34,12 @@ router.get('/by-user', (req, res) => {
 router.post("/", (req, res) => {
 
   // const actualUser = req.session.currentUser;
-  const id = '6151918fa7b0cf1ddb4c95fb'
+  const id = '61520a489094900aa77e150f'
   const { text, audioId } = req.body;
 
   Comment.create({text, user: id})
   .then(comment => Audio.findByIdAndUpdate(audioId, {$push: {comments: comment.id}}))
-  .then(() => res.status(200).json({ message: "Comment created and push" }))
+  .then(audio => res.status(200).json({ audio, message: `Comment created and push in this audio ${audio._id}` }))
   .catch(err => res.status(500).json({ code: 500, message: "Error creating comment", err: err.message }))
 })
 
@@ -49,10 +49,21 @@ router.delete("/:id", (req, res) => {
 
   Comment
     .findByIdAndDelete(id)
-    .then(() => res.status(200).json({ message: `Comment ${id} deleted` }))
+    .then(() => Audio.find({comments: id}))
+    // .then(audios => {
+    //   return audios.forEach(audio => Audio.findByIdAndUpdate(audio._id,{ $pull: {comments: id} }) )
+    // })
+    .then( () => res.status(200).json({ message: `Comment ${id} deleted` }))
     .catch(err => res.status(500).json({ code: 500, message: "Error deleting comment", err }))
 })
 
+// router.get("/by-comments", (req, res) => {
+
+//   Audio
+//     .find({comments: id})
+//     .then(audios => res.status(200).json(audios))
+//     .catch(err => res.status(500).json({ code: 500, message: "Error retrieving audios by comment", err }))
+// })
 
 
 module.exports = router;

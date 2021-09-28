@@ -35,19 +35,6 @@ router.delete("/:id", (req, res) => {
 })
 
 
-//PREGUNTAR A TEO SI METER ESTO EN LA PROPIA CREACION DEL AUDIO
-router.put('/my-audios', (req, res)=> {
-
-  const currentUser = '6151918fa7b0cf1ddb4c95fb' //req.session.currentUser
-  const { audioId } = req.body
-
-  User
-  .findByIdAndUpdate( currentUser, { $push: {myAudios: audioId}}, {new: true} )
-  //.populate('audioId')
-  .then(user => res.status(200).json({ user, message: "User updated with my new audio" }))
-  .catch(err => res.status(500).json({ code: 500, message: 'Error adding my audio', err}))
-})
-
 router.put('/fav-audios', (req, res)=> {
   
   const currentUser = '6151918fa7b0cf1ddb4c95fb' //req.session.currentUser
