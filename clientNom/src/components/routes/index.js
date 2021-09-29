@@ -4,6 +4,8 @@ import AudioForm from '../pages/AudiosPage/AudioForm/AudioForm';
 import AudioList from '../pages/AudiosPage/AudiosList/AudiosList';
 import BookDetails from '../pages/BooksPage/BookDetails/BookDetails';
 import BooksList from '../pages/BooksPage/BooksList/BooksList';
+import FragmentForm from '../pages/FragmentsPage/FragmentForm/FragmentForm';
+import FragmentsList from '../pages/FragmentsPage/FragmentsList/FragmentsList';
 import HomePage from '../pages/HomePage/HomePage';
 import Login from '../pages/Login/Login';
 import Profile from '../pages/Profile/Profile';
@@ -17,10 +19,12 @@ const Routes = ({ storeUser, loggedUser }) => {
         <Route exact path="/" render={() => <HomePage />} />
         <Route exact path="/libros" render={() => <BooksList />} />
         <Route exact path="/audios" render={() => <AudioList />} />
+        <Route exact path="/fragmentos" render={() => <FragmentsList />} />
         <Route exact path="/registro" render={(props) => <Signup {...props} />} />
         <Route exact path="/iniciar-sesion" render={(props) => <Login storeUser={storeUser} {...props} />} />
         <Route path="/libros/:id" render={(props) => <BookDetails {...props} />} />
-        <Route path="/crear-audio" render={(props) => <AudioForm {...props}/>} />
+        <Route path="/crear-audio/:fragmentId" render={(props) => <AudioForm {...props}/>} />
+        <Route path="/crear-fragmento/:bookId" render={(props) => <FragmentForm {...props}/>} />
         <Route path="/perfil" render={() => loggedUser ? <Profile loggedUser={loggedUser} /> : <Redirect to="/iniciar-sesion" />} />
       </Switch>
     )

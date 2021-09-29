@@ -6,8 +6,8 @@ import FragmentItem from "../FragmentItem/FragmentItem";
 
 
 class FragmentsList extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
 
         this.state= {
             fragments: null
@@ -16,23 +16,25 @@ class FragmentsList extends Component {
     }
 
     componentDidMount(){
+        console.log(this.props.bookId)
         this.fragmentService.getFragments()
         .then(res => {
-            console.log(res.data)
             this.setState({
                 ...this.state,
                 fragments: res.data
             })
+            this.filteredFragments(this.props.bookId)
         })
     }
-        displayFragment = () => {
+
+        displayFragments = () => {
         return(
             this.state.fragments ?
                 this.state.fragments.map(fragment => {
                     return (
-                        <Col md={4}>
-                                <FragmentItem/>
-                            </Col>
+                        <Col md={6}>
+                            <FragmentItem {...fragment}/>
+                        </Col>
                     )
                 }) : 
                 <p>Cargando...</p>
@@ -40,15 +42,29 @@ class FragmentsList extends Component {
 
     }
 
+    filteredFragments = (book) => {
+        const copyFragments = this.state.fragments
+        return(
+            copyFragments ?
+            this.setState({
+                ...this.state,
+                fragments: copyFragments.filter(fragment => fragment.bookId.includes(book))
+            }) :
+            <p>Cargando</p>
+        )
+    }
+
+
     render() {
 
         return (
             <>
-                <h2>Listado de Libros</h2>
+                <h2>Fragmentos</h2>
                 <hr/>
                 <Container>
                     <Row>
-                        {this.displayFragment()}
+                        {this.displayFragments()}
+                         
                     </Row>
                 </Container>
             </>

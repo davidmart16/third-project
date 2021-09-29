@@ -11,23 +11,30 @@ class AudioForm extends Component {
 
         this.state = {
           fragment: "",
-          book: "",
-          audioFile:'',
+          audioFile: '',
           isLoading: null
         }
     }
 
   uploadService = new UploadsService()
-  audioService = new AudiosService();
+  audioService = new AudiosService()
 
-  handleChange = (e) => {
-    const { value, name } = e.target;
+  componentDidMount () {
+     const { fragmentId } = this.props.match.params;
 
-    this.setState({
-      ...this.state,
-      [name]: value
-    })
+        this.setState({
+            ...this.state,
+            fragment: fragmentId
+        })
   }
+  // handleChange = (e) => {
+  //   const { value, name } = e.target;
+
+  //   this.setState({
+  //     ...this.state,
+  //     [name]: value
+  //   })
+  // }
 
   handleFile = (e) => {
     this.setState({
@@ -45,38 +52,35 @@ class AudioForm extends Component {
           isLoading: false,
           audioFile: res.data.cloudinary_url
         })
+        console.log(res.data.cloudinary_url)
       })
       .catch(err => alert("Error, no se ha subido el audio"))
   }
 
-//   handleSubmit = (e) => {
-//     e.preventDefault();
 
-//     this.coasterService.createCoaster(this.state)
-//       .then(() => {
-//         this.props.closeModal();
-//         this.props.refreshCoasters();
-//         this.setState({
-//           fragment: "",
-//           book: "",
-//           audioFile: ""
-//         })
-//       })
-//       .catch(err => console.error(err))
-//   }
+
+    handleSubmit = (e) => {
+        e.preventDefault()
+
+        this.audioService.createAudio(this.state.fragment, this.state.audioFile)
+        .then(()=> {
+            // this.props.reloadFragments()
+            this.props.history.push(`/fragment/${this.state.fragment}`)
+        })
+    }
 
   render() {
     return (
       <Form onSubmit={this.handleSubmit}>
 
-        <Form.Group className="mb-3" controlId="libro">
+        {/* <Form.Group className="mb-3" controlId="libro">
           <Form.Label>Libro: </Form.Label>
           <Form.Control  as="select" onChange={(e) => this.handleChange(e)} name="libro" value={this.state.book} type="text" placeholder="Selecciona el libro">
                 <option value="DICTUM">Dictamen</option>
                 <option value="CONSTANCY">Constancia</option>
                 <option value="COMPLEMENT">Complemento</option>
           </Form.Control>
-        </Form.Group>
+        </Form.Group> */}
 
         {/* <Form.Group className="mb-3" controlId="imageUrl">
           <Form.Label>Imagen: </Form.Label>
@@ -89,7 +93,7 @@ class AudioForm extends Component {
         </Form.Group>
 
 
-        {this.state.isLoading && <p>subiendo archivo</p>}
+        {this.state.isLoading && <p>Subiendo archivo</p>}
 {/* <Spinner shape="circle" /> */}
 
         <Button disabled={this.state.isLoading} variant="primary" type="submit">

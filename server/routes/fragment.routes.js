@@ -32,10 +32,10 @@ router.get("/:id", (req, res) => {
 
 router.post("/", (req, res) => {
 
-  const {content, isValidated, bookId} = req.body;
+  const {content, bookId} = req.body;
 
   Fragment
-    .create({content, isValidated, bookId})
+    .create({content, bookId})
     .then(fragment => Book.findByIdAndUpdate(bookId, {$push: {fragments: fragment.id}}, {new: true}))
     .then(() => res.status(200).json({ message: "Fragment created" }))
     .catch(err => res.status(500).json({ code: 500, message: "Error creating fragment", err }))

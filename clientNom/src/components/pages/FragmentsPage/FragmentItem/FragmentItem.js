@@ -1,23 +1,21 @@
 import React from "react";
-import { Button, Card, Col } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-function FragmentItem({_id, content, bookId}) {
+function FragmentItem({ _id, content, bookId}) {
 
     return(
-        <Col md={4} className="mb-3">
-            <Card>
-            
-                <Card.Title>{content}</Card.Title>
+        <Card>
+        
+            <Card.Title>{content}</Card.Title>
 
-                <Card.Body>
-
-                    <Link to={`/fragmentos/${_id}`}>
-                    <Button variant="primary">Ver detalles</Button>
-                    </Link>
-                </Card.Body>
-            </Card>
-        </Col>
+            <Card.Body>
+                <p>Pertenece al libro con id: {bookId}</p>
+                <Link to={`/crear-audio/${_id}`}>
+                <Button variant="primary">Subir audio de este fragmento</Button>
+                </Link>
+            </Card.Body>
+        </Card>
     )
 }
 

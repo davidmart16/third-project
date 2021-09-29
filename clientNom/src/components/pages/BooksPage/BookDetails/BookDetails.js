@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import { Col, Container, Row } from 'react-bootstrap';
+import { Button, Col, Container, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import BooksService from '../../../../services/books.service';
+import FragmentsList from '../../FragmentsPage/FragmentsList/FragmentsList';
 
 class BookDetails extends Component {
   constructor(props){
@@ -34,15 +36,29 @@ class BookDetails extends Component {
         {
           this.state.book ?
           <Row>
-            <Col md={6}>
+            <Col>
                 <h1>Libro {this.state.book.name}</h1>
                 
                 <ul>Fragmentos: 
-                {this.state.book.fragment?.map(elem => {
+
+                {/* {this.state.book.fragment?.map(elem => {
                     return (<il>{elem.content}</il>)
-                })}
+                })} */}
+
+                  <FragmentsList bookId={this.state.book._id}/>
+                  
                 </ul>
             </Col>
+            <Link to={`/crear-fragmento/${this.state.book._id}`}>
+              <Button variant='primary' >Añade otro fragmento</Button>
+            </Link>
+            <Link to="/fragmentos">
+              <Button>Ver fragmentos</Button>
+            </Link>
+            <Link to="/">
+              <Button>volver</Button>
+            </Link>
+            
           </Row>
 
           : 

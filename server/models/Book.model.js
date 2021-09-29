@@ -2,6 +2,8 @@ const { Schema, model } = require("mongoose");
 
 const bookSchema = new Schema({
 
+    name: String,
+
     bookId: {
         type: String,
         // required: true
@@ -10,9 +12,7 @@ const bookSchema = new Schema({
     fragments: [{
         type: Schema.Types.ObjectId,
         ref: 'Fragment'
-    }],
-
-    name: String
+    }]
 
 }, {
   timestamps: true

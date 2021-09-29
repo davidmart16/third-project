@@ -17,6 +17,7 @@ function HomePage() {
         <Link to="/audios">
           <Button>Ver audios</Button>
         </Link>
+
         <Row >
           <Col mt={60} className='bloques'>
             <Link to="/registro">

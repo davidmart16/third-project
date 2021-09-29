@@ -3,7 +3,7 @@ import axios from 'axios';
 class FragmentsService {
   constructor(){
     this.instance = axios.create({
-      baseURL: `${process.env.REACT_APP_API_URL}/fragments`
+      baseURL: `${process.env.REACT_APP_API_URL}/fragment`
     })
   }
 

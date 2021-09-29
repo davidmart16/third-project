@@ -17,14 +17,15 @@ class BooksList extends Component {
     componentDidMount(){
         this.bookService.getBooks()
         .then(res => {
-            console.log(res.data)
             this.setState({
                 ...this.state,
                 books: res.data
             })
         })
     }
-        displayBooks = () => {
+
+    
+    displayBooks = () => {
         return(
             this.state.books ?
                 this.state.books.map(book => {
