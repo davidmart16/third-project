@@ -5,7 +5,7 @@ const audioRouter = require('./audio.routes')
 const fragmentRouter = require('./fragment.routes')
 const commentRouter = require('./comment.routes')
 const userRouter = require('./user.routes')
-const uploadRouter = require('./upload.routes')
+const uploadRouter = require('./uploads.routes')
 
 router.get("/", (req, res, next) => {
   res.json("All good in here");

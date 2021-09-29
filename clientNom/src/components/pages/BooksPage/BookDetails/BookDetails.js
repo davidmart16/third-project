@@ -3,8 +3,8 @@ import { Col, Container, Row } from 'react-bootstrap';
 import BooksService from '../../../../services/books.service';
 
 class BookDetails extends Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
 
     this.state = {
       book: null
@@ -38,7 +38,7 @@ class BookDetails extends Component {
                 <h1>Libro {this.state.book.name}</h1>
                 
                 <ul>Fragmentos: 
-                {this.state.book.fragment.map(elem => {
+                {this.state.book.fragment?.map(elem => {
                     return (<il>{elem.content}</il>)
                 })}
                 </ul>

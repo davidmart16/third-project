@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const Book = require("../models/Book.model");
 const Fragment = require("../models/Fragment.model");
 
 
@@ -31,11 +32,12 @@ router.get("/:id", (req, res) => {
 
 router.post("/", (req, res) => {
 
-  const fragment = req.body;
+  const {content, isValidated, bookId} = req.body;
 
   Fragment
-    .create(fragment)
-    .then(fragment => res.status(200).json({ fragment, message: "Fragment created" }))
+    .create({content, isValidated, bookId})
+    .then(fragment => Book.findByIdAndUpdate(bookId, {$push: {fragments: fragment.id}}, {new: true}))
+    .then(() => res.status(200).json({ message: "Fragment created" }))
     .catch(err => res.status(500).json({ code: 500, message: "Error creating fragment", err }))
 })
 

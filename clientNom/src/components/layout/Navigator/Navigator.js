@@ -25,7 +25,9 @@ export default function Navigator(props) {
             {props.loggedUser ?
               <>
                 <Link className="nav-link" to="/perfil">Mi perfil</Link>
+                <Link className="nav-link" to="/crear-audio">Subir audio</Link>
                 <span className="nav-link" onClick={logout}>Logout</span>
+
               </>
               :
               <>

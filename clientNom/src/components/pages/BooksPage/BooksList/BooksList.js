@@ -29,19 +29,14 @@ class BooksList extends Component {
             this.state.books ?
                 this.state.books.map(book => {
                     return (
-                        <Row>
-                            {/* <Col>
-                                <img className='img-home' src={book.image_url} alt='no es una imagen'></img>
-                            </Col> */}
-                            <Col>
+                        <Col md={4}>
                                 <h2>{book.name}</h2>
-                                {book.fragment?.map(fragment => <p>hola{fragment.content}</p>               
-                                )}
-                                <Link to={`/libros/${book.id}`}>
+                                {/* {book.fragment?.map(fragment => <p>hola{fragment.content}</p>               
+                                )} */}
+                                <Link to={`/libros/${book._id}`}>
                                     <Button>Detalles</Button>
                                 </Link>
                             </Col>
-                        </Row>
                     )
                 }) : 
                 <p>Cargando...</p>
@@ -53,11 +48,12 @@ class BooksList extends Component {
 
         return (
             <>
-                <div>
-                    hola buenas vengo de la rama de dani&jesus y somos libros
-                </div>
+                <h2>Listado de Libros</h2>
+                <hr/>
                 <Container>
-                    {this.displayBooks()}
+                    <Row>
+                        {this.displayBooks()}
+                    </Row>
                 </Container>
             </>
         )

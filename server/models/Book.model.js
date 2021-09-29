@@ -18,6 +18,6 @@ const bookSchema = new Schema({
   timestamps: true
 });
 
-const book = model("book", bookSchema);
+const Book = model("Book", bookSchema);
 
-module.exports = book;
+module.exports = Book;
