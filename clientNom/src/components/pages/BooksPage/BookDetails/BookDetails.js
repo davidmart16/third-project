@@ -37,17 +37,11 @@ class BookDetails extends Component {
           this.state.book ?
           <Row>
             <Col>
-                <h1>Libro {this.state.book.name}</h1>
-                
-                <ul>Fragmentos: 
-
+                <h1>Libro: {this.state.book.name}</h1>
                 {/* {this.state.book.fragment?.map(elem => {
                     return (<il>{elem.content}</il>)
                 })} */}
-
-                  <FragmentsList bookId={this.state.book._id}/>
-                  
-                </ul>
+                  <FragmentsList book={this.state.book}/>
             </Col>
             <Link to={`/crear-fragmento/${this.state.book._id}`}>
               <Button variant='primary' >Añade otro fragmento</Button>

@@ -4,17 +4,12 @@ const logger = require("morgan");
 
 const cookieParser = require("cookie-parser");
 
-const cors = require("cors");
+const corsConfig = require("./cors.config");
 
 module.exports = (app) => {
   app.set("trust proxy", 1);
 
-  app.use(
-    cors({
-      credentials: true,
-      origin: process.env.ORIGIN || "http://localhost:3000",
-    })
-  );
+  corsConfig(app)
 
   app.use(logger("dev"));
 

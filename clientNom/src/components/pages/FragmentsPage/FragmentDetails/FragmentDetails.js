@@ -25,48 +25,43 @@ class FragmentDetails extends Component{
 
     componentDidMount(){
         const { id } = this.props.match.params
-        console.log(id)
+        const info = {fragment: null}
+
         this.fragmentService.getOneFragment(id)
         .then(res => {
+            info.fragment = res.data.fragment
+            return this.bookService.getOneBook(res.data.fragment.bookId)
+        })
+        .then(res => {
             this.setState({
                 ...this.state,
-                fragment: res.data.fragment
+                book: res.data.book,
+                fragment: info.fragment
             })
-            console.log(res.data)
         })
         .catch(err => console.error(err))
-        // this.state.fragment ?
-        // this.bookService.getOneBook(this.state.fragment.bookId)
-        // .then(res => {
-        //     this.setState({
-        //         ...this.state,
-        //         book: res.data.book
-        //     })
-        // })
-        // .catch(err => console.error(err))
-
-        // : <p>waiting...</p>
-        this.getAudios()
-
-    }
-
-    getAudios = () => {
-
-        this.audioService.getAudiosByFragment(this.state.fragment?._id)
-        .then(res => {
-            console.log(res.data)
-            this.setState({
-                ...this.state,
-                fragmentAudios: res.data.audios
-            })
+            this.getAudios()
+            
+        }
+        
+        getAudios = () => {
+            
+            this.audioService.getAudiosByFragment(this.state.fragment?._id)
+            .then(res => {
+                this.setState({
+                    ...this.state,
+                    fragmentAudios: res.data
+                })
         })
         .catch(err => console.error(err))
 
     }
 
     displayAudios = () => {
+        return(
         this.state.fragmentAudios ?
             this.state.fragmentAudios.map(audio => {
+                console.log(audio)
                 return (
                     <Col>
                         <ReactAudioPlayer src={`${audio.audioFile}`} autoPlay controls/>
@@ -74,6 +69,7 @@ class FragmentDetails extends Component{
                 )
             }) : 
             <p>Cargando...</p>
+        )
     }
 
 
@@ -86,11 +82,11 @@ class FragmentDetails extends Component{
                     {this.state.fragment && 
                     <Col>
                         <h3>{this.state.fragment.content}</h3>
-                        <p>Este fragmento es de: {}</p>
+                        <p>Este fragmento es de: {this.state.book.name}</p>
                     </Col>
                     }
                 </Row>
-                <Row>hola
+                <Row>
                         {this.displayAudios()}
                 </Row>
             </Container>

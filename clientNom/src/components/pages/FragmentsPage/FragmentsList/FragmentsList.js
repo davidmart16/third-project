@@ -16,14 +16,14 @@ class FragmentsList extends Component {
     }
 
     componentDidMount(){
-        console.log(this.props.bookId)
+        console.log(this.props.book._id)
         this.fragmentService.getFragments()
         .then(res => {
             this.setState({
                 ...this.state,
                 fragments: res.data
             })
-            this.filteredFragments(this.props.bookId)
+            this.filteredFragments(this.props.book._id)
         })
     }
 
@@ -33,7 +33,7 @@ class FragmentsList extends Component {
                 this.state.fragments.map(fragment => {
                     return (
                         <Col md={6}>
-                            <FragmentItem {...fragment}/>
+                            <FragmentItem {...fragment} bookName= {this.props.book.name}/>
                         </Col>
                     )
                 }) : 

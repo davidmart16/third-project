@@ -52,7 +52,7 @@ router.get("/:id", (req, res) => {
 
 router.post("/", (req, res) => {
 
-  const currentUser = '6151918fa7b0cf1ddb4c95fb' //req.session.currentUser._id
+  const currentUser = req.session.currentUser._id
   const {audioFile, fragment} = req.body;
 
   Fragment

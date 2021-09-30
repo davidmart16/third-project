@@ -12,7 +12,6 @@ const userSchema = new Schema({
 
   password: {
     type: String,
-    match: /[0-9][A-Z][a-z]/,
     required: true 
   },
 
