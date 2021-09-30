@@ -1,7 +1,7 @@
 import { Component } from "react";
-import { Col } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import AudiosService from "../../../../services/audios.service"
-import ReactAudioPlayer from 'react-audio-player';
+import AudioItem from "../AudioItem/AudioItem";
 
 
 class AudioList extends Component {
@@ -31,12 +31,12 @@ class AudioList extends Component {
 
             this.state.audios ?
              this.state.audios.map(audio => {
+//               <Col>
+//                   <ReactAudioPlayer src={`${audio.audioFile}`} autoPlay controls/>
+//               </Col>
 
                     return (
-                        <Col>
-                            <div>{audio.audioFile}</div>
-                            <ReactAudioPlayer src={`${audio.audioFile}`} autoPlay controls/>
-                        </Col>
+                        <AudioItem {...audio} ></AudioItem>
                     )
                 }) : 
                 <p>Cargando...</p>
@@ -47,11 +47,12 @@ class AudioList extends Component {
     render() {
 
         return (
-            
-            <div>
-                hola buenas vengo de la rama de dani&jesus y somos audios
-                {this.displayAudios()}
-            </div>
+            <Container>
+                <Row>
+                    <h2>Los mejores audios</h2>
+                    {this.displayAudios()}
+                </Row>
+            </Container>
         )
     }   
 }

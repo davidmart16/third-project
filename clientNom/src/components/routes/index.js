@@ -19,7 +19,7 @@ const Routes = ({ storeUser, loggedUser }) => {
   return (
       <Switch>
         <Route path="/prueba" render={() => <PruebaAudio />} />
-        <Route exact path="/" render={() => <HomePage />} />
+        <Route exact path="/" render={() => <HomePage loggedUser={loggedUser} storeUser={storeUser} />} />
         <Route exact path="/libros" render={() => <BooksList />} />
         <Route exact path="/audios" render={() => <AudioList />} />
         <Route exact path="/fragmentos" render={() => <FragmentsList />} />

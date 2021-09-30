@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import BooksService from "../../../../services/books.service"
 
@@ -48,15 +48,14 @@ class BooksList extends Component {
     render() {
 
         return (
-            <>
-                <h2>Listado de Libros</h2>
-                <hr/>
-                <Container>
-                    <Row>
-                        {this.displayBooks()}
-                    </Row>
-                </Container>
-            </>
+        <>
+            <h2>Listado de Libros</h2>
+            <hr/>
+            <Row>
+                {this.displayBooks()}
+            </Row>
+            
+        </>
         )
     }   
 }
