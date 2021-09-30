@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const authRouter = require('./auth.routes')
 const bookRouter = require('./book.routes')
+const apibookRouter = require('./apibooks.routes')
 const audioRouter = require('./audio.routes')
 const fragmentRouter = require('./fragment.routes')
 const commentRouter = require('./comment.routes')
@@ -14,6 +15,7 @@ router.get("/", (req, res, next) => {
 // You put the next routes here 👇
 router.use("/auth", authRouter)
 router.use("/book", bookRouter)
+router.use("/apibook", apibookRouter)
 router.use("/audio", audioRouter)
 router.use("/fragment", fragmentRouter)
 router.use("/comment", commentRouter)

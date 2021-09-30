@@ -10,7 +10,8 @@ import FragmentsList from '../pages/FragmentsPage/FragmentsList/FragmentsList';
 import HomePage from '../pages/HomePage/HomePage';
 import Login from '../pages/Login/Login';
 import Profile from '../pages/Profile/Profile';
-import PruebaAudio from '../pages/PruebaAudio/PruebaAudio';
+import PruebaBooks from '../pages/PruebaBooks/PruebaBooks';
+// import PruebaAudio from '../pages/PruebaAudio/PruebaAudio';
 import Signup from '../pages/Signup/Signup';
 
 const Routes = ({ storeUser, loggedUser }) => {
@@ -18,7 +19,8 @@ const Routes = ({ storeUser, loggedUser }) => {
 
   return (
       <Switch>
-        <Route path="/prueba" render={() => <PruebaAudio />} />
+        {/* <Route path="/prueba" render={() => <PruebaAudio />} /> */}
+        <Route path="/prueba" render={() => <PruebaBooks />} />
         <Route exact path="/" render={() => <HomePage loggedUser={loggedUser} storeUser={storeUser} />} />
         <Route exact path="/libros" render={() => <BooksList />} />
         <Route exact path="/audios" render={() => <AudioList />} />
