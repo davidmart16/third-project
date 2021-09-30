@@ -28,6 +28,7 @@ router.get("/validated", (req, res) => {
 router.get("/by-fragment", (req, res) => {
 
   const fragment = req.body
+  console.log(fragment)
 
   Audio
     .find(fragment)
@@ -52,12 +53,11 @@ router.get("/:id", (req, res) => {
 router.post("/", (req, res) => {
 
   const currentUser = '6151918fa7b0cf1ddb4c95fb' //req.session.currentUser._id
-  console.log(req.body)
   const {audioFile, fragment} = req.body;
 
   Fragment
-  .findById({fragment})
-  .then(oneFragment=> Audio.create({audioFile, fragment: oneFragment.id, book: oneFragment.bookId}))
+  .findById(fragment)
+  .then(oneFragment=> Audio.create({audioFile, fragment: oneFragment._id, book: oneFragment.bookId}))
   .then(audio => User.findByIdAndUpdate( currentUser, { $push: {myAudios: audio.id}}, {new: true} ))
   .then(() => res.status(200).json({ message: "Audio created" }))
   .catch(err => res.status(500).json({ code: 500, message: "Error creating audio", err: err.message }))

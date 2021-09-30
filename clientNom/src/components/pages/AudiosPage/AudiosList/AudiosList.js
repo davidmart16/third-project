@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { Col } from "react-bootstrap";
 import AudiosService from "../../../../services/audios.service"
-//import ReactAudioPlayer from 'react-audio-player';
+import ReactAudioPlayer from 'react-audio-player';
 
 
 class AudioList extends Component {
@@ -35,7 +35,7 @@ class AudioList extends Component {
                     return (
                         <Col>
                             <div>{audio.audioFile}</div>
-                            {/* <ReactAudioPlayer src={`${audio.audioFile}`} autoPlay controls/> */}
+                            <ReactAudioPlayer src={`${audio.audioFile}`} autoPlay controls/>
                         </Col>
                     )
                 }) : 

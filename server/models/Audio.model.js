@@ -4,7 +4,7 @@ const audioSchema = new Schema({
 
   audioFile: {
     type: String,
-    required: true
+    // required: true
   },
 
   book: {

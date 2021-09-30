@@ -20,8 +20,8 @@ class AudioForm extends Component {
   audioService = new AudiosService()
 
   componentDidMount () {
-     const { fragmentId } = this.props.match.params;
-
+    const { fragmentId } = this.props.match.params;
+    console.log(fragmentId)
         this.setState({
             ...this.state,
             fragment: fragmentId
@@ -50,9 +50,9 @@ class AudioForm extends Component {
         this.setState({
           ...this.state,
           isLoading: false,
-          audioFile: res.data.cloudinary_url
+          audioFile: res.data.fileUrl
         })
-        console.log(res.data.cloudinary_url)
+        // console.log(res.data.fileUrl)
       })
       .catch(err => alert("Error, no se ha subido el audio"))
   }
@@ -62,10 +62,10 @@ class AudioForm extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
 
-        this.audioService.createAudio(this.state.fragment, this.state.audioFile)
-        .then(()=> {
+        this.audioService.createAudio({fragment: this.state.fragment, audioFile: this.state.audioFile})
+        .then(() => {
             // this.props.reloadFragments()
-            this.props.history.push(`/fragment/${this.state.fragment}`)
+            this.props.history.push(`/fragmentos/${this.state.fragment}`)
         })
     }
 
