@@ -14,6 +14,9 @@ function FragmentItem({ _id, content, bookId}) {
                 <Link to={`/crear-audio/${_id}`}>
                 <Button variant="primary">Subir audio de este fragmento</Button>
                 </Link>
+                <Link to={`/fragmentos/${_id}`}>
+                    <Button>Audios del Fragmento</Button>
+                </Link>
             </Card.Body>
         </Card>
     )

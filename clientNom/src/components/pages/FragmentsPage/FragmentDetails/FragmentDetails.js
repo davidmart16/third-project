@@ -3,6 +3,7 @@ import AudiosService from "../../../../services/audios.service";
 import ReactAudioPlayer from 'react-audio-player';
 import BooksService from "../../../../services/books.service";
 import FragmentsService from "../../../../services/fragments.service";
+
 const { Component } = require("react");
 
 
@@ -78,14 +79,14 @@ class FragmentDetails extends Component{
         return (
             <>
             <Container>
-                <Row>
                     {this.state.fragment && 
+                <Row>
                     <Col>
                         <h3>{this.state.fragment.content}</h3>
                         <p>Este fragmento es de: {this.state.book.name}</p>
                     </Col>
-                    }
                 </Row>
+                    }
                 <Row>
                         {this.displayAudios()}
                 </Row>
