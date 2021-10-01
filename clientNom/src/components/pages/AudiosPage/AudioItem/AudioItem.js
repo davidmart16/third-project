@@ -7,7 +7,7 @@ function AudioItem ({audioFile, _id}) {
     return(
         
             <Col md={6}>
-                <ReactAudioPlayer src={`${audioFile}`} autoPlay controls/>
+                <ReactAudioPlayer src={`${audioFile}`} autoPlay={false} controls/>
                 <Link to={`/audios/${_id}`}>
                     <Button  >Detalles</Button>
                 </Link>

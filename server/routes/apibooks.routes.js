@@ -3,7 +3,7 @@ const router = require('express').Router()
 
 const APIHandler = require('../services/APIHandler')
 
-const API = new APIHandler
+const API = new APIHandler()
 
 router.get('/search-book/:text', (req, res) => {
 
@@ -13,7 +13,7 @@ router.get('/search-book/:text', (req, res) => {
     API
     .getBooks(text)
     .then(books => {
-        console.log(books, books.data)    
+        console.log(books, 'HOLAAAAA ESTOY AQUIIIIIIIII',books.data)    
         return res.json( books.data.items)
     })
     .catch(err => console.error(err))

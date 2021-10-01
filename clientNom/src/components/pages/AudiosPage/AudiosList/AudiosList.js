@@ -31,10 +31,6 @@ class AudioList extends Component {
 
             this.state.audios ?
              this.state.audios.map(audio => {
-//               <Col>
-//                   <ReactAudioPlayer src={`${audio.audioFile}`} autoPlay controls/>
-//               </Col>
-
                     return (
                         <AudioItem {...audio} ></AudioItem>
                     )

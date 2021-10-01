@@ -1,8 +1,9 @@
-import { Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import AudiosService from "../../../../services/audios.service";
 import ReactAudioPlayer from 'react-audio-player';
 import BooksService from "../../../../services/books.service";
 import FragmentsService from "../../../../services/fragments.service";
+import { Link } from "react-router-dom";
 
 const { Component } = require("react");
 
@@ -44,7 +45,7 @@ class FragmentDetails extends Component{
             this.getAudios()
             
         }
-        
+        //FILTRAR AUDIOS AQUI O LLAMAR MEJOR EN EL SERVICIO
         getAudios = () => {
             
             this.audioService.getAudiosByFragment(this.state.fragment?._id)
@@ -65,7 +66,10 @@ class FragmentDetails extends Component{
                 console.log(audio)
                 return (
                     <Col>
-                        <ReactAudioPlayer src={`${audio.audioFile}`} autoPlay controls/>
+                        <ReactAudioPlayer src={`${audio.audioFile}`} autoPlay={false} controls/>
+                        <Link to={`/audios/${audio._id}`}>
+                            <Button>Da tu opinion sobre este audio</Button>
+                        </Link>
                     </Col>
                 )
             }) : 

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom';
+import AudioDetails from '../pages/AudiosPage/AudioDetails/AudioDetails';
 import AudioForm from '../pages/AudiosPage/AudioForm/AudioForm';
 import AudioList from '../pages/AudiosPage/AudiosList/AudiosList';
 import BookDetails from '../pages/BooksPage/BookDetails/BookDetails';
@@ -25,10 +26,11 @@ const Routes = ({ storeUser, loggedUser }) => {
         <Route exact path="/libros" render={() => <BooksList />} />
         <Route exact path="/audios" render={() => <AudioList />} />
         <Route exact path="/fragmentos" render={() => <FragmentsList />} />
-        <Route exact path="/fragmentos/:id" render={(props) => <FragmentDetails {...props} />} />
+        <Route path="/libros/:id" render={(props) => <BookDetails {...props} />} />
+        <Route path="/fragmentos/:id" render={(props) => <FragmentDetails {...props} />} />
+        <Route path="/audios/:id" render={(props) => <AudioDetails {...props} />} />
         <Route exact path="/registro" render={(props) => <Signup {...props} />} />
         <Route exact path="/iniciar-sesion" render={(props) => <Login storeUser={storeUser} {...props} />} />
-        <Route path="/libros/:id" render={(props) => <BookDetails {...props} />} />
         <Route path="/crear-audio/:fragmentId" render={(props) => <AudioForm {...props}/>} />
         <Route path="/crear-fragmento/:bookId" render={(props) => <FragmentForm {...props}/>} />
         <Route path="/perfil" render={() => loggedUser ? <Profile loggedUser={loggedUser} /> : <Redirect to="/iniciar-sesion" />} />

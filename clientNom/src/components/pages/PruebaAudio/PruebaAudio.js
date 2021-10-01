@@ -30,7 +30,7 @@ class PruebaAudio extends Component {
         return(
             <>
             {this.state.audio ? 
-            <ReactAudioPlayer src={`${this.state.audio.audioFile}`} autoPlay controls/> : <p>cargando</p>
+            <ReactAudioPlayer src={`${this.state.audio.audioFile}`} autoPlay={false} controls/> : <p>cargando</p>
             }
             </>
         )
