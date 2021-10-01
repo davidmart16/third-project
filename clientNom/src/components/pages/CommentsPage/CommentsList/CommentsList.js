@@ -13,25 +13,19 @@ class CommentList extends Component {
     }
 
     componentDidMount(){
-        console.log('hola soy las props',this.props)
+
         this.setState({
             ...this.state,
-            comments: this.props
+            comments: this.props.comments
         })
     }
 
     displayComments = () => {
-        console.log(this.state.comments)
+
         return (
         this.state.comments ?
-             this.state.comments.map(comment => {
-                return(
-                    
-                    <CommentItem {...comment}/>
-                    )
-
-            })
-            : <div>fallando</div>
+             this.state.comments.map(comment => <CommentItem {...comment}/>) 
+             : <div>fallando</div>
         )
     }
     
@@ -41,7 +35,6 @@ class CommentList extends Component {
         return(
             
             <Row>
-            <div>hola a ti si a ti</div>
                 {this.displayComments()}
             </Row>
         )

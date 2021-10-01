@@ -5,6 +5,7 @@ import AudioForm from '../pages/AudiosPage/AudioForm/AudioForm';
 import AudioList from '../pages/AudiosPage/AudiosList/AudiosList';
 import BookDetails from '../pages/BooksPage/BookDetails/BookDetails';
 import BooksList from '../pages/BooksPage/BooksList/BooksList';
+import CommentForm from '../pages/CommentsPage/CommentForm/CommentForm';
 import FragmentDetails from '../pages/FragmentsPage/FragmentDetails/FragmentDetails';
 import FragmentForm from '../pages/FragmentsPage/FragmentForm/FragmentForm';
 import FragmentsList from '../pages/FragmentsPage/FragmentsList/FragmentsList';
@@ -23,17 +24,26 @@ const Routes = ({ storeUser, loggedUser }) => {
         {/* <Route path="/prueba" render={() => <PruebaAudio />} /> */}
         <Route path="/prueba" render={() => <PruebaBooks />} />
         <Route exact path="/" render={() => <HomePage loggedUser={loggedUser} storeUser={storeUser} />} />
-        <Route exact path="/libros" render={() => <BooksList />} />
-        <Route exact path="/audios" render={() => <AudioList />} />
-        <Route exact path="/fragmentos" render={() => <FragmentsList />} />
-        <Route path="/libros/:id" render={(props) => <BookDetails {...props} />} />
-        <Route path="/fragmentos/:id" render={(props) => <FragmentDetails {...props} />} />
-        <Route path="/audios/:id" render={(props) => <AudioDetails {...props} />} />
+        <Route exact path="/libros" render={() => <BooksList loggedUser={loggedUser} />} />
+        <Route exact path="/audios" render={() => <AudioList loggedUser={loggedUser} />} />
         <Route exact path="/registro" render={(props) => <Signup {...props} />} />
         <Route exact path="/iniciar-sesion" render={(props) => <Login storeUser={storeUser} {...props} />} />
-        <Route path="/crear-audio/:fragmentId" render={(props) => <AudioForm {...props}/>} />
-        <Route path="/crear-fragmento/:bookId" render={(props) => <FragmentForm {...props}/>} />
-        <Route path="/perfil" render={() => loggedUser ? <Profile loggedUser={loggedUser} /> : <Redirect to="/iniciar-sesion" />} />
+        <Route exact path="/fragmentos" render={() => <FragmentsList loggedUser={loggedUser} />} />
+
+
+        {loggedUser ? (
+          <>
+            <Route path="/libros/:id" render={(props) =>  <BookDetails {...props} /> } />
+            <Route path="/fragmentos/:id" render={(props) => <FragmentDetails {...props} /> } />
+            <Route path="/audios/:id" render={(props) => <AudioDetails {...props} /> } />
+            <Route path="/crear-audio/:fragmentId" render={(props) => <AudioForm {...props}/>}  />
+            <Route path="/crear-comentario/:audioId" render={(props) => <CommentForm {...props} loggedUser={loggedUser}/> } />
+            <Route path="/crear-fragmento/:bookId" render={(props) => <FragmentForm {...props}/> } />
+            <Route path="/perfil" render={() => <Profile loggedUser={loggedUser} /> } />
+          </>
+        )
+        : <Redirect to="/iniciar-sesion" /> 
+        }
       </Switch>
     )
 }

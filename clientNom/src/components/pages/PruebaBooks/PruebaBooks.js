@@ -18,6 +18,8 @@ class PruebaBooks extends Component{
 
 
     componentDidMount(){
+        //props.match
+        //didUpdate (posible bucle infinito ;) )
         this.apibookService.getBooks('sanderson')
         .then(res => {
             this.setState({

@@ -4,7 +4,7 @@ function CommentItem ({text, _id}) {
 
     return(
         
-            <Col md={6}>
+            <Col>
                 <article>{text}</article>
             </Col>
     )

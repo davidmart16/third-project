@@ -1,13 +1,13 @@
 import { Component } from "react";
-import { Container, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import AudiosService from "../../../../services/audios.service"
 import AudioItem from "../AudioItem/AudioItem";
 
 
 class AudioList extends Component {
-    constructor(){
-        super();
-
+    constructor(props){
+        super(props);
+        console.log(props)
         this.state= {
             audios: null
         }
@@ -32,7 +32,7 @@ class AudioList extends Component {
             this.state.audios ?
              this.state.audios.map(audio => {
                     return (
-                        <AudioItem {...audio} ></AudioItem>
+                        <AudioItem {...audio} loggedUser={this.props.loggedUser}></AudioItem>
                     )
                 }) : 
                 <p>Cargando...</p>
@@ -45,9 +45,14 @@ class AudioList extends Component {
         return (
             <Container>
                 <Row>
-                    <h2>Los mejores audios</h2>
+                    <Col md={12}><h2>Los mejores audios</h2></Col>
+                <hr/>
                     {this.displayAudios()}
                 </Row>
+                <hr/>
+                {/* {this.props.loggedUser  */}
+                || <h5> Inicia sesion para poder comentar </h5>
+                {/* } */}
             </Container>
         )
     }   
