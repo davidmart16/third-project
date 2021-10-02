@@ -14,8 +14,6 @@ class SearchBar extends Component {
 
     }
 
-    //const { plant } = props
-
     handleChange = (e) => {
         const { value } = e.target
 
@@ -26,8 +24,6 @@ class SearchBar extends Component {
         console.log(this.state.searchValue)
     }
 
-
-        
     render() {
 
         return(
@@ -37,10 +33,10 @@ class SearchBar extends Component {
                 <InputGroup className="mb-3 mt-4">
                     <FormControl onChange={e => this.handleChange(e)} name="searchValue" value={this.state.searchValue} 
                     placeholder="Search for title..." aria-label="buscar"/>
-                </InputGroup>
                 <Link to={`/lista-libros/${this.state.searchValue}`}>
                 <Button variant="primary" type="submit">Buscar</Button>
                 </Link>
+                </InputGroup>
 
         </Container>
 

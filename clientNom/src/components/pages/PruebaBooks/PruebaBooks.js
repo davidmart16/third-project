@@ -59,8 +59,14 @@ class PruebaBooks extends Component{
                         
                         <Col md={6}>
                             <h3>{libro.volumeInfo.title}</h3>
+                            {libro.volumeInfo.description ?
                             <p>{libro.volumeInfo.description}</p>
+                            : <p>Sin descripcion</p>
+                            }
+                            {libro.volumeInfo.pageCount ?
                             <h4>Paginas: {libro.volumeInfo.pageCount}</h4>
+                            : <> </>
+                            }
                             <Link>
                                 <Button>hara cosas, como llevarte a narnia</Button>
                             </Link>

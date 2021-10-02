@@ -9,6 +9,7 @@ class BooksService {
 
   getBooks = () => this.instance.get("/");
   getOneBook = (id) => this.instance.get(`/${id}`);
+  createBook = (book) => this.instance.post('/', book);
 }
 
 export default BooksService;

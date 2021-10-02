@@ -6,7 +6,6 @@ const bookSchema = new Schema({
 
     bookId: {
         type: String,
-        // required: true
     }, 
 
     fragments: [{

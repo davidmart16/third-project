@@ -1,8 +1,7 @@
 import { Component } from "react";
-import { Button, Col } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import APIBooksService from '../../../services/apibooks.service'
-import PruebaBooks from "../PruebaBooks/PruebaBooks";
 
 
 class BooksAPIPage extends Component{
@@ -10,28 +9,19 @@ class BooksAPIPage extends Component{
         super()
 
         this.state={
-            books: null
+            booksApi: null
         }
 
-        console.log(props)
     }
 
-
-
-      
     apibookService = new APIBooksService()
     
-    
     componentDidMount(){
-        //didUpdate (posible bucle infinito ;) )
         this.getBooks()
     }
     
-    
-    
 
     componentDidUpdate = (prevProps, prevState) => {
-
         // console.log('soy las prevProps: ', prevProps.match.params)
         // console.log('soy las this.props: diferenciame' ,this.props.match.params)
         if (prevProps.match.params.text !== this.props.match.params.text) this.getBooks()
@@ -45,9 +35,9 @@ class BooksAPIPage extends Component{
         .then(res => {
             this.setState({
                 ...this.state,
-                libros: res.data
+                booksApi: res.data
             })
-            console.log(this.state.libros)
+            console.log(this.state.booksApi)
         })
         .catch(err => console.error(err))
         
@@ -56,65 +46,60 @@ class BooksAPIPage extends Component{
 
     displayBooks = () => {
         return(
-            this.state.libros ?
-                this.state.libros.map(libro => {
-                    console.log(libro)
+            this.state.booksApi ?
+                this.state.booksApi.map(book => {
+                    console.log(book)
                     return (
                         
                         <Col md={6}>
-                            <h3>{libro.volumeInfo.title}</h3>
-                            <p>{libro.volumeInfo.description}</p>
-                            <h4>Paginas: {libro.volumeInfo.pageCount}</h4>
-                            <Link>
+                            <h3>{book.volumeInfo.title}</h3>
+                            <p>{book.volumeInfo.description}</p>
+                            <h4>Paginas: {book.volumeInfo.pageCount}</h4>
+                            <Link to='/'>
                                 <Button>hara cosas, como llevarte a narnia</Button>
                             </Link>
                             <hr/>
                         </Col>
-                          
                         
                     )
                 }) : 
                 <p>Cargando...</p>
         )
-
     }
 
-
-
-    // render(){
-
-    //     return (
-    //     <Container>
-    //         <Row>
-
-    //         {this.state.libros ? 
-            
-    //         this.displayBooks()
-    //         :
-    //         <p>cargando...</p>
-    //         }
-
-    //         <hr/>
-
-    //         {/* <Col md={6}>
-    //             <image src={`${libro.volumeInfo.imageLinks?.thumbnail}`}></image>
-    //         </Col> */}
-
-    //         </Row>
-    //     </Container>
-    //     )
-    // }
 
     render(){
 
         return (
-            <>
-            <h1>IR A NARNIA</h1>
+        <Container>
+            <Row>
+
+            {this.state.booksApi ? 
             
-            <PruebaBooks {...this.props}></PruebaBooks>
-            </>
+            this.displayBooks()
+            :
+            <p>cargando...</p>
+            }
+            <hr/>
+            {/* <Col md={6}>
+                <image src={`${book.volumeInfo.imageLinks?.thumbnail}`}></image>
+            </Col> */}
+
+            </Row>
+        </Container>
         )
     }
+
+    // render(){
+
+    //     return (
+    //         <>
+    //         <h1>IR A NARNIA</h1>
+            
+    //         <PruebaBooks {...this.props}></PruebaBooks>
+    //         </>
+    //     )
+    // }
 }
 
 export default BooksAPIPage
