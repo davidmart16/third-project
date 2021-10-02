@@ -16,6 +16,11 @@ function HomePage(props) {
             </Link>
           </Col>
           <Col>
+            <Link to="/prueba">
+              <Button>Ver libros de la api</Button>
+            </Link>
+          </Col>
+          <Col>
             <Link to="/audios">
               <Button>Ver audios</Button>
             </Link>
@@ -23,28 +28,28 @@ function HomePage(props) {
         </Row>
         <br/>
         {props.loggedUser ? 
-        <Row>
-          <Col>
-            <Link to="/perfil">
-              <Button>Mi perfil</Button>
-            </Link>
-          </Col>
-        </Row>
-        : 
-        <Row >
-          <Col mt={60} className='bloques'>
-            <Link to="/registro">
-              <Button>Registrate</Button>
-            </Link>
-          </Col>
-          <Col className='bloques'>
-            <Link to="/iniciar-sesion">
-              <Button>Inicia Sesion</Button>
-            </Link>
-          </Col>
-        </Row> 
+          <Row>
+            <Col>
+              <Link to="/perfil">
+                <Button>Mi perfil</Button>
+              </Link>
+            </Col>
+          </Row>
+          : 
+          <Row >
+            <Col mt={60} className='bloques'>
+              <Link to="/registro">
+                <Button>Registrate</Button>
+              </Link>
+            </Col>
+            <Col className='bloques'>
+              <Link to="/iniciar-sesion">
+                <Button>Inicia Sesion</Button>
+              </Link>
+            </Col>
+          </Row> 
         }
-        <BooksList/>
+        <BooksList loggedUser= {props.loggedUser}/>
       </Container>
     </>
   )

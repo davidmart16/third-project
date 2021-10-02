@@ -50,9 +50,9 @@ class AudioList extends Component {
                     {this.displayAudios()}
                 </Row>
                 <hr/>
-                {/* {this.props.loggedUser  */}
-                || <h5> Inicia sesion para poder comentar </h5>
-                {/* } */}
+                {!this.props.loggedUser 
+                && <h5> Inicia sesion para poder comentar </h5>
+                }
             </Container>
         )
     }   

@@ -36,11 +36,11 @@ class BooksList extends Component {
                             <Container>
                                 <Row>
                                     {book.fragments?.map(fragment => <Col md={11}>{fragment.content}</Col>)}
-                                    {/* {this.props.loggedUser && */}
+                                    {this.props.loggedUser &&
                                     <Link to={`/libros/${book._id}`}>
                                         <Button>Detalles</Button>
                                     </Link>
-                                    {/* } */}
+                                    }
                                 </Row>
                             </Container>
                         </Col>

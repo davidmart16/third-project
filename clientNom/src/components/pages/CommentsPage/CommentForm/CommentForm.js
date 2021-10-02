@@ -19,7 +19,7 @@ class CommentForm extends Component{
         const userId = this.props.loggedUser._id
         //pasar el usuario registrado
         console.log(this.props.loggedUser)
-        const { audioId } = this.props.match.params; //esto esta mal
+        const { audioId } = this.props.match.params;
         
         this.setState({
             ...this.state,
