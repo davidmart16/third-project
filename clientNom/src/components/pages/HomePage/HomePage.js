@@ -16,8 +16,8 @@ function HomePage(props) {
             </Link>
           </Col>
           <Col>
-            <Link to="/prueba">
-              <Button>Ver libros de la api</Button>
+            <Link to={`/lista-libros/julio verne`}>
+              <Button>Libros de Julio Verne</Button>
             </Link>
           </Col>
           <Col>

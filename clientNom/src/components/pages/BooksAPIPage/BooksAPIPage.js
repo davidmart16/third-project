@@ -1,20 +1,24 @@
 import { Component } from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Button, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import APIBooksService from '../../../services/apibooks.service'
+import PruebaBooks from "../PruebaBooks/PruebaBooks";
 
 
-
-class PruebaBooks extends Component{
+class BooksAPIPage extends Component{
     constructor(props){
-        super(props)
-        
+        super()
+
         this.state={
-            libros: null
+            books: null
         }
-        
+
+        console.log(props)
     }
-    
+
+
+
+      
     apibookService = new APIBooksService()
     
     
@@ -77,29 +81,40 @@ class PruebaBooks extends Component{
 
 
 
+    // render(){
+
+    //     return (
+    //     <Container>
+    //         <Row>
+
+    //         {this.state.libros ? 
+            
+    //         this.displayBooks()
+    //         :
+    //         <p>cargando...</p>
+    //         }
+
+    //         <hr/>
+
+    //         {/* <Col md={6}>
+    //             <image src={`${libro.volumeInfo.imageLinks?.thumbnail}`}></image>
+    //         </Col> */}
+
+    //         </Row>
+    //     </Container>
+    //     )
+    // }
+
     render(){
 
         return (
-        <Container>
-            <Row>
-
-            {this.state.libros ? 
+            <>
+            <h1>IR A NARNIA</h1>
             
-            this.displayBooks()
-            :
-            <p>cargando...</p>
-            }
-
-            <hr/>
-
-            {/* <Col md={6}>
-                <image src={`${libro.volumeInfo.imageLinks?.thumbnail}`}></image>
-            </Col> */}
-
-            </Row>
-        </Container>
+            <PruebaBooks {...this.props}></PruebaBooks>
+            </>
         )
     }
 }
 
-export default PruebaBooks
+export default BooksAPIPage

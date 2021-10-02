@@ -1,8 +1,10 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom';
+import SearchBar from '../layout/SearchBar/SearchBar';
 import AudioDetails from '../pages/AudiosPage/AudioDetails/AudioDetails';
 import AudioForm from '../pages/AudiosPage/AudioForm/AudioForm';
 import AudioList from '../pages/AudiosPage/AudiosList/AudiosList';
+import BooksAPIPage from '../pages/BooksAPIPage/BooksAPIPage';
 import BookDetails from '../pages/BooksPage/BookDetails/BookDetails';
 import BooksList from '../pages/BooksPage/BooksList/BooksList';
 import CommentForm from '../pages/CommentsPage/CommentForm/CommentForm';
@@ -29,6 +31,8 @@ const Routes = ({ storeUser, loggedUser }) => {
         <Route exact path="/registro" render={(props) => <Signup {...props} />} />
         <Route exact path="/iniciar-sesion" render={(props) => <Login storeUser={storeUser} {...props} />} />
         <Route exact path="/fragmentos" render={() => <FragmentsList loggedUser={loggedUser} />} />
+        <Route path="/prueba-searchbar" render={() => <SearchBar />} />
+        <Route path="/lista-libros/:text" render={(props) => <BooksAPIPage {...props} loggedUser={loggedUser} />} />
 
 
         {loggedUser ? (

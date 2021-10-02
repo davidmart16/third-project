@@ -2,6 +2,7 @@ import React from 'react'
 import { Container, Nav, Navbar } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import AuthService from '../../../services/auth.service'
+import SearchBar from '../SearchBar/SearchBar'
 
 const authService = new AuthService()
 
@@ -12,6 +13,7 @@ export default function Navigator(props) {
       .then(res => props.storeUser(null))
       .catch(err => console.log(err))
   }
+
   return (
     <Navbar bg="light" expand="md" className="mb-5">
       <Container>
@@ -37,6 +39,9 @@ export default function Navigator(props) {
 
           </Nav>
         </Navbar.Collapse>
+        <Navbar.Brand>
+        <SearchBar ></SearchBar>
+        </Navbar.Brand>
       </Container>
     </Navbar>
   )
