@@ -35,7 +35,7 @@ router.post("/create", (req, res) => {
   console.log(bookIdApi, "soy undefined David, quiereme igual")
   Book
   .findOne({ bookIdApi })
-  .then(book => book ? book : Book.create({ bookId }))
+  .then(book => book ? book : Book.create({ name, bookIdApi }))
   // .then(book => Fragment.create( {content, bookId: book._id } ))
   // .then(fragment => Book.findByIdAndUpdate(fragment.bookId, {$push: {fragments: fragment.id}}, {new: true}))
   .then(() => res.status(200).json({message: 'Book created in the database'}))

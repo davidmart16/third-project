@@ -4,36 +4,37 @@ const Fragment = require("../models/Fragment.model");
 const User = require("../models/User.model");
 
 
-
 router.get("/", (req, res) => {
-
+  
   Audio
-    .find() //{isValidated: true}
-    .populate('comments')
-    //.select('audioFile')//rate
-    .then(audios => res.status(200).json(audios))
-    .catch(err => res.status(500).json({ code: 500, message: "Error retrieving audios", err }))
+  .find({isValidated: true}) //
+  .populate('comments')
+  //.select('audioFile')//rate
+  .then(audios => res.status(200).json(audios))
+  .catch(err => res.status(500).json({ code: 500, message: "Error retrieving audios", err }))
 })
 
 router.get("/validated", (req, res) => {
-
+  
   Audio
-    .find({isValidated: false})
-    //.select('isValidated fragment book')
-    //.populate('fragment')
-    .then(audios => res.status(200).json(audios))
-    .catch(err => res.status(500).json({ code: 500, message: "Error retrieving audios", err }))
+  .find({isValidated: false})
+  //.select('isValidated fragment book')
+  //.populate('fragment')
+  .then(audios => res.status(200).json(audios))
+  .catch(err => res.status(500).json({ code: 500, message: "Error retrieving audios", err }))
 })
 
 router.get("/by-fragment", (req, res) => {
-
-  const fragment = req.body
-  console.log('soy el req body', req.body)
+  
+  const {fragment} = req.query
+  console.log('soy el req query', req.query.fragment.id)
   
   Audio
-    .find({fragment: fragment._id})
+    .find({fragment:  fragment})
     //.populate('fragment')
-    .then(audios => res.status(200).json(audios))
+    .then(audios => {
+      console.log(audios)
+      return res.status(200).json(audios)})
     .catch(err => res.status(500).json({ code: 500, message: "Error retrieving audios", err }))
 })
 

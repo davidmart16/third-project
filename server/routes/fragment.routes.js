@@ -6,7 +6,7 @@ const Fragment = require("../models/Fragment.model");
 router.get("/", (req, res) => {
 
   Fragment
-    .find()
+    .find({isValidated: true})
     .then(fragments => res.status(200).json(fragments))
     .catch(err => res.status(500).json({ code: 500, message: "Error retrieving fragments", err }))
 })
