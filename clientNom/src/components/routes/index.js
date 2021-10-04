@@ -4,13 +4,14 @@ import SearchBar from '../layout/SearchBar/SearchBar';
 import AudioDetails from '../pages/AudiosPage/AudioDetails/AudioDetails';
 import AudioForm from '../pages/AudiosPage/AudioForm/AudioForm';
 import AudioList from '../pages/AudiosPage/AudiosList/AudiosList';
+import BookAPIDetails from '../pages/BooksAPIPage/BookAPIDetails/BookAPIDetails';
 import BooksAPIPage from '../pages/BooksAPIPage/BooksAPIPage';
 import BookDetails from '../pages/BooksPage/BookDetails/BookDetails';
 import BooksList from '../pages/BooksPage/BooksList/BooksList';
 import CommentForm from '../pages/CommentsPage/CommentForm/CommentForm';
 import FragmentDetails from '../pages/FragmentsPage/FragmentDetails/FragmentDetails';
 import FragmentForm from '../pages/FragmentsPage/FragmentForm/FragmentForm';
-import FragmentsList from '../pages/FragmentsPage/FragmentsList/FragmentsList';
+// import FragmentsList from '../pages/FragmentsPage/FragmentsList/FragmentsList';
 import HomePage from '../pages/HomePage/HomePage';
 import Login from '../pages/Login/Login';
 import Profile from '../pages/Profile/Profile';
@@ -30,9 +31,11 @@ const Routes = ({ storeUser, loggedUser }) => {
         <Route exact path="/audios" render={() => <AudioList loggedUser={loggedUser} />} />
         <Route exact path="/registro" render={(props) => <Signup {...props} />} />
         <Route exact path="/iniciar-sesion" render={(props) => <Login storeUser={storeUser} {...props} />} />
-        <Route exact path="/fragmentos" render={() => <FragmentsList loggedUser={loggedUser} />} />
+        {/* <Route exact path="/fragmentos" render={() => <FragmentsList loggedUser={loggedUser} />} /> */}
         <Route path="/prueba-searchbar" render={() => <SearchBar />} />
         <Route path="/lista-libros/:text" render={(props) => <BooksAPIPage {...props} loggedUser={loggedUser} />} />
+        <Route path="/detalles/:id" render={(props) =>  <BookAPIDetails {...props} /> } />
+        
 
 
         {loggedUser ? (

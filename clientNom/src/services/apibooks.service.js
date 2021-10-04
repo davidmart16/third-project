@@ -11,6 +11,7 @@ class APIBooksService {
 
   getBooks = (text) => this.instance.get(`/search-book/${text}`)
   getBooksByType = (type, text) => this.instance.get(`/search-book-by/${type}/${text}`)
+  getOneBook = (id) => this.instance.get(`/get-book/${id}`)
 
 }
 

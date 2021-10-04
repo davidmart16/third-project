@@ -56,7 +56,7 @@ class BookDetails extends Component {
           </Row>
 
           : 
-          <h3>Cargando...</h3>
+          <h3>Cargando el libro...</h3>
         }
       </Container>
     )

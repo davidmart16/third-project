@@ -22,8 +22,6 @@ class BooksAPIPage extends Component{
     
 
     componentDidUpdate = (prevProps, prevState) => {
-        // console.log('soy las prevProps: ', prevProps.match.params)
-        // console.log('soy las this.props: diferenciame' ,this.props.match.params)
         if (prevProps.match.params.text !== this.props.match.params.text) this.getBooks()
     }
 
@@ -37,7 +35,6 @@ class BooksAPIPage extends Component{
                 ...this.state,
                 booksApi: res.data
             })
-            console.log(this.state.booksApi)
         })
         .catch(err => console.error(err))
         
@@ -50,17 +47,22 @@ class BooksAPIPage extends Component{
                 this.state.booksApi.map(book => {
                     console.log(book)
                     return (
-                        
                         <Col md={6}>
                             <h3>{book.volumeInfo.title}</h3>
+
+                                {/* <image src={`${book.volumeInfo.imageLinks?.thumbnail}`}></image> */}
+
+                            {book.volumeInfo.description ? 
                             <p>{book.volumeInfo.description}</p>
+                            : <p>No hay descripcion</p>
+                            }
+                            <h4> - {book.volumeInfo.authors[0]} - </h4>
                             <h4>Paginas: {book.volumeInfo.pageCount}</h4>
-                            <Link to='/'>
+                            <Link to={`/detalles/${book.id}`}>
                                 <Button>hara cosas, como llevarte a narnia</Button>
                             </Link>
                             <hr/>
                         </Col>
-                        
                     )
                 }) : 
                 <p>Cargando...</p>
@@ -81,25 +83,13 @@ class BooksAPIPage extends Component{
             <p>cargando...</p>
             }
             <hr/>
-            {/* <Col md={6}>
-                <image src={`${book.volumeInfo.imageLinks?.thumbnail}`}></image>
-            </Col> */}
+            
 
             </Row>
         </Container>
         )
     }
 
-    // render(){
-
-    //     return (
-    //         <>
-    //         <h1>IR A NARNIA</h1>
-            
-    //         <PruebaBooks {...this.props}></PruebaBooks>
-    //         </>
-    //     )
-    // }
 }
 
 export default BooksAPIPage

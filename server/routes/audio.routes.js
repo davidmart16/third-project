@@ -28,10 +28,10 @@ router.get("/validated", (req, res) => {
 router.get("/by-fragment", (req, res) => {
 
   const fragment = req.body
-  console.log(fragment)
-
+  console.log('soy el req body', req.body)
+  
   Audio
-    .find(fragment)
+    .find({fragment: fragment._id})
     //.populate('fragment')
     .then(audios => res.status(200).json(audios))
     .catch(err => res.status(500).json({ code: 500, message: "Error retrieving audios", err }))

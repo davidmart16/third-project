@@ -4,7 +4,7 @@ const bookSchema = new Schema({
 
     name: String,
 
-    bookId: {
+    bookIdApi: {
         type: String,
     }, 
 

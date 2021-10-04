@@ -25,11 +25,19 @@ class FragmentDetails extends Component{
 
     }
 
-    componentDidMount(){
+    async componentDidMount(){
+        
+        await this.getFragmentAndBook()
+        this.state.fragment && this.getAudios()
+            
+    }
+
+    getFragmentAndBook(){
+
         const { id } = this.props.match.params
         const info = {fragment: null}
 
-        this.fragmentService.getOneFragment(id)
+        return this.fragmentService.getOneFragment(id)
         .then(res => {
             info.fragment = res.data.fragment
             return this.bookService.getOneBook(res.data.fragment.bookId)
@@ -42,14 +50,15 @@ class FragmentDetails extends Component{
             })
         })
         .catch(err => console.error(err))
-            this.getAudios()
-            
-        }
-        //FILTRAR AUDIOS AQUI O LLAMAR MEJOR EN EL SERVICIO
+
+    }
+
+
         getAudios = () => {
-            
-            this.audioService.getAudiosByFragment(this.state.fragment?._id)
+            console.log('esto es el fragment del estado en la funcion de getAudios ---',this.state.fragment)
+            this.audioService.getAudiosByFragment(this.state.fragment)
             .then(res => {
+                console.log('estoy dentro del then',this.state.fragment)
                 this.setState({
                     ...this.state,
                     fragmentAudios: res.data
@@ -59,11 +68,14 @@ class FragmentDetails extends Component{
 
     }
 
+
     displayAudios = () => {
+        console.log('soy la array de audios',this.state.fragmentAudios)
         return(
         this.state.fragmentAudios ?
+        
             this.state.fragmentAudios.map(audio => {
-                console.log(audio)
+                console.log('soy un audio por favor muestrate',audio)
                 return (
                     <Col>
                         <ReactAudioPlayer src={`${audio.audioFile}`} autoPlay={false} controls/>
@@ -73,7 +85,7 @@ class FragmentDetails extends Component{
                     </Col>
                 )
             }) : 
-            <p>Cargando...</p>
+            <p>Cargando lista de audios...</p>
         )
     }
 
@@ -87,7 +99,7 @@ class FragmentDetails extends Component{
                 <Row>
                     <Col>
                         <h3>{this.state.fragment.content}</h3>
-                        <p>Este fragmento es de: {this.state.book.name}</p>
+                        <p>Este fragmento es del Libro: {this.state.book.name}</p>
                     </Col>
                 </Row>
                     }
@@ -95,6 +107,9 @@ class FragmentDetails extends Component{
                         {this.displayAudios()}
                 </Row>
             </Container>
+            <Link to={`/libros`}>
+                <Button>Volver</Button>
+            </Link>
             </>
         )
     }

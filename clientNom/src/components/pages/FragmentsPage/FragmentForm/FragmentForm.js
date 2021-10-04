@@ -50,7 +50,11 @@ class FragmentForm extends Component{
             <Form onSubmit={this.handleSubmit}>
                 <Form.Group className="mb-3" controlId="content">
                     <Form.Label>Fragmento: </Form.Label>
-                    <Form.Control onChange={(e) => this.handleChange(e)} name="content" value={this.state.content} type="text" placeholder="Introduce aqui el fragmento que vas a leer" />
+                    <Form.Control onChange={(e) => this.handleChange(e)} 
+                    name="content" 
+                    value={this.state.content} 
+                    type="text" 
+                    placeholder="Introduce aqui el fragmento que vas a leer" />
                 </Form.Group>
                 <Button variant="primary" type="submit">Submit</Button>
             </Form>

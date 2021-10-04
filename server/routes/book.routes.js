@@ -30,19 +30,15 @@ router.get("/:_id", (req, res) => {
 
 router.post("/create", (req, res) => {
   
-  const { content, bookId } = req.body
-  
-  Book.findOne({ id: bookId })
-  .then(book => {
-    if (book) {
-      return book;
-    } else {
-      return Book.create({ bookId })
-    }
-  })
-  .then(book => Fragment.create( {content, bookId: book._id } ))
-  .then(fragment => Book.findByIdAndUpdate(fragment.bookId, {$push: {fragments: fragment.id}}, {new: true}))
-  .then(() => res.status(200).json({message: 'Fragment created in the book'}))
+  console.log('hola soy el req body', req.body)
+  const { bookIdApi, name } = req.body
+  console.log(bookIdApi, "soy undefined David, quiereme igual")
+  Book
+  .findOne({ bookIdApi })
+  .then(book => book ? book : Book.create({ bookId }))
+  // .then(book => Fragment.create( {content, bookId: book._id } ))
+  // .then(fragment => Book.findByIdAndUpdate(fragment.bookId, {$push: {fragments: fragment.id}}, {new: true}))
+  .then(() => res.status(200).json({message: 'Book created in the database'}))
   .catch((err) => console.log(err));
 })
 
