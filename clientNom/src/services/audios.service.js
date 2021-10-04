@@ -14,6 +14,7 @@ class AudiosService {
   getOneAudio = (id) => this.instance.get(`/${id}`);
   createAudio = (audio) => this.instance.post("/", audio);
   deleteAudio = (id) => this.instance.delete(`/${id}`)
+  updateAudio = (id) => this.instance.put(`/${id}`)
 
 }
 

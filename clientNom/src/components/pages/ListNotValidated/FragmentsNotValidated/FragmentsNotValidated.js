@@ -1,36 +1,35 @@
-import { Component } from "react"
 import { Button, Col, Row } from "react-bootstrap"
 import { Link } from 'react-router-dom';
 
 
 
-class FragmentsNotValidated extends Component {
-    constructor(props){
-        super()
+function FragmentsNotValidated(props) {
+    // constructor(props){
+    //     super(props)
 
-        this.state={
-            fragments: null
-        }
-    }
+    //     // this.state={
+    //     //     fragments: null
+    //     // }
+    // }
 
-    componentDidMount(){
-        this.setState({
-            ...this.state,
-            fragments: this.props.fragments
-        })
-    }
+    // componentDidMount(){
+    //     this.setState({
+    //         ...this.state,
+    //         fragments: this.props.fragments
+    //     })
+    // }
 
-    componentDidUpdate = (prevProps, prevState) => {
+    // componentDidUpdate = (prevProps, prevState) => {
 
-        console.log('prevprops de los fragmentos -',prevProps.fragments?.length)
-        // if (prevProps.fragments.length !== this.props.fragments.length) this.getNotValidated()
-    }
+    //     console.log('prevprops de los fragmentos',prevProps.fragments?.length)
+    //     // if (prevProps.fragments.length !== this.props.fragments.length) this.getNotValidated()
+    // }
 
-    displayFragments() {
+    const displayFragments = () => {
 
         return (
-            this.state.fragments ?
-                this.state.fragments.map(fragment => {
+            props.fragments ?
+                props.fragments.map(fragment => {
 
                     return(
                         <Col md={4}>
@@ -46,17 +45,13 @@ class FragmentsNotValidated extends Component {
     }
 
 
-    render(){
-
-
-        return(
-            <Row>
-                <h3>Lista de Fragmentos a validar</h3>
-                <hr/>
-                {this.displayFragments()}
-            </Row>
-            )
-    }
+    return(
+        <Row>
+            <h3>Lista de Fragmentos a validar</h3>
+            <hr/>
+            {displayFragments()}
+        </Row>
+        )
 }
 
 export default FragmentsNotValidated

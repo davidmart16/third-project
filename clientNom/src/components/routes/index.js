@@ -46,7 +46,7 @@ const Routes = ({ storeUser, loggedUser }) => {
             <Route path="/crear-audio/:fragmentId" render={(props) => <AudioForm {...props}/>}  />
             <Route path="/crear-comentario/:audioId" render={(props) => <CommentForm {...props} loggedUser={loggedUser}/> } />
             <Route path="/crear-fragmento/:bookId" render={(props) => <FragmentForm {...props}/> } />
-            <Route path="/perfil" render={() => <Profile loggedUser={loggedUser} /> } />
+            <Route path="/perfil" render={() => <Profile loggedUser={loggedUser}/> } />
           </>
         )
         : <Redirect to="/iniciar-sesion" /> 

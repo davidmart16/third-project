@@ -50,11 +50,13 @@ class ListNotValidated extends Component {
         
 
     }
+
+    
     render(){
         return(
             <>
                 <h2>Validaciones</h2>
-                <FragmentsNotValidated fragments={this.state.fragmentsNotValidated}></FragmentsNotValidated>
+                <FragmentsNotValidated  fragments={this.state.fragmentsNotValidated}></FragmentsNotValidated>
                 <CommentsNotValidated comments={this.state.commentsNotValidated}></CommentsNotValidated>
                 <AudiosNotValidated audios={this.state.audiosNotValidated}></AudiosNotValidated>
             </>

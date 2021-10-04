@@ -3,7 +3,7 @@ import axios from 'axios';
 class UsersService {
   constructor(){
     this.instance = axios.create({
-      baseURL: `${process.env.REACT_APP_API_URL}/users`
+      baseURL: `${process.env.REACT_APP_API_URL}/user`
     })
   }
 
@@ -12,8 +12,9 @@ class UsersService {
   createUser = (user) => this.instance.post("/", user);
   deleteUser = (id) => this.instance.delete(`/${id}`)
   
-  addAudiosFav = (audioId) => this.instance.put('/fav-audios', audioId)
-  showAudiosFav = (id) => this.instance.put(`/${id}/my-fav-audios`)
+  // showMyAudios = (id) => this.instance.get(`/my-audios/${id}`)
+  // showAudiosFav = (id) => this.instance.get(`/my-fav-audios/${id}`)
+  addAudiosFav = (audioId, id) => this.instance.put(`/add-fav-audios/${id}`, audioId)
 }
 
 export default UsersService;

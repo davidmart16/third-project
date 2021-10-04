@@ -51,16 +51,29 @@ router.delete("/:id", (req, res) => {
     .catch(err => res.status(500).json({ code: 500, message: "Error deleting fragment", err }))
 })
 
+
 router.put("/:id", (req, res) => {
 
-  const { content } = req.body
   const { id } = req.params;
-
+  // const { isValidated } = req.body
+  
   Fragment
-    .findByIdAndUpdate(id, { content }, { new: true })
-    .then(fragment => res.status(200).json({ fragment, message: "Fragment edited" }))
-    .catch(err => res.status(500).json({ code: 500, message: "Error editing fragment", err }))
+    .findByIdAndUpdate(id, {isValidated: true})
+    .then(fragment => res.status(200).json({ fragment, message: "Fragment updated and validated" }))
+    .catch(err => res.status(500).json({ code: 500, message: "Error updating an fragment", err }))
 })
+
+
+// router.put("/:id", (req, res) => {
+
+//   const { content } = req.body
+//   const { id } = req.params;
+
+//   Fragment
+//     .findByIdAndUpdate(id, { content }, { new: true })
+//     .then(fragment => res.status(200).json({ fragment, message: "Fragment edited" }))
+//     .catch(err => res.status(500).json({ code: 500, message: "Error editing fragment", err }))
+// })
 
 
 

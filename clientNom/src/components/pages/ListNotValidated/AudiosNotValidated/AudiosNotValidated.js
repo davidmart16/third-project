@@ -1,47 +1,49 @@
-import { Component } from "react"
 import ReactAudioPlayer from 'react-audio-player';
-import { Button, Col, Row } from "react-bootstrap"
+import { Button, Col, Form, Row } from "react-bootstrap"
 import { Link } from 'react-router-dom';
+import AudiosService from '../../../../services/audios.service';
 
 
 
 
-class AudiosNotValidated extends Component{
-    constructor(props){
-        super()
+function AudiosNotValidated(props) {
 
-        this.state={
-            audios: null
-        }
-    }
+    const audioService = new AudiosService()
+    // constructor(props){
+    //     super()
 
-
-    componentDidMount(){
-
-        this.setState({
-            ...this.state,
-            audios: this.props.audios
-        })
-    }
+    //     this.state={
+    //         audios: null
+    //     }
+    // }
 
 
-    componentDidUpdate = (prevProps, prevState) => {
+    // componentDidMount(){
 
-        console.log('prevprops de los audios -',prevProps.audios?.length)
-        // if (prevProps.audios.length !== this.props.audios.length) this.getNotValidated()
-    }
-    displayAudios() {
+    //     this.setState({
+    //         ...this.state,
+    //         audios: this.props.audios
+    //     })
+    // }
+
+
+    // componentDidUpdate = (prevProps, prevState) => {
+
+    //     console.log('prevprops de los audios -',prevProps.audios?.length)
+    //     // if (prevProps.audios.length !== this.props.audios.length) this.getNotValidated()
+    // }
+    const displayAudios = () => {
 
         return (
-            this.state.audios ?
-                this.state.audios.map(audio => {
+            props.audios ?
+                props.audios.map(audio => {
 
                     return(
                         <Col md={3}>
                             <ReactAudioPlayer src={`${audio.audioFile}`} autoPlay={false} controls/>
-                            <Link>
-                                <Button>boton de Prueba</Button>
-                            </Link>
+                            <Form onSubmit>
+                                <Button type="submit">Validar</Button>
+                            </Form>
                         </Col>
                     )
                 })
@@ -49,17 +51,24 @@ class AudiosNotValidated extends Component{
         )
     }
 
-    render(){
+    // const handleSubmit = (e) => {
+    //     e.preventDefault()
+
+    //     audioService.updateAudio(audio._id)
+    //     .then(()=> {
+    //         console.log(props)
+    //         // this.props.history.push(`/perfil`)
+    //     })
+    // }
 
 
         return(
             <Row>
             <h3>Lista de audios a validar</h3>
                 <hr/>
-            {this.displayAudios()}
+            {displayAudios()}
             </Row>
             )
-    }
 }
 
 export default AudiosNotValidated

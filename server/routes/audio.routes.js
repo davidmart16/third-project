@@ -65,6 +65,17 @@ router.post("/", (req, res) => {
  
 })
 
+router.put("/:id", (req, res) => {
+
+  const { id } = req.params;
+  // const { isValidated } = req.body
+  
+  Audio
+    .findByIdAndUpdate(id, {isValidated: true})
+    .then(audio => res.status(200).json({ audio, message: "Audio updated and validated" }))
+    .catch(err => res.status(500).json({ code: 500, message: "Error updating an audio", err }))
+})
+
 router.delete("/:id", (req, res) => {
 
   const { id } = req.params;

@@ -12,7 +12,8 @@ class CommentsService {
   getCommentsByUser = (user) => this.instance.get("/by-user", user);
   createComment = (comment) => this.instance.post("/", comment);
   deleteComment = (id) => this.instance.delete(`/${id}`)
-
+  updateComment = (id) => this.instance.put(`/${id}`)
+  
 }
 
 export default CommentsService;

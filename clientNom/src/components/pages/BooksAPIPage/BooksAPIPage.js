@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Image, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import APIBooksService from '../../../services/apibooks.service'
 
@@ -50,13 +50,15 @@ class BooksAPIPage extends Component{
                         <Col md={6}>
                             <h3>{book.volumeInfo.title}</h3>
 
-                                {/* <image src={`${book.volumeInfo.imageLinks?.thumbnail}`}></image> */}
-
+                            <Image src={book.volumeInfo.imageLinks?.thumbnail ? book.volumeInfo.imageLinks.thumbnail : 'https://www.esferalibros.com/assets/corporativa/images/portada_no_disponible.png'}></Image>
+                            
                             {book.volumeInfo.description ? 
                             <p>{book.volumeInfo.description}</p>
-                            : <p>No hay descripcion</p>
-                            }
-                            <h4> - {book.volumeInfo.authors[0]} - </h4>
+                            : <p>No hay descripcion</p>}
+                                
+                            {/* {book.volumeInfo.authors?.length !== 0 ?
+                            book.volumeInfo.authors.map(author => <h4> - {author} - </h4>) : <p>Sin autores conocidos</p>} */}
+
                             <h4>Paginas: {book.volumeInfo.pageCount}</h4>
                             <Link to={`/detalles/${book.id}`}>
                                 <Button>hara cosas, como llevarte a narnia</Button>

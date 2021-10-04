@@ -20,6 +20,7 @@ router.get("/:id", (req, res) => {
 
   User
     .findById(id)
+    .populate('myAudios favAudios')
     .then(user => res.status(200).json({ user, message: "User getted" }))
     .catch(err => res.status(500).json({ code: 500, message: "Error retrieving a single user", err }))
 }) 
@@ -35,26 +36,26 @@ router.delete("/:id", (req, res) => {
 })
 
 
-router.put('/fav-audios', (req, res)=> {
-  
-  const currentUser = '6151918fa7b0cf1ddb4c95fb' //req.session.currentUser
-  const {audioId} = req.body
+router.put('/add-fav-audios/:id', (req, res)=> {
+
+  // const currentUser =  req.session.currentUser  //'6151918fa7b0cf1ddb4c95fb'
+  const {audioId, id} = req.body
 
   User
-  .findById(currentUser)
+  .findById(id)
   .then(user => {
 
       if (user.favAudios.includes(audioId)){
         
         User   
-            .findByIdAndUpdate( currentUser, { $pull: {favAudios: audioId} }, {new: true})
+            .findByIdAndUpdate( id, { $pull: {favAudios: audioId} }, {new: true})
             .then(user => res.status(200).json({ user, message: "User updated with my favourites audios" }))
             .catch(err => res.status(500).json({ code: 500, message: 'Error adding fav audios', err}))
             
       } else {
             
         User   
-        .findByIdAndUpdate( currentUser, { $push: {favAudios: audioId} }, {new: true})
+        .findByIdAndUpdate( id, { $push: {favAudios: audioId} }, {new: true})
         .then(user => res.status(200).json({ user, message: "User updated with my favourites audios" }))
         .catch(err => res.status(500).json({ code: 500, message: 'Error adding fav audios', err}))
         
@@ -63,15 +64,26 @@ router.put('/fav-audios', (req, res)=> {
   )
 })
 
-router.get("/:id/my-fav-audios", (req, res) => {
+// router.get("/my-audios/:id", (req, res) => {
 
-  const {id} =  req.params  // '6151918fa7b0cf1ddb4c95fb' //req.session.currentUser._id
+//   const {id} =  req.params  // '6151918fa7b0cf1ddb4c95fb' //req.session.currentUser._id
   
-  User
-    .findById(id)
-    .populate('favAudios')
-    .then(user => res.status(200).json({ user }))
-    .catch(err => res.status(500).json({ code: 500, message: "Error retrieving favourites audios for my user", err }))
-})
+//   User
+//     .findById(id)
+//     .populate('myAudios')
+//     .then(user => res.status(200).json({ user }))
+//     .catch(err => res.status(500).json({ code: 500, message: "Error retrieving my audios", err }))
+// })
+
+// router.get("/my-fav-audios/:id", (req, res) => {
+
+//   const {id} =  req.params  // '6151918fa7b0cf1ddb4c95fb' //req.session.currentUser._id
+  
+//   User
+//     .findById(id)
+//     .populate('favAudios')
+//     .then(user => res.status(200).json({ user }))
+//     .catch(err => res.status(500).json({ code: 500, message: "Error retrieving favourites audios", err }))
+// })
 
 module.exports = router;
