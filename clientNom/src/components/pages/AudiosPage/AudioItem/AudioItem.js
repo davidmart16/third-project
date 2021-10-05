@@ -7,6 +7,8 @@ function AudioItem ({audioFile, _id , loggedUser, storeUser }) {
 
     const userService = new UsersService()
     
+    const checkInclude = (audioId, arrAudios) => arrAudios.includes(audioId)
+    let audioInclude = checkInclude(_id, loggedUser.favAudios)
 
     const handleClick = (e) => {
         e.preventDefault()
@@ -21,10 +23,13 @@ function AudioItem ({audioFile, _id , loggedUser, storeUser }) {
         })
         .catch(err => console.log(err))
 
-        let audioInclude = loggedUser.favAudios.includes(info.audioId)
-        console.log('que estoy pasando? ',audioInclude)
+        audioInclude = checkInclude(_id, loggedUser.favAudios)
 
     }
+    
+    
+
+    
 
     
     return(
@@ -38,9 +43,8 @@ function AudioItem ({audioFile, _id , loggedUser, storeUser }) {
                 </Link>
                 
                 <form onSubmit={handleClick}>
-                    <Button type="submit">Añadir a favoritos</Button>
+                    <Button type="submit">{audioInclude ? 'Eliminar de Fav' : 'Añadir a favoritos'}</Button>
                 </form>
-
                 </>
                 }
             </Col>

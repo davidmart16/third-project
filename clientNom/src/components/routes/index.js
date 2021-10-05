@@ -24,20 +24,18 @@ const Routes = ({ storeUser, loggedUser }) => {
 
   return (
       <Switch>
-        {/* <Route path="/prueba" render={() => <PruebaAudio />} /> */}
-        <Route path="/prueba" render={() => <PruebaBooks />} />
         <Route exact path="/" render={() => <HomePage loggedUser={loggedUser} storeUser={storeUser} />} />
         <Route exact path="/libros" render={() => <BooksList loggedUser={loggedUser} />} />
         <Route exact path="/audios" render={() => <AudioList loggedUser={loggedUser} storeUser={storeUser}/>} />
         <Route exact path="/registro" render={(props) => <Signup {...props} />} />
         <Route exact path="/iniciar-sesion" render={(props) => <Login storeUser={storeUser} {...props} />} />
-        {/* <Route exact path="/fragmentos" render={() => <FragmentsList loggedUser={loggedUser} />} /> */}
-        <Route path="/prueba-searchbar" render={() => <SearchBar />} />
         <Route path="/lista-libros/:text" render={(props) => <BooksAPIPage {...props} loggedUser={loggedUser} />} />
         <Route path="/detalles/:id" render={(props) =>  <BookAPIDetails {...props} /> } />
+        {/* <Route exact path="/fragmentos" render={() => <FragmentsList loggedUser={loggedUser} />} /> */}
+        {/* <Route path="/prueba" render={() => <PruebaAudio />} /> */}
+        <Route path="/prueba-searchbar" render={() => <SearchBar />} />
+        <Route path="/prueba" render={() => <PruebaBooks />} />
         
-
-
         {loggedUser ? (
           <>
             <Route path="/libros/:id" render={(props) =>  <BookDetails {...props} /> } />
@@ -46,7 +44,7 @@ const Routes = ({ storeUser, loggedUser }) => {
             <Route path="/crear-audio/:fragmentId" render={(props) => <AudioForm {...props} loggedUser={loggedUser}/>}  />
             <Route path="/crear-comentario/:audioId" render={(props) => <CommentForm {...props} loggedUser={loggedUser}/> } />
             <Route path="/crear-fragmento/:bookId" render={(props) => <FragmentForm {...props}/> } />
-            <Route path="/perfil" render={() => <Profile loggedUser={loggedUser}/> } />
+            <Route path="/perfil" render={() => <Profile loggedUser={loggedUser} storeUser={storeUser}/> } />
           </>
         )
         : <Redirect to="/iniciar-sesion" /> 

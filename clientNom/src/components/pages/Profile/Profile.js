@@ -1,8 +1,8 @@
 import { Container } from "react-bootstrap"
-import ListFavAudios from "../ListFavAudios/ListFavAudios"
+import ListProfileAudios from "../ListProfileAudios/ListProfileAudios"
 import ListNotValidated from "../ListNotValidated/ListNotValidated"
 
-const Profile = ({ loggedUser }) => {
+const Profile = ({ loggedUser, storeUser }) => {
 
 
   return (
@@ -11,7 +11,7 @@ const Profile = ({ loggedUser }) => {
       {loggedUser.role === 'ADMIN' ?  
         <ListNotValidated loggedUser={loggedUser}></ListNotValidated>
         : <div><h3>Aqui van las listas de mis audios y los audios fav:</h3>
-        <ListFavAudios loggedUser={loggedUser}></ListFavAudios>
+        <ListProfileAudios loggedUser={loggedUser} storeUser={storeUser}></ListProfileAudios>
         </div>
       }
     </Container>
