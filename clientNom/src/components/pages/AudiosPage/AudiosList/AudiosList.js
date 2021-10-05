@@ -7,7 +7,7 @@ import AudioItem from "../AudioItem/AudioItem";
 class AudioList extends Component {
     constructor(props){
         super(props);
-        console.log(props)
+        
         this.state= {
             audios: null
         }
@@ -32,7 +32,7 @@ class AudioList extends Component {
             this.state.audios ?
              this.state.audios.map(audio => {
                     return (
-                        <AudioItem {...audio} loggedUser={this.props.loggedUser}></AudioItem>
+                        <AudioItem fav {...audio} loggedUser={this.props.loggedUser} storeUser={this.props.storeUser}></AudioItem>
                     )
                 }) : 
                 <p>Cargando...</p>

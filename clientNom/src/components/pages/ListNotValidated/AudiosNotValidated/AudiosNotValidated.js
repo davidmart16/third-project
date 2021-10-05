@@ -1,6 +1,5 @@
 import ReactAudioPlayer from 'react-audio-player';
 import { Button, Col, Form, Row } from "react-bootstrap"
-import { Link } from 'react-router-dom';
 import AudiosService from '../../../../services/audios.service';
 
 
@@ -32,6 +31,9 @@ function AudiosNotValidated(props) {
     //     console.log('prevprops de los audios -',prevProps.audios?.length)
     //     // if (prevProps.audios.length !== this.props.audios.length) this.getNotValidated()
     // }
+
+    
+
     const displayAudios = () => {
 
         return (
@@ -41,7 +43,7 @@ function AudiosNotValidated(props) {
                     return(
                         <Col md={3}>
                             <ReactAudioPlayer src={`${audio.audioFile}`} autoPlay={false} controls/>
-                            <Form onSubmit>
+                            <Form onSubmit={handleSubmit}>
                                 <Button type="submit">Validar</Button>
                             </Form>
                         </Col>
@@ -51,15 +53,16 @@ function AudiosNotValidated(props) {
         )
     }
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault()
+    const handleSubmit = (e) => {
+        e.preventDefault()
 
-    //     audioService.updateAudio(audio._id)
-    //     .then(()=> {
-    //         console.log(props)
-    //         // this.props.history.push(`/perfil`)
-    //     })
-    // }
+        audioService.updateAudio()
+        .then(()=> {
+            console.log(props)
+            this.props.getNotValidated()
+        })
+        .catch(err => console.log(err))
+    }
 
 
         return(

@@ -9,7 +9,7 @@ const Profile = ({ loggedUser }) => {
     <Container>
       <h1>¡Bienvenid@, {loggedUser.username}!</h1>
       {loggedUser.role === 'ADMIN' ?  
-        <ListNotValidated></ListNotValidated>
+        <ListNotValidated loggedUser={loggedUser}></ListNotValidated>
         : <div><h3>Aqui van las listas de mis audios y los audios fav:</h3>
         <ListFavAudios loggedUser={loggedUser}></ListFavAudios>
         </div>

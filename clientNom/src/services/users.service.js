@@ -14,7 +14,7 @@ class UsersService {
   
   // showMyAudios = (id) => this.instance.get(`/my-audios/${id}`)
   // showAudiosFav = (id) => this.instance.get(`/my-fav-audios/${id}`)
-  addAudiosFav = (audioId, id) => this.instance.put(`/add-fav-audios/${id}`, audioId)
+  addAudiosFav = (audioId, userId) => this.instance.put(`/add-fav-audios`, {audioId, userId})
 }
 
 export default UsersService;

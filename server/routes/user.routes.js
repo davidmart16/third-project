@@ -36,26 +36,27 @@ router.delete("/:id", (req, res) => {
 })
 
 
-router.put('/add-fav-audios/:id', (req, res)=> {
+router.put('/add-fav-audios', (req, res)=> {
 
   // const currentUser =  req.session.currentUser  //'6151918fa7b0cf1ddb4c95fb'
-  const {audioId, id} = req.body
+  console.log(req.body)
+  const {audioId, userId} = req.body
 
   User
-  .findById(id)
+  .findById(userId)
   .then(user => {
 
       if (user.favAudios.includes(audioId)){
         
         User   
-            .findByIdAndUpdate( id, { $pull: {favAudios: audioId} }, {new: true})
+            .findByIdAndUpdate( userId, { $pull: {favAudios: audioId} }, {new: true})
             .then(user => res.status(200).json({ user, message: "User updated with my favourites audios" }))
             .catch(err => res.status(500).json({ code: 500, message: 'Error adding fav audios', err}))
             
       } else {
             
         User   
-        .findByIdAndUpdate( id, { $push: {favAudios: audioId} }, {new: true})
+        .findByIdAndUpdate( userId, { $push: {favAudios: audioId} }, {new: true})
         .then(user => res.status(200).json({ user, message: "User updated with my favourites audios" }))
         .catch(err => res.status(500).json({ code: 500, message: 'Error adding fav audios', err}))
         
