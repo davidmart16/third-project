@@ -11,7 +11,8 @@ class AudioDetails extends Component{
         super(props)
 
         this.state = {
-            audio: null
+            audio: null,
+            rate: 0
         }
 
         this.audioService = new AudiosService()
@@ -22,14 +23,41 @@ class AudioDetails extends Component{
 
         this.audioService.getOneAudio( id )
         .then(res => {
-            console.log(res.data.audio)
             this.setState({
                 ...this.state,
                 audio: res.data.audio
             })
-            console.log(this.state.audio)
+            const rate = this.getRateComments()
+            this.updateRateAudio(rate)
+
         })
         .catch(err => console.error(err))
+
+    }
+
+    getRateComments(){
+        // const comments = this.state.audio?.comments
+        let rating = 0
+        this.state.audio?.comments?.map(comment => rating += comment.rate )
+        let rate = 0
+        rate = rating/this.state.audio?.comments?.length
+        console.log(rate, this.state.audio?.comments?.length)
+        rate = 2
+        return rate
+    }
+
+    updateRateAudio(rate){
+        this.audioService.updateAudioRate(this.state.audio._id, rate)
+        .then(res => {
+            console.log('estoy dentro de  la promesa, me habre actualizado?', res.data.audio)
+
+            this.setState({
+                ...this.state,
+                rate: res.data.audio.rate
+            })
+        }
+        )
+        .catch(err => console.log(err))
     }
 
     render(){

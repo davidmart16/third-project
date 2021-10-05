@@ -58,7 +58,7 @@ class CommentForm extends Component{
         return(
 
             <Form onSubmit={this.handleSubmit}>
-            <h1>Valora el audio </h1>
+            <h2>Valora el audio </h2>
           {[...Array(5)].map((star, idx) => {
             const rateValue = idx + 1;
 
@@ -90,7 +90,9 @@ class CommentForm extends Component{
             );
           })}
                 <Form.Group className="mb-3" controlId="text">
-                    <Form.Label>Comentario: </Form.Label>
+                
+                    <Form.Label><h4>Comentario: </h4></Form.Label>
+                    <p> Hola  </p>
                     <Form.Control onChange={(e) => this.handleChange(e)} name="text" value={this.state.text} type="text" placeholder="Deja tu comentario" />
                 </Form.Group>
                 <Button variant="primary" type="submit">Submit</Button>

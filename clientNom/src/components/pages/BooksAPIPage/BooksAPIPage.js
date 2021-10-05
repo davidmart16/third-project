@@ -56,8 +56,7 @@ class BooksAPIPage extends Component{
                             <p>{book.volumeInfo.description}</p>
                             : <p>No hay descripcion</p>}
                                 
-                            {/* {book.volumeInfo.authors?.length !== 0 ?
-                            book.volumeInfo.authors.map(author => <h4> - {author} - </h4>) : <p>Sin autores conocidos</p>} */}
+                            {book.volumeInfo.authors ?  book.volumeInfo.authors.map(author => <h4> - {author} - </h4>) : <p>Sin autores conocidos</p>}
 
                             <h4>Paginas: {book.volumeInfo.pageCount}</h4>
                             <Link to={`/detalles/${book.id}`}>

@@ -12,9 +12,10 @@ class AudiosService {
   getAudiosNotValidated = () => this.instance.get("/validated");
   getAudiosByFragment = (fragment) => this.instance.get(`/by-fragment?fragment=${fragment._id}`);
   getOneAudio = (id) => this.instance.get(`/${id}`);
-  createAudio = (audio) => this.instance.post("/", audio);
+  createAudio = (audioFile, fragment, userId) => this.instance.post("/", {audioFile, fragment, userId});
   deleteAudio = (id) => this.instance.delete(`/${id}`)
   updateAudio = (id) => this.instance.put(`/${id}`)
+  updateAudioRate = (id, rate) => this.instance.put(`/rate/${id}`, rate)
 
 }
 

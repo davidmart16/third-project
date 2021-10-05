@@ -43,7 +43,7 @@ const Routes = ({ storeUser, loggedUser }) => {
             <Route path="/libros/:id" render={(props) =>  <BookDetails {...props} /> } />
             <Route path="/fragmentos/:id" render={(props) => <FragmentDetails {...props} /> } />
             <Route path="/audios/:id" render={(props) => <AudioDetails {...props} /> } />
-            <Route path="/crear-audio/:fragmentId" render={(props) => <AudioForm {...props}/>}  />
+            <Route path="/crear-audio/:fragmentId" render={(props) => <AudioForm {...props} loggedUser={loggedUser}/>}  />
             <Route path="/crear-comentario/:audioId" render={(props) => <CommentForm {...props} loggedUser={loggedUser}/> } />
             <Route path="/crear-fragmento/:bookId" render={(props) => <FragmentForm {...props}/> } />
             <Route path="/perfil" render={() => <Profile loggedUser={loggedUser}/> } />

@@ -20,7 +20,8 @@ const audioSchema = new Schema({
   rate: {    //Este ratio se basa en la media de todas las puntuaciones de los comentarios 
     type: Number,
     min: 0,
-    max: 5
+    max: 5,
+    default: 0
   },
 
   comments: 

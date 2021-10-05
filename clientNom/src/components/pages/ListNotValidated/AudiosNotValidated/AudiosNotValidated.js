@@ -14,10 +14,10 @@ function AudiosNotValidated(props) {
 
         return (
             props.audios ?
-                props.audios.map(audio => {
+                props.audios.map((audio, idx) => {
 
                     return(
-                        <Col md={3}>
+                        <Col key={audio._id + idx} md={3}>
                             <ReactAudioPlayer src={`${audio.audioFile}`} autoPlay={false} controls/>
                             <Form onSubmit={handleSubmit}>
                                 <Button type="submit" value={audio._id}>Validar</Button>
@@ -33,11 +33,10 @@ function AudiosNotValidated(props) {
         e.preventDefault()
         const audioId = e.target.querySelector('button').value
         console.log(e.target, 'hola soy ohhhhh',audioId)
-
         audioService.updateAudio(audioId)
         .then(()=> {
             console.log(props)
-            this.props.getNotValidated()
+            props.getNotValidated()
         })
         .catch(err => console.log(err))
     }

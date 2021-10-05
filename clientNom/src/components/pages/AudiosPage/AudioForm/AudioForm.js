@@ -12,6 +12,7 @@ class AudioForm extends Component {
         this.state = {
           fragment: "",
           audioFile: '',
+          userId: '',
           isLoading: null
         }
     }
@@ -21,9 +22,11 @@ class AudioForm extends Component {
 
   componentDidMount () {
     const { fragmentId } = this.props.match.params;
-    console.log(fragmentId)
+    console.log('este es el fragmentID que le paso al form',fragmentId)
+    console.log(this.props)
         this.setState({
             ...this.state,
+            userId: this.props.loggedUser._id,
             fragment: fragmentId
         })
   }
@@ -62,7 +65,7 @@ class AudioForm extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
 
-        this.audioService.createAudio({fragment: this.state.fragment, audioFile: this.state.audioFile})
+        this.audioService.createAudio({fragment: this.state.fragment, audioFile: this.state.audioFile, userId: this.state.userId})
         .then(() => {
             // this.props.reloadFragments()
             this.props.history.push(`/fragmentos/${this.state.fragment}`)

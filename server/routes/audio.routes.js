@@ -44,22 +44,32 @@ router.get("/:id", (req, res) => {
   
   Audio
     .findById(id)
-    .populate('fragment')
-    .populate('book')
-    .populate('comments')
+    .populate('fragment book comments')
     .then(audio => res.status(200).json({ audio, message: "Audio getted" }))
+    .catch(err => res.status(500).json({ code: 500, message: "Error retrieving a single audio", err }))
+})
+
+router.get("/rating/:id", (req, res) => {
+
+  const { id } = req.params;
+  
+  Audio
+    .findById(id)
+    .populate('comments')
+    .then(audio => (audio.comments.reduce((acc, elm) => acc += elm.rate || 0 , 0))/audio.comments?.length)
+    .then(rate => Audio.findByIdAndUpdate(id, {rate}, {new: true}))
+    .then(audio => res.json({audio, message: "todo ok"}))
     .catch(err => res.status(500).json({ code: 500, message: "Error retrieving a single audio", err }))
 })
 
 router.post("/", (req, res) => {
 
-  const currentUser = req.session.currentUser._id
-  const {audioFile, fragment} = req.body;
+  const {audioFile, fragment, userId} = req.body.audioFile
 
   Fragment
   .findById(fragment)
   .then(oneFragment=> Audio.create({audioFile, fragment: oneFragment._id, book: oneFragment.bookId}))
-  .then(audio => User.findByIdAndUpdate( currentUser, { $push: {myAudios: audio.id}}, {new: true} ))
+  .then(audio => User.findByIdAndUpdate( userId, { $push: {myAudios: audio.id}}, {new: true} ))
   .then(() => res.status(200).json({ message: "Audio created" }))
   .catch(err => res.status(500).json({ code: 500, message: "Error creating audio", err: err.message }))
  
@@ -71,9 +81,20 @@ router.put("/:id", (req, res) => {
   // const { isValidated } = req.body
   
   Audio
-    .findByIdAndUpdate(id, {isValidated: true})
+    .findByIdAndUpdate(id, {isValidated: true}, {new: true})
     .then(audio => res.status(200).json({ audio, message: "Audio updated and validated" }))
     .catch(err => res.status(500).json({ code: 500, message: "Error updating an audio", err }))
+})
+
+router.put("/rate/:id", (req, res) => {
+
+  const { id } = req.params;
+  const { rate } = req.body
+  
+  Audio
+    .findByIdAndUpdate(id, { rate },{new: true})
+    .then(audio => res.status(200).json({ audio, message: "Audio rate updated" },))
+    .catch(err => res.status(500).json({ code: 500, message: "Error updating an audio's rate", err }))
 })
 
 router.delete("/:id", (req, res) => {
