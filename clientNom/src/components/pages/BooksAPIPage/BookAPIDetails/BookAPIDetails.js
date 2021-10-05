@@ -20,13 +20,13 @@ class BookAPIDetails extends Component {
 
   async componentDidMount() { //cambiar lo de async? guardar y luego probar
     
-    await this.getOneBook()
+    await this.getBook()
     this.createTheBook()
 
   }
 
 
-  getOneBook() {
+  getBook() {
 
     const { id } = this.props.match.params;
     return this.apiBookService.getOneBook(id)

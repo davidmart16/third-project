@@ -1,29 +1,26 @@
-import { Button, Col, Row } from "react-bootstrap"
-import { Link } from 'react-router-dom';
+import { Button, Col, Form, Row } from "react-bootstrap"
+import FragmentsService from "../../../../services/fragments.service";
 
 
 
 function FragmentsNotValidated(props) {
-    // constructor(props){
-    //     super(props)
 
-    //     // this.state={
-    //     //     fragments: null
-    //     // }
-    // }
+    const fragmentService = new FragmentsService()
 
-    // componentDidMount(){
-    //     this.setState({
-    //         ...this.state,
-    //         fragments: this.props.fragments
-    //     })
-    // }
 
-    // componentDidUpdate = (prevProps, prevState) => {
+    const handleSubmit = (e) => {
+        e.preventDefault()
 
-    //     console.log('prevprops de los fragmentos',prevProps.fragments?.length)
-    //     // if (prevProps.fragments.length !== this.props.fragments.length) this.getNotValidated()
-    // }
+        const fragmentId = e.target.querySelector('button').value
+
+        fragmentService.updateFragment(fragmentId)
+        .then(()=> {
+            console.log(props)
+            this.props.getNotValidated()
+        })
+        .catch(err => console.log(err))
+    }
+
 
     const displayFragments = () => {
 
@@ -34,9 +31,9 @@ function FragmentsNotValidated(props) {
                     return(
                         <Col md={4}>
                             <p>-{fragment.content}-</p>
-                            <Link>
-                                <Button>boton de prueba</Button>
-                            </Link>
+                            <Form onSubmit={handleSubmit}>
+                                <Button type="submit" value={fragment._id}>Validar</Button>
+                            </Form>
                         </Col>
                     )
                 })

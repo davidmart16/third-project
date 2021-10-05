@@ -1,32 +1,26 @@
-import { Button, Col, Row } from "react-bootstrap"
-import { Link } from 'react-router-dom';
+import { Button, Col, Form, Row } from "react-bootstrap"
+import CommentsService from "../../../../services/comments.service";
 
 
 
 function CommentsNotValidated (props){
-    // constructor(props){
-    //     super()
-
-    //     this.state={
-    //         comments: null
-    //     }
-
-    // }
 
 
-    // componentDidMount(){
+    const commentService = new CommentsService()
 
-    //     this.setState({
-    //         ...this.state,
-    //         comments: this.props.comments
-    //     })
-    // }
 
-    // componentDidUpdate = (prevProps, prevState) => {
+    const handleSubmit = (e) => {
+        e.preventDefault()
 
-    //     console.log('prevprops de los comentarios ',prevProps.comments?.length)
-    //     // if (prevProps.comments.length !== this.props.comments.length) this.getNotValidated()
-    // }
+        const commentId = e.target.querySelector('button').value
+
+        commentService.updateComment(commentId)
+        .then(()=> {
+            console.log(props)
+            this.props.getNotValidated()
+        })
+        .catch(err => console.log(err))
+    }
 
     const displayComments = () => {
 
@@ -37,9 +31,9 @@ function CommentsNotValidated (props){
                     return(
                         <Col md={3}>
                             <p>-{comment.text}-</p>
-                            <Link>
-                                <Button>Boton de prueba</Button>
-                            </Link>
+                            <Form onSubmit={handleSubmit}>
+                                <Button type="submit" value={comment._id}>Validar</Button>
+                            </Form>
                         </Col>
                     )
                 })

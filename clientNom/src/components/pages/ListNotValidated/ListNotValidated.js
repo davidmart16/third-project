@@ -51,23 +51,14 @@ class ListNotValidated extends Component {
 
     }
 
-
-    handleChange = (audioId, userId) => {
-        this.audioService.updateAudio(audioId, userId)
-        .then(() => this.getNotValidated())
-        .catch(err => console.log(err))
-    }
-
-
-
     
     render(){
         return(
             <>
                 <h2>Validaciones</h2>
-                <FragmentsNotValidated  fragments={this.state.fragmentsNotValidated}></FragmentsNotValidated>
-                <CommentsNotValidated comments={this.state.commentsNotValidated}></CommentsNotValidated>
-                <AudiosNotValidated audios={this.state.audiosNotValidated} handleC></AudiosNotValidated>
+                <FragmentsNotValidated  fragments={this.state.fragmentsNotValidated} getNotValidated={() => this.getNotValidated()}></FragmentsNotValidated>
+                <CommentsNotValidated comments={this.state.commentsNotValidated} getNotValidated={() => this.getNotValidated()}></CommentsNotValidated>
+                <AudiosNotValidated audios={this.state.audiosNotValidated} getNotValidated={() => this.getNotValidated()}></AudiosNotValidated>
             </>
         )
     }

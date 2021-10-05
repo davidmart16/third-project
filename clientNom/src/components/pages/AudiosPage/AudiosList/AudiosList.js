@@ -32,7 +32,7 @@ class AudioList extends Component {
             this.state.audios ?
              this.state.audios.map(audio => {
                     return (
-                        <AudioItem fav {...audio} loggedUser={this.props.loggedUser} storeUser={this.props.storeUser}></AudioItem>
+                        <AudioItem {...audio} loggedUser={this.props.loggedUser} storeUser={this.props.storeUser}></AudioItem>
                     )
                 }) : 
                 <p>Cargando...</p>

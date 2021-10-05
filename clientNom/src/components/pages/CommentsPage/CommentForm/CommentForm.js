@@ -1,6 +1,8 @@
 import { Component } from "react"
 import { Button, Form } from "react-bootstrap"
 import CommentsService from "../../../../services/comments.service"
+import { FaStar } from "react-icons/fa"
+import './CommentForm.css'
 
 class CommentForm extends Component{
     constructor(props){
@@ -9,7 +11,9 @@ class CommentForm extends Component{
         this.state={
             text: '',
             userId: '',
-            audioId: ''
+            audioId: '',
+            rate: null,
+            hover: null
         }
     }
 
@@ -17,8 +21,7 @@ class CommentForm extends Component{
 
     componentDidMount = () => {
         const userId = this.props.loggedUser._id
-        //pasar el usuario registrado
-        console.log(this.props.loggedUser)
+
         const { audioId } = this.props.match.params;
         
         this.setState({
@@ -28,10 +31,11 @@ class CommentForm extends Component{
         })
     }
 
+
     handleSubmit = (e) => {
         e.preventDefault()
 
-        this.commentService.createComment({text: this.state.text, user: this.state.userId, audioId: this.state.audioId})
+        this.commentService.createComment({text: this.state.text, user: this.state.userId, audioId: this.state.audioId, rate: this.state.rate})
         .then(()=> {
             this.props.history.push(`/audios/${this.state.audioId}`)
         })
@@ -54,9 +58,40 @@ class CommentForm extends Component{
         return(
 
             <Form onSubmit={this.handleSubmit}>
+            <h1>Valora el audio </h1>
+          {[...Array(5)].map((star, idx) => {
+            const rateValue = idx + 1;
+
+            return (
+              <label key={idx}>
+                <input
+                  id="starRadio"
+                  type="radio"
+                  name="rate"
+                  value={rateValue}
+                  onClick={(e) => this.handleChange(e)}
+                />
+                <FaStar
+                  className="star"
+                  color={
+                    rateValue <= (this.state.hover || this.state.rate) ? "#ffc107" : "#e4e5e9"
+                  }
+                  size={30}
+                  onMouseEnter={() => 
+                  this.setState({
+                      ...this.state,
+                      rate: rateValue})
+                    }
+                  onMouseLeave={() => this.setState({
+                      ...this.state,
+                      hover: null})}
+                />
+              </label>
+            );
+          })}
                 <Form.Group className="mb-3" controlId="text">
                     <Form.Label>Comentario: </Form.Label>
-                    <Form.Control onChange={(e) => this.handleChange(e)} name="text" value={this.state.text} type="text" placeholder="Comenta" />
+                    <Form.Control onChange={(e) => this.handleChange(e)} name="text" value={this.state.text} type="text" placeholder="Deja tu comentario" />
                 </Form.Group>
                 <Button variant="primary" type="submit">Submit</Button>
             </Form>

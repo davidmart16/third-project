@@ -21,9 +21,12 @@ function AudioItem ({audioFile, _id , loggedUser, storeUser }) {
         })
         .catch(err => console.log(err))
 
+        let audioInclude = loggedUser.favAudios.includes(info.audioId)
+        console.log('que estoy pasando? ',audioInclude)
+
     }
 
-    console.log(loggedUser)
+    
     return(
         
             <Col md={6}>

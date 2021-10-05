@@ -46,9 +46,6 @@ class BookDetails extends Component {
             <Link to={`/crear-fragmento/${this.state.book._id}`}>
               <Button variant='primary' >Añade otro fragmento</Button>
             </Link>
-            <Link to="/fragmentos">
-              <Button>Ver fragmentos</Button>
-            </Link>
             <Link to="/">
               <Button>volver</Button>
             </Link>

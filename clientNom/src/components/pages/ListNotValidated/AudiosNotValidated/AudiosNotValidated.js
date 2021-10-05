@@ -8,30 +8,6 @@ import AudiosService from '../../../../services/audios.service';
 function AudiosNotValidated(props) {
 
     const audioService = new AudiosService()
-    // constructor(props){
-    //     super()
-
-    //     this.state={
-    //         audios: null
-    //     }
-    // }
-
-
-    // componentDidMount(){
-
-    //     this.setState({
-    //         ...this.state,
-    //         audios: this.props.audios
-    //     })
-    // }
-
-
-    // componentDidUpdate = (prevProps, prevState) => {
-
-    //     console.log('prevprops de los audios -',prevProps.audios?.length)
-    //     // if (prevProps.audios.length !== this.props.audios.length) this.getNotValidated()
-    // }
-
     
 
     const displayAudios = () => {
@@ -44,7 +20,7 @@ function AudiosNotValidated(props) {
                         <Col md={3}>
                             <ReactAudioPlayer src={`${audio.audioFile}`} autoPlay={false} controls/>
                             <Form onSubmit={handleSubmit}>
-                                <Button type="submit">Validar</Button>
+                                <Button type="submit" value={audio._id}>Validar</Button>
                             </Form>
                         </Col>
                     )
@@ -55,8 +31,10 @@ function AudiosNotValidated(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        const audioId = e.target.querySelector('button').value
+        console.log(e.target, 'hola soy ohhhhh',audioId)
 
-        audioService.updateAudio()
+        audioService.updateAudio(audioId)
         .then(()=> {
             console.log(props)
             this.props.getNotValidated()

@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import BooksService from "../../../../services/books.service"
 
@@ -32,17 +32,17 @@ class BooksList extends Component {
                     return (
 
                         <Col md={4}>
-                            <h2>{book.name}</h2>
-                            <Container>
-                                <Row>
-                                    {book.fragments?.map(fragment => <Col md={11}>{fragment.content}</Col>)}
+                            <Card >
+                                <Card.Title>{book.name}</Card.Title>
+                                    <Card.Body>
+                                    {book.fragments.map(fragment => fragment.isValidated && <p>{fragment.content}</p>)}
                                     {this.props.loggedUser &&
                                     <Link to={`/libros/${book._id}`}>
                                         <Button>Detalles</Button>
                                     </Link>
                                     }
-                                </Row>
-                            </Container>
+                                    </Card.Body>
+                            </Card>
                         </Col>
                     )
                 }) : 

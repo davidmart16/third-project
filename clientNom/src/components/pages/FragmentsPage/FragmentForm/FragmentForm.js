@@ -29,7 +29,7 @@ class FragmentForm extends Component{
         this.fragmentService.createFragment(this.state)
         .then(()=> {
             // this.props.reloadFragments()
-            this.props.history.push(`/libros/${this.state.bookId}`)
+            this.props.history.push(`/libros`)
         })
     }
 

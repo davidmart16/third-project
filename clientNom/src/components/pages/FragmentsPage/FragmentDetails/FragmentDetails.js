@@ -107,9 +107,9 @@ class FragmentDetails extends Component{
                         {this.displayAudios()}
                 </Row>
             </Container>
-            <Link to={`/libros`}>
+            {/* <Link to={`/libros/${this.state.fragment}`}>
                 <Button>Volver</Button>
-            </Link>
+            </Link> */}
             </>
         )
     }
