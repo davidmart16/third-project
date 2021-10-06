@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react'
 import { Button, Form } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import AudiosService from '../../../../services/audios.service'
 import UploadsService from '../../../../services/uploads.service'
 
@@ -74,21 +75,8 @@ class AudioForm extends Component {
 
   render() {
     return (
+    <>
       <Form onSubmit={this.handleSubmit}>
-
-        {/* <Form.Group className="mb-3" controlId="libro">
-          <Form.Label>Libro: </Form.Label>
-          <Form.Control  as="select" onChange={(e) => this.handleChange(e)} name="libro" value={this.state.book} type="text" placeholder="Selecciona el libro">
-                <option value="DICTUM">Dictamen</option>
-                <option value="CONSTANCY">Constancia</option>
-                <option value="COMPLEMENT">Complemento</option>
-          </Form.Control>
-        </Form.Group> */}
-
-        {/* <Form.Group className="mb-3" controlId="imageUrl">
-          <Form.Label>Imagen: </Form.Label>
-          <Form.Control onChange={(e) => this.handleChange(e)} name="imageUrl" value={this.state.imageUrl} type="text" placeholder="Introduce imagen" />
-        </Form.Group> */}
 
         <Form.Group className="mb-3" controlId="audioFile">
           <Form.Label>Archivo de audio: </Form.Label>
@@ -97,12 +85,15 @@ class AudioForm extends Component {
 
 
         {this.state.isLoading && <p>Subiendo archivo</p>}
-{/* <Spinner shape="circle" /> */}
 
         <Button disabled={this.state.isLoading} variant="primary" type="submit">
           {this.state.isLoading ? "Loading..." : "Submit"}
         </Button>
       </Form>
+      <Link to={`/fragmentos/${this.state?.fragment}`}>
+          <Button>Volver a libros</Button>
+      </Link> 
+      </>
     )
   }
 }

@@ -2,13 +2,15 @@ import { Button, Col } from "react-bootstrap";
 import ReactAudioPlayer from 'react-audio-player';
 import { Link } from "react-router-dom";
 import UsersService from "../../../../services/users.service";
+import rateStar from "../../../../utils";
+import './AudioItem.css'
 
-function AudioItem ({audioFile, _id , loggedUser, storeUser }) {
+function AudioItem ({rate,audioFile, _id , loggedUser, storeUser }) {
 
     const userService = new UsersService()
     
     const checkInclude = (audioId, arrAudios) => arrAudios.includes(audioId)
-    let audioInclude = checkInclude(_id, loggedUser.favAudios)
+    let audioInclude = checkInclude(_id, loggedUser ? loggedUser.favAudios : [])
 
     const handleClick = (e) => {
         e.preventDefault()
@@ -28,14 +30,11 @@ function AudioItem ({audioFile, _id , loggedUser, storeUser }) {
     }
     
     
-
-    
-
-    
     return(
         
             <Col md={6}>
                 <ReactAudioPlayer src={`${audioFile}`} autoPlay={false} controls/>
+                <>{rate ? rateStar(rate) : <div className='rating'>☆☆☆☆☆</div>}</>
                 {loggedUser && 
                 <>
                 <Link to={`/audios/${_id}`}>

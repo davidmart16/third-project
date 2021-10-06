@@ -1,7 +1,8 @@
 import { Component } from "react";
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import {Container, Row } from "react-bootstrap";
+// import { Link } from "react-router-dom";
 import BooksService from "../../../../services/books.service"
+import BookItem from "../BookItem/BookItem";
 
 
 class BooksList extends Component {
@@ -12,6 +13,7 @@ class BooksList extends Component {
             books: null
         }
         this.bookService = new BooksService()
+        
     }
 
     componentDidMount(){
@@ -22,29 +24,17 @@ class BooksList extends Component {
                 books: res.data
             })
         })
+        .catch(err => console.log(err))
     }
 
     
     displayBooks = () => {
         return(
             this.state.books ?
-                this.state.books.map(book => {
-                    return (
-
-                        <Col md={4}>
-                            <Card >
-                                <Card.Title>{book.name}</Card.Title>
-                                    <Card.Body>
-                                    {book.fragments.map(fragment => fragment.isValidated && <p>{fragment.content}</p>)}
-                                    {this.props.loggedUser &&
-                                    <Link to={`/libros/${book._id}`}>
-                                        <Button>Detalles</Button>
-                                    </Link>
-                                    }
-                                    </Card.Body>
-                            </Card>
-                        </Col>
-                    )
+                this.state.books.map((book, idx) => {
+                    return <BookItem key={`${idx}-${book._id}`} 
+                    book={book} 
+                    loggedUser={this.props.loggedUser}/>
                 }) : 
                 <p>Cargando...</p>
         )

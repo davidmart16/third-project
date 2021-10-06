@@ -1,4 +1,5 @@
 import { Col } from "react-bootstrap";
+import rateStar from "../../../../utils";
 
 function CommentItem ({text, rate, _id}) {
 
@@ -6,7 +7,7 @@ function CommentItem ({text, rate, _id}) {
         
             <Col>
                 <article>{text}</article>
-                <>{rate ? rate : <p>Sin puntuacion</p>}</>
+                <>{rate ? rateStar(rate) : <p>Sin puntuacion</p>}</>
             </Col>
     )
 }

@@ -6,8 +6,6 @@ import UsersService from "../../../services/users.service";
 // import AudioItem from "../AudiosPage/AudioItem/AudioItem";
 
 
-let audioIncludeFavAudios = null
-
 class ListProfileAudios extends Component {
     constructor(props){
         super(props)
@@ -51,7 +49,6 @@ class ListProfileAudios extends Component {
                         </Link>
                         }
                     </Col>
-                    // <AudioItem {...audio} loggedUser={this.props.loggedUser} storeUser={this.props.storeUser}/>
                 )
         })
             : <p>cargando usuario</p>
@@ -67,16 +64,9 @@ class ListProfileAudios extends Component {
 
                     <Col md={6}>
                         <ReactAudioPlayer src={`${audio.audioFile}`} autoPlay={false} controls/>
-                        {this.props.loggedUser && 
-                        <>
                         <Link to={`/audios/${audio._id}`}>
                             <Button >Detalles</Button>
                         </Link>
-                        <form onSubmit={this.handleClick}>
-                            <Button id='Button' type="submit" value={audio._id}>{audioIncludeFavAudios ? 'Eliminar de Fav' : 'Añadir a favoritos'}</Button>
-                        </form>
-                        </>
-                        }
                     </Col>
                         // <AudioItem {...audio} loggedUser={this.props.loggedUser}/> 
                 )
@@ -85,33 +75,7 @@ class ListProfileAudios extends Component {
         )
     }
 
-    // let audioInclude = checkInclude(loggedUser.favAudios)
-
-    checkInclude = (audioId, arrAudios) => arrAudios.includes(audioId)
-
     
-
-
-    handleClick = (e) => {
-        e.preventDefault()
-        const info = {
-            audioId: e.target.querySelector('#Button').value,
-            userId: this.props.loggedUser._id
-        }
-        
-        this.userService.addAudiosFav(info.audioId, info.userId)
-        .then((res) => {
-            this.props.storeUser(res.data.user)
-        })
-        .catch(err => console.log(err))
-
-        audioIncludeFavAudios = this.checkInclude(info.audioId, this.props.loggedUser.favAudios)
-
-    }
-    
- 
-
-
     render(){
         
         return(

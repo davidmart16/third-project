@@ -28,9 +28,10 @@ class FragmentForm extends Component{
 
         this.fragmentService.createFragment(this.state)
         .then(()=> {
-            // this.props.reloadFragments()
+            //cambiar el redirect?
             this.props.history.push(`/libros`)
         })
+        .catch(err => console.log(err))
     }
 
     handleChange = (e) => {

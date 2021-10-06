@@ -38,9 +38,9 @@ class BookDetails extends Component {
           <Row>
             <Col>
                 <h1>Libro: {this.state.book.name}</h1>
-                {/* {this.state.book.fragment?.map(elem => {
+                {this.state.book.fragments?.map(elem => {
                     return (<il>{elem.content}</il>)
-                })} */}
+                })}
                   <FragmentsList book={this.state.book}/>
             </Col>
             <Link to={`/crear-fragmento/${this.state.book._id}`}>

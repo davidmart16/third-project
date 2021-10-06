@@ -71,6 +71,7 @@ class FragmentDetails extends Component{
 
     displayAudios = () => {
         console.log('soy la array de audios',this.state.fragmentAudios)
+                console.log(this.state.fragment?.bookId)
         return(
         this.state.fragmentAudios ?
         
@@ -80,10 +81,10 @@ class FragmentDetails extends Component{
                     <Col>
                         <ReactAudioPlayer src={`${audio.audioFile}`} autoPlay={false} controls/>
                         <Link to={`/audios/${audio._id}`}>
-                            <Button>Da tu opinion sobre este audio</Button>
+                            <Button>Comentarios del audio</Button>
                         </Link>
                     </Col>
-                )
+                ) 
             }) : 
             <p>Cargando lista de audios...</p>
         )
@@ -106,10 +107,13 @@ class FragmentDetails extends Component{
                 <Row>
                         {this.displayAudios()}
                 </Row>
+            <Link to={`/libros/${this.state.fragment?.bookId}`}>
+                <Button>Volver a libros</Button>
+            </Link>    
+            <Link to={`/crear-audio/${this.state.fragment?._id}`}>
+                <Button>Subir audio de este fragmento</Button>
+            </Link>
             </Container>
-            {/* <Link to={`/libros/${this.state.fragment}`}>
-                <Button>Volver</Button>
-            </Link> */}
             </>
         )
     }

@@ -41,16 +41,12 @@ class AudioDetails extends Component{
         this.state.audio?.comments?.map(comment => rating += comment.rate )
         let rate = 0
         rate = rating/this.state.audio?.comments?.length
-        console.log(rate, this.state.audio?.comments?.length)
-        rate = 2
         return rate
     }
 
     updateRateAudio(rate){
         this.audioService.updateAudioRate(this.state.audio._id, rate)
         .then(res => {
-            console.log('estoy dentro de  la promesa, me habre actualizado?', res.data.audio)
-
             this.setState({
                 ...this.state,
                 rate: res.data.audio.rate

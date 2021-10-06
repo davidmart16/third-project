@@ -17,7 +17,7 @@ function CommentsNotValidated (props){
         commentService.updateComment(commentId)
         .then(()=> {
             console.log(props)
-            this.props.getNotValidated()
+            props.getNotValidated()
         })
         .catch(err => console.log(err))
     }

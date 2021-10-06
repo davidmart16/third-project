@@ -39,13 +39,13 @@ router.get("/search-book-by/:type/:text", (req, res) => {
 
 router.get('/get-book/:id', (req, res) => {
 
-    const {id} = req.params
-    console.log(id)
+    const { id } = req.params
 
     API
     .getBooks(id)
     .then(book => res.json(book.data.items))
     .catch(err => console.error(err))
+    
 })
 
 module.exports = router;
