@@ -77,7 +77,9 @@ router.post("/", (req, res) => {
 
 router.put("/:id", (req, res) => {
 
-  const { id } = req.params;
+  const { id } = req.params
+
+  console.log('no estare entrando aqui?')
   // const { isValidated } = req.body
   
   Audio
@@ -88,8 +90,9 @@ router.put("/:id", (req, res) => {
 
 router.put("/rate/:id", (req, res) => {
 
-  const { id } = req.params;
+  const { id } = req.params
   const { rate } = req.body
+  console.log('esto es req.params', req.body)
   
   Audio
     .findByIdAndUpdate(id, { rate },{new: true})

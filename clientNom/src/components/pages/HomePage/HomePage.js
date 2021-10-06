@@ -2,11 +2,13 @@
 import React from 'react'
 import { Button, Col, Container, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import AudioList from '../AudiosPage/AudiosList/AudiosList'
 import BooksList from '../BooksPage/BooksList/BooksList'
 
 function HomePage(props) {
   return (
     <>
+  
       <Container style={{ minHeight: "100vh" }}>
         <h1>Bienvenid@ a La Voz de las Palabras</h1>
         <Row>
@@ -49,8 +51,15 @@ function HomePage(props) {
             </Col>
           </Row> 
         }
-        <BooksList loggedUser= {props.loggedUser}/>
       </Container>
+    
+  
+        <BooksList loggedUser= {props.loggedUser}/>
+    
+  
+        <AudioList loggedUser={props.loggedUser} storeUser={props.storeUser} ></AudioList>
+    
+
     </>
   )
 }

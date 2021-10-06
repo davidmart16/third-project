@@ -15,7 +15,7 @@ class AudiosService {
   createAudio = (audioFile, fragment, userId) => this.instance.post("/", {audioFile, fragment, userId});
   deleteAudio = (id) => this.instance.delete(`/${id}`)
   updateAudio = (id) => this.instance.put(`/${id}`)
-  updateAudioRate = (id, rate) => this.instance.put(`/rate/${id}`, rate)
+  updateAudioRate = (id, rate) => this.instance.put(`/rate/${id}`, {rate})
 
 }
 

@@ -23,6 +23,7 @@ class BooksList extends Component {
                 ...this.state,
                 books: res.data
             })
+            this.sortByFragments()
         })
         .catch(err => console.log(err))
     }
@@ -39,6 +40,16 @@ class BooksList extends Component {
                 <p>Cargando...</p>
         )
 
+    }
+
+    sortByFragments= () => {
+
+        const newState = this.state.books
+        this.setState({
+
+            ...this.state,
+            books: newState.sort(((book1, book2) => book2.fragments.length - book1.fragments.length))
+        })
     }
 
     render() {

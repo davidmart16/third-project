@@ -39,7 +39,7 @@ class BookDetails extends Component {
             <Col>
                 <h1>Libro: {this.state.book.name}</h1>
                 {this.state.book.fragments?.map(elem => {
-                    return (<il>{elem.content}</il>)
+                    return (<p>{elem.content}</p>)
                 })}
                   <FragmentsList book={this.state.book}/>
             </Col>

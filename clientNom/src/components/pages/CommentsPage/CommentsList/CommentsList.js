@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Row } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import CommentItem from "../CommentItem/CommentItem";
 
 class CommentList extends Component {
@@ -33,10 +33,11 @@ class CommentList extends Component {
     render(){
         
         return(
-            
-            <Row>
-                {this.displayComments()}
-            </Row>
+            <Container>
+                <Row>
+                    {this.displayComments()}
+                </Row>
+            </Container>
         )
     }
 }

@@ -22,6 +22,7 @@ class AudioList extends Component {
                 ...this.state,
                 audios: res.data
             })
+            this.sortByRate()
         })
     }
 
@@ -39,6 +40,15 @@ class AudioList extends Component {
         )
     }
 
+    sortByRate= () => {
+
+        const newState = this.state.audios
+        this.setState({
+
+            ...this.state,
+            audios: newState.sort(((audio1, audio2) => audio2.rate - audio1.rate))
+        })
+    }
 
     render() {
 
