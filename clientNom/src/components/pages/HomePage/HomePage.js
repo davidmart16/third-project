@@ -11,32 +11,26 @@ function HomePage(props) {
   
       <Container style={{ minHeight: "100vh" }}>
         <h1>Bienvenid@ a La Voz de las Palabras</h1>
-        <Row>
-          <Col>
+        <section className='myRow'>
+          <div>
             <Link to="/libros">
               <Button>Ver libros</Button>
             </Link>
-          </Col>
-          <Col>
-            <Link to={`/lista-libros/julio verne`}>
-              <Button>Libros de Julio Verne</Button>
-            </Link>
-          </Col>
-          <Col>
+          </div>
+
+          <div>
             <Link to="/audios">
               <Button>Ver audios</Button>
             </Link>
-          </Col>
-        </Row>
+          </div>
+        </section>
         <br/>
         {props.loggedUser ? 
-          <Row>
-            <Col>
+          <div className='homepage'>
               <Link to="/perfil">
                 <Button>Mi perfil</Button>
               </Link>
-            </Col>
-          </Row>
+          </div>
           : 
           <Row >
             <Col mt={60} className='bloques'>

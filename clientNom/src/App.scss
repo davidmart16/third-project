@@ -1,0 +1,244 @@
+.App {
+  text-align: center;
+  font-style: italic;
+}
+
+/*
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} */
+
+//navbar
+$bgDefault: #8eaed8;
+$bgHighlight: #477bbf;
+$colDefault: #ead8ea;
+$colHighlight: #304464;
+$dropDown: true;
+.navbar {
+  background-color: $bgDefault;
+  .navbar-brand {
+    color: $colDefault;
+    &:hover,
+    &:focus {
+      color: $colHighlight;
+    }
+  }
+  .navbar-text {
+    color: $colDefault;
+    a {
+      color: $colHighlight;
+      &:hover,
+      &:focus {
+        color: $colHighlight;
+      }
+    }
+  }
+  .navbar-nav {
+    .nav-link {
+      color: $colDefault;
+      border-radius: 0.25rem;
+      margin: 0 0.25em;
+      &:not(.disabled) {
+        &:hover,
+        &:focus {
+          color: $colHighlight;
+        }
+      }
+    }
+    @if ($dropDown) {
+      .dropdown-menu {
+        background-color: $bgDefault;
+        border-color: $bgHighlight;
+        .dropdown-item {
+          color: $colDefault;
+          &:hover,
+          &:focus,
+          &.active {
+            color: $colHighlight;
+            background-color: $bgHighlight;
+          }
+        }
+        .dropdown-divider {
+          border-top-color: $bgHighlight;
+        }
+      }
+    }
+    .nav-item.active,
+    .nav-item.show {
+      .nav-link,
+      .nav-link:hover,
+      .nav-link:focus {
+        color: $colHighlight;
+        background-color: $bgHighlight;
+      }
+    }
+  }
+  .navbar-toggler {
+    border-color: $bgHighlight;
+    &:hover,
+    &:focus {
+      background-color: $bgHighlight;
+    }
+    .navbar-toggler-icon {
+      color: $colDefault;
+    }
+  }
+  .navbar-collapse,
+  .navbar-form {
+    border-color: $colDefault;
+  }
+  .navbar-link {
+    color: $colDefault;
+    &:hover {
+      color: $colHighlight;
+    }
+  }
+}
+@media (max-width: 575px) {
+  .navbar-expend-sm .navbar-nav .show .dropdown-menu {
+    .dropdown-item {
+      color: $colDefault;
+      &:hover,
+      &:focus {
+        color: $colHighlight;
+      }
+    }
+    .dropdown-item.active {
+      color: $colHighlight;
+      background-color: $bgHighlight;
+    }
+  }
+}
+@media (max-width: 767px) {
+  .navbar-expend-md .navbar-nav .show .dropdown-menu {
+    .dropdown-item {
+      color: $colDefault;
+      &:hover,
+      &:focus {
+        color: $colHighlight;
+      }
+    }
+    .dropdown-item.active {
+      color: $colHighlight;
+      background-color: $bgHighlight;
+    }
+  }
+}
+@media (max-width: 991px) {
+  .navbar-expend-lg .navbar-nav .show .dropdown-menu {
+    .dropdown-item {
+      color: $colDefault;
+      &:hover,
+      &:focus {
+        color: $colHighlight;
+      }
+    }
+    .dropdown-item.active {
+      color: $colHighlight;
+      background-color: $bgHighlight;
+    }
+  }
+}
+@media (max-width: 1199px) {
+  .navbar-expend-xl .navbar-nav .show .dropdown-menu {
+    .dropdown-item {
+      color: $colDefault;
+      &:hover,
+      &:focus {
+        color: $colHighlight;
+      }
+    }
+    .dropdown-item.active {
+      color: $colHighlight;
+      background-color: $bgHighlight;
+    }
+  }
+}
+.navbar-expend .navbar-nav .show .dropdown-menu {
+  .dropdown-item {
+    color: $colDefault;
+    &:hover,
+    &:focus {
+      color: $colHighlight;
+    }
+  }
+  .dropdown-item.active {
+    color: $colHighlight;
+    background-color: $bgHighlight;
+  }
+}
+
+.form-control {
+  font-style: italic;
+}
+
+.btn-primary {
+  font-style: italic;
+  color:  #395076 !important;
+  font-weight: 100;
+}
+
+.navbar-brand {
+  color: #395076 !important;
+  font-size: 50px;
+}
+
+.nav-link {
+  color: #395076 !important;
+
+}
+
+h1 {
+  color: #c9d4e6 ;
+  background-image: url('https://lamenteesmaravillosa.com/wp-content/uploads/2020/01/muchos-libros.jpg');
+  border-radius: 0.375rem;
+  text-shadow: 2px 2px #477bbf;
+}
+
+.homepage {
+  background-image: url('https://hipermediaciones.files.wordpress.com/2016/07/libros.jpg');
+  background-size: cover;
+  padding: 100px;
+}
+
+.myRow{
+  display: flex;
+  justify-content: space-evenly;
+}
+$theme-colors: (
+  "primary": #8eaed8,
+  "secondary": #477bbf,
+);
+
+@import "~bootstrap/scss/bootstrap";

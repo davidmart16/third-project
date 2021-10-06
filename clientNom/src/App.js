@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Component } from 'react';
-import './App.css';
+import './App.scss'
 import Navigator from './components/layout/Navigator/Navigator';
 import Routes from './components/routes';
 import AuthService from './services/auth.service';

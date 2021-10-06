@@ -15,7 +15,7 @@ export default function Navigator(props) {
   }
 
   return (
-    <Navbar bg="light" expand="md" className="mb-5">
+    <Navbar expand="md" className="mb-5">
       <Container>
         <Navbar.Brand href="/">My App</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
