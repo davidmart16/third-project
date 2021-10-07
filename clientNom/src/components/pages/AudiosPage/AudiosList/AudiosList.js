@@ -2,6 +2,7 @@ import { Component } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import AudiosService from "../../../../services/audios.service"
 import AudioItem from "../AudioItem/AudioItem";
+import './AudiosList.css'
 
 
 class AudioList extends Component {
@@ -53,10 +54,9 @@ class AudioList extends Component {
     render() {
 
         return (
-            <Container>
+            <Container className='border'>
                 <Row>
                     <Col md={12}><h2>Los mejores audios</h2></Col>
-                <hr/>
                     {this.displayAudios()}
                 </Row>
                 <hr/>

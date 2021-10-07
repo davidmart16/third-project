@@ -23,8 +23,6 @@ class AudioForm extends Component {
 
   componentDidMount () {
     const { fragmentId } = this.props.match.params;
-    console.log('este es el fragmentID que le paso al form',fragmentId)
-    console.log(this.props)
         this.setState({
             ...this.state,
             userId: this.props.loggedUser._id,
@@ -56,7 +54,6 @@ class AudioForm extends Component {
           isLoading: false,
           audioFile: res.data.fileUrl
         })
-        // console.log(res.data.fileUrl)
       })
       .catch(err => alert("Error, no se ha subido el audio"))
   }

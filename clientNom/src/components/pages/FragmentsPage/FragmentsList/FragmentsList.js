@@ -16,7 +16,6 @@ class FragmentsList extends Component {
     }
 
     componentDidMount(){
-        console.log(this.props.book._id)
         this.fragmentService.getFragments()
         .then(res => {
             this.setState({

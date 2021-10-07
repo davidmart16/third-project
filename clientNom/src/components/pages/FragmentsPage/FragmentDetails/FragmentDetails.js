@@ -55,10 +55,8 @@ class FragmentDetails extends Component{
 
 
         getAudios = () => {
-            console.log('esto es el fragment del estado en la funcion de getAudios ---',this.state.fragment)
             this.audioService.getAudiosByFragment(this.state.fragment)
             .then(res => {
-                console.log('estoy dentro del then',this.state.fragment)
                 this.setState({
                     ...this.state,
                     fragmentAudios: res.data
@@ -70,13 +68,10 @@ class FragmentDetails extends Component{
 
 
     displayAudios = () => {
-        console.log('soy la array de audios',this.state.fragmentAudios)
-                console.log(this.state.fragment?.bookId)
         return(
         this.state.fragmentAudios ?
         
             this.state.fragmentAudios.map(audio => {
-                console.log('soy un audio por favor muestrate',audio)
                 return (
                     <Col>
                         <ReactAudioPlayer src={`${audio.audioFile}`} autoPlay={false} controls/>

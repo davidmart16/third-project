@@ -15,7 +15,6 @@ function FragmentsNotValidated(props) {
 
         fragmentService.updateFragment(fragmentId)
         .then(()=> {
-            console.log(props)
             props.getNotValidated()
         })
         .catch(err => console.log(err))

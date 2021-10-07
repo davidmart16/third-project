@@ -28,8 +28,6 @@ class PruebaBooks extends Component{
 
     componentDidUpdate = (prevProps, prevState) => {
 
-        // console.log('soy las prevProps: ', prevProps.match.params)
-        // console.log('soy las this.props: diferenciame' ,this.props.match.params)
         if (prevProps.match.params.text !== this.props.match.params.text) this.getBooks()
     }
 
@@ -43,7 +41,6 @@ class PruebaBooks extends Component{
                 ...this.state,
                 libros: res.data
             })
-            console.log(this.state.libros)
         })
         .catch(err => console.error(err))
         
@@ -54,7 +51,6 @@ class PruebaBooks extends Component{
         return(
             this.state.libros ?
                 this.state.libros.map(libro => {
-                    console.log(libro)
                     return (
                         
                         <Col md={6}>

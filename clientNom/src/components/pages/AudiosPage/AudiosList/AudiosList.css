@@ -1,0 +1,19 @@
+.border{
+    margin-bottom: 100px;
+}
+
+h2 {
+  color: #c9d4e6;
+  background-image: url("https://lamenteesmaravillosa.com/wp-content/uploads/2020/01/muchos-libros.jpg");
+  border-radius: 0.375rem;
+  text-shadow: 2px 2px #477bbf;
+}
+
+h5 {
+  color: #c9d4e6;
+  font-size: 20px;
+  font-weight: 400;
+  text-decoration-line: underline;
+  text-shadow: 2px 2px #477bbf;
+  margin: 30px;
+}

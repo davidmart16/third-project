@@ -2,6 +2,7 @@ import { Component } from "react";
 import { Button, Card, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import APIBooksService from '../../../../services/apibooks.service'
+import './BookItem.css'
 
 
 
@@ -23,30 +24,29 @@ class BookItem extends Component {
             ...this.state,
             book: this.props.book
         })
-        this.getOneBook(this.state.book?._id)
+        // this.getOneBook(this.state.book?._id)
     }
 
-    getOneBook(id) {
+    // getOneBook(id) {
 
-        this.apiBookService.getOneBook(id)
-        .then(res => {
-            console.log('esto es la res data', res.data)
-            this.setState({
-            ...this.state,
-            bookFromApi: res.data.book
-            })
-        })
-        .catch(err => console.log(err))
+    //     this.apiBookService.getOneBook(id)
+    //     .then(res => {
+    //         this.setState({
+    //         ...this.state,
+    //         bookFromApi: res.data.book
+    //         })
+    //     })
+    //     .catch(err => console.log(err))
         
-    }
+    // }
 
     displayBook(){
 
         return (
 
-           <Col md={4}>
-                <Card >
-                    <Card.Title>{this.state.book?.name}</Card.Title>
+           <Col key={`${this.state.book?.name}-${this.state.book?._id}`} md={4}>
+                <Card className= 'book-item' >
+                    <Card.Title className='card-title'>{this.state.book?.name}</Card.Title>
                         <Card.Body>
                         {/* <img src= {this.state.bookFromApi.volumeInfo?.thumbnails?.thumbnails} alt=''/>  */}
                         {this.state.book?.fragments.map(fragment => fragment.isValidated && <p>{fragment.content}</p>)}

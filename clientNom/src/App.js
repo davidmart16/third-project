@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Component } from 'react';
 import './App.css'
+import Footer from './components/layout/Footer/Footer';
 import Navigator from './components/layout/Navigator/Navigator';
 import Routes from './components/routes';
 import AuthService from './services/auth.service';
@@ -28,6 +29,7 @@ class App extends Component {
       <div className="App">
         <Navigator loggedUser={this.state.loggedUser} storeUser={this.storeUser}/>
         <Routes loggedUser={this.state.loggedUser} storeUser={this.storeUser}/>
+        <Footer></Footer>
       </div>
     );
   }

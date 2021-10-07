@@ -16,7 +16,6 @@ router.get("/", (req, res) => {
 router.get("/:_id", (req, res) => {
 
   const { _id } = req.params;
-  console.log(_id)
 
   Book
     .findById(_id)
@@ -29,9 +28,8 @@ router.get("/:_id", (req, res) => {
 
 router.post("/create", (req, res) => {
   
-  console.log('hola soy el req body', req.body)
   const { bookIdApi, name } = req.body
-  console.log(bookIdApi, "soy undefined David, quiereme igual")
+  
   Book
   .findOne({ bookIdApi })
   .then(book => book ? book : Book.create({ name, bookIdApi }))

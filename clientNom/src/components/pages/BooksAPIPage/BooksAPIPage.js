@@ -45,7 +45,6 @@ class BooksAPIPage extends Component{
         return(
             this.state.booksApi ?
                 this.state.booksApi.map(book => {
-                    console.log(book)
                     return (
                         <Col md={6}>
                             <h3>{book.volumeInfo.title}</h3>

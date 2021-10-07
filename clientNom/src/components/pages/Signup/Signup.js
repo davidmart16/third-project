@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Container, Form, Button } from 'react-bootstrap'
 import AuthService from '../../../services/auth.service'
+import './Signup.css'
 
 class Signup extends Component {
   constructor(props) {
@@ -28,8 +29,8 @@ class Signup extends Component {
 
   render() {
     return (
-      <Container>
-        <Form onSubmit={this.handleFormSubmit}>
+      <Container className='text'>
+        <Form className='form' onSubmit={this.handleFormSubmit}>
         
           <Form.Group className="mb-3" controlId="formBasicName">
             <Form.Label>Username</Form.Label>

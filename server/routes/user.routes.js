@@ -39,7 +39,6 @@ router.delete("/:id", (req, res) => {
 router.put('/add-fav-audios', (req, res)=> {
 
   // const currentUser =  req.session.currentUser  //'6151918fa7b0cf1ddb4c95fb'
-  console.log(req.body)
   const {audioId, userId} = req.body
 
   User

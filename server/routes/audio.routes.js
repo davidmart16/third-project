@@ -27,14 +27,11 @@ router.get("/validated", (req, res) => {
 router.get("/by-fragment", (req, res) => {
   
   const {fragment} = req.query
-  console.log('soy el req query', req.query.fragment.id)
   
   Audio
     .find({fragment:  fragment})
     //.populate('fragment')
-    .then(audios => {
-      console.log(audios)
-      return res.status(200).json(audios)})
+    .then(audios =>  res.status(200).json(audios))
     .catch(err => res.status(500).json({ code: 500, message: "Error retrieving audios", err }))
 })
 
@@ -79,7 +76,6 @@ router.put("/:id", (req, res) => {
 
   const { id } = req.params
 
-  console.log('no estare entrando aqui?')
   // const { isValidated } = req.body
   
   Audio
@@ -92,7 +88,6 @@ router.put("/rate/:id", (req, res) => {
 
   const { id } = req.params
   const { rate } = req.body
-  console.log('esto es req.params', req.body)
   
   Audio
     .findByIdAndUpdate(id, { rate },{new: true})

@@ -1,0 +1,21 @@
+.footer {
+    background-color: #395076;
+    color:#c9d4e6;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    margin: 0;
+}
+
+h3{
+    font-size: 15px;
+    font-weight: 600;
+}
+
+h5{
+    font-size: 12px;
+    font-weight: 350;
+    text-decoration-line: underline;
+}

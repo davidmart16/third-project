@@ -32,10 +32,8 @@ function AudiosNotValidated(props) {
     const handleSubmit = (e) => {
         e.preventDefault()
         const audioId = e.target.querySelector('button').value
-        console.log(e.target, 'hola soy ohhhhh',audioId)
         audioService.updateAudio(audioId)
         .then(()=> {
-            console.log(props)
             props.getNotValidated()
         })
         .catch(err => console.log(err))

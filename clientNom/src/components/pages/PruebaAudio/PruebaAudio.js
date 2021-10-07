@@ -17,7 +17,6 @@ class PruebaAudio extends Component {
 
         this.audioService.getOneAudio('6155851cb71dca2e8452f9ce')
         .then(res => {
-            console.log(res.data)
             this.setState({
                 ...this.state,
                 audio: res.data.audio

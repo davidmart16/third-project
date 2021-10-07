@@ -55,9 +55,8 @@ class BooksList extends Component {
     render() {
 
         return (
-        <Container>
+        <Container className=''>
             <h2>Listado de Libros</h2>
-            <hr/>
             <Row>
                 {this.displayBooks()}
             </Row>

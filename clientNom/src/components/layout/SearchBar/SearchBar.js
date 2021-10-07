@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { Button, Container, FormControl, InputGroup } from "react-bootstrap"
 import { Link } from "react-router-dom";
+import './SeachBar.css'
 
 
 class SearchBar extends Component {
@@ -21,7 +22,6 @@ class SearchBar extends Component {
             ...this.state,
             searchValue: value
         })
-        console.log(this.state.searchValue)
     }
 
     render() {

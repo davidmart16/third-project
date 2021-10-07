@@ -1,11 +1,12 @@
 import React from "react";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import './FragmentItem.css'
 
 function FragmentItem({ _id, content, bookId}) {
 
     return(
-        <Card>
+        <Card className='fragment-item'>
         
             <Card.Title>{content}</Card.Title>
 

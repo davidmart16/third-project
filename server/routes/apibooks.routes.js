@@ -8,12 +8,10 @@ const API = new APIHandler()
 router.get('/search-book/:text', (req, res) => {
 
     const {text} = req.params
-    console.log(text)
 
     API
     .getBooks(text)
     .then(books => {
-        console.log(books, 'HOLAAAAA ESTOY AQUIIIIIIIII',books.data)    
         return res.json( books.data.items)
     })
     .catch(err => console.error(err))

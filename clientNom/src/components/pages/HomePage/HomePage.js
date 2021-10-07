@@ -4,6 +4,7 @@ import { Button, Col, Container, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import AudioList from '../AudiosPage/AudiosList/AudiosList'
 import BooksList from '../BooksPage/BooksList/BooksList'
+import './HomePage.css'
 
 function HomePage(props) {
   return (
@@ -11,34 +12,33 @@ function HomePage(props) {
   
       <Container style={{ minHeight: "100vh" }}>
         <h1>Bienvenid@ a La Voz de las Palabras</h1>
-        <section className='myRow'>
-          <div>
+        <Row className='homepage'>
+          <Col className='bloques'>
             <Link to="/libros">
               <Button>Ver libros</Button>
             </Link>
-          </div>
-
-          <div>
+          </Col>
+          <Col className='bloques'>
             <Link to="/audios">
               <Button>Ver audios</Button>
             </Link>
-          </div>
-        </section>
+          </Col>
+        </Row>
         <br/>
         {props.loggedUser ? 
-          <div className='homepage'>
+          <div className='homepage3'>
               <Link to="/perfil">
                 <Button>Mi perfil</Button>
               </Link>
           </div>
           : 
-          <Row >
-            <Col mt={60} className='bloques'>
+          <Row>
+            <Col className='homepage2'>
               <Link to="/registro">
                 <Button>Registrate</Button>
               </Link>
             </Col>
-            <Col className='bloques'>
+            <Col className='homepage2'>
               <Link to="/iniciar-sesion">
                 <Button>Inicia Sesion</Button>
               </Link>
@@ -46,7 +46,6 @@ function HomePage(props) {
           </Row> 
         }
       </Container>
-    
   
         <BooksList loggedUser= {props.loggedUser}/>
     

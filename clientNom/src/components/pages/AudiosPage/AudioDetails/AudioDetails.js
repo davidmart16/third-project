@@ -23,7 +23,6 @@ class AudioDetails extends Component{
 
         this.audioService.getOneAudio( id )
         .then(res => {
-            console.log('esto es el res que guardo en el estado de audiodetails',res)
             this.setState({
                 ...this.state,
                 audio: res.data.audio
@@ -31,7 +30,6 @@ class AudioDetails extends Component{
 
             this.getRateComments()
 
-            console.log('esto es el audio en el estado', this.state.audio)
         })
         .catch(err => console.error(err))
 
@@ -48,15 +46,12 @@ class AudioDetails extends Component{
 
     
     updateRateAudio(rate){
-        console.log(rate, "EL RATE DEL SERVICIO")
         this.audioService.updateAudioRate(this.state.audio._id, rate)
         .then(res => {
-            console.log('esto es el res del servicio de update hasta el rate', res.data.audio.rate)
             this.setState({
                 ...this.state,
                 rate: rate
             })
-            console.log('esto es el rate en el estado', this.state.rate)
         })
         .catch(err => console.log(err))
     }
