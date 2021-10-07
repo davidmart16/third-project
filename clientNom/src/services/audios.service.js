@@ -3,7 +3,7 @@ import axios from 'axios';
 class AudiosService {
   constructor(){
     this.instance = axios.create({
-      baseURL: `${process.env.REACT_APP_API_URL}/audio`,
+      baseURL: `${process.env.REACT_APP_BASE_URL}/audio`,
       withCredentials: true
     })
   }
