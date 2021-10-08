@@ -8,7 +8,7 @@ function FragmentItem({ _id, content, bookId}) {
     return(
         <Card className='fragment-item'>
         
-            <Card.Title>{content}</Card.Title>
+            <Card.Title className='content'>{content}</Card.Title>
 
             <Card.Body>
                 <p>Pertenece al libro con id: {bookId}</p>

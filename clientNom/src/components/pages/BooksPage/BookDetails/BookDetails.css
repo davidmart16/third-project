@@ -1,5 +1,11 @@
-.book-details{
-    font-size: 14px;
-    text-decoration: none !important;
+.button-details {
+  margin-top: 10px;
+}
+.button-details2 {
 
+  margin-bottom: 150px;
+}
+
+.book-details{
+  font-size: 10px;
 }

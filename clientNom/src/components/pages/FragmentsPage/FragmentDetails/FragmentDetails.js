@@ -4,6 +4,7 @@ import ReactAudioPlayer from 'react-audio-player';
 import BooksService from "../../../../services/books.service";
 import FragmentsService from "../../../../services/fragments.service";
 import { Link } from "react-router-dom";
+import './FragmentDetails.css'
 
 const { Component } = require("react");
 
@@ -94,7 +95,7 @@ class FragmentDetails extends Component{
                     {this.state.fragment && 
                 <Row>
                     <Col>
-                        <h3>{this.state.fragment.content}</h3>
+                        <h3 className='fragment-content'>{this.state.fragment.content}</h3>
                         <p>Este fragmento es del Libro: {this.state.book.name}</p>
                     </Col>
                 </Row>

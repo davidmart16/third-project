@@ -1,8 +1,8 @@
 import { Component } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-// import { Link } from "react-router-dom";
 import FragmentsService from "../../../../services/fragments.service"
 import FragmentItem from "../FragmentItem/FragmentItem";
+import './FragmentsList.css'
 
 
 class FragmentsList extends Component {
@@ -60,7 +60,7 @@ class FragmentsList extends Component {
             <>
                 <h2>Fragmentos</h2>
                 <hr/>
-                <Container>
+                <Container className='list-fragments'>
                     <Row>
                         {this.displayFragments()}
                          

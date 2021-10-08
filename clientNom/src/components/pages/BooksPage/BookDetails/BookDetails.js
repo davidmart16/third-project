@@ -44,10 +44,10 @@ class BookDetails extends Component {
                 })}
                   <FragmentsList book={this.state.book}/>
             </Col>
-            <Link to={`/crear-fragmento/${this.state.book._id}`}>
+            <Link className='button-details' to={`/crear-fragmento/${this.state.book._id}`}>
               <Button variant='primary' >Añade otro fragmento</Button>
             </Link>
-            <Link to="/">
+            <Link  className='button-details2' to="/">
               <Button>volver</Button>
             </Link>
             
