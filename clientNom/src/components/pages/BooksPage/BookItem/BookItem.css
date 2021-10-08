@@ -8,8 +8,9 @@
 }
 .card-title {
     margin-left: 50px;
-    text-decoration-line: underline;
+    text-decoration-line: none;
     font-weight: 800;
+    font-size: 15px;
 
 }
 

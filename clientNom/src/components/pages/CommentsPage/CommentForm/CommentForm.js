@@ -92,7 +92,6 @@ class CommentForm extends Component{
                 <Form.Group className="mb-3" controlId="text">
                 
                     <Form.Label><h4>Comentario: </h4></Form.Label>
-                    <p> Hola  </p>
                     <Form.Control onChange={(e) => this.handleChange(e)} name="text" value={this.state.text} type="text" placeholder="Deja tu comentario" />
                 </Form.Group>
                 <Button variant="primary" type="submit">Submit</Button>

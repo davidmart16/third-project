@@ -28,7 +28,7 @@ function FragmentsNotValidated(props) {
                 props.fragments.map(fragment => {
 
                     return(
-                        <Col md={4}>
+                        <Col className='validated-items' md={4}>
                             <p>-{fragment.content}-</p>
                             <Form onSubmit={handleSubmit}>
                                 <Button type="submit" value={fragment._id}>Validar</Button>

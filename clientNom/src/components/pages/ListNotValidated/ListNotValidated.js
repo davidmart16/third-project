@@ -5,6 +5,7 @@ import CommentsService from '../../../services/comments.service'
 import FragmentsNotValidated from "./FragmentsNotValidated/FragmentsNotValidated";
 import CommentsNotValidated from "./CommentsNotValidated/CommentsNotValidated";
 import AudiosNotValidated from "./AudiosNotValidated/AudiosNotValidated";
+import './ListNotValidated.css'
 
 
 class ListNotValidated extends Component {

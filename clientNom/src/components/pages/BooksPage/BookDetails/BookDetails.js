@@ -3,6 +3,7 @@ import { Button, Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import BooksService from '../../../../services/books.service';
 import FragmentsList from '../../FragmentsPage/FragmentsList/FragmentsList';
+import './BookDetails.css'
 
 class BookDetails extends Component {
   constructor(props){
@@ -32,7 +33,7 @@ class BookDetails extends Component {
   render() {
 
     return (
-      <Container>
+      <Container className='book-details'>
         {
           this.state.book ?
           <Row>

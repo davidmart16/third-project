@@ -1,6 +1,7 @@
 import ReactAudioPlayer from 'react-audio-player';
 import { Button, Col, Form, Row } from "react-bootstrap"
 import AudiosService from '../../../../services/audios.service';
+import './AudiosNotValidated.css'
 
 
 
@@ -17,7 +18,7 @@ function AudiosNotValidated(props) {
                 props.audios.map((audio, idx) => {
 
                     return(
-                        <Col key={audio._id + idx} md={3}>
+                        <Col className='validated-items' key={audio._id + idx} md={3}>
                             <ReactAudioPlayer src={`${audio.audioFile}`} autoPlay={false} controls/>
                             <Form onSubmit={handleSubmit}>
                                 <Button type="submit" value={audio._id}>Validar</Button>
@@ -41,7 +42,7 @@ function AudiosNotValidated(props) {
 
 
         return(
-            <Row>
+            <Row className='center'>
             <h3>Lista de audios a validar</h3>
                 <hr/>
             {displayAudios()}
