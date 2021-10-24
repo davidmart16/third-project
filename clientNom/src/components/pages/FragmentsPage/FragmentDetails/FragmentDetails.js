@@ -6,75 +6,62 @@ import FragmentsService from "../../../../services/fragments.service";
 import { Link } from "react-router-dom";
 import './FragmentDetails.css'
 
-const { Component } = require("react");
+const { useState, useEffect } = require("react");
 
+const fragmentService = new FragmentsService();
+const bookService = new BooksService()
+const audioService = new AudiosService()
 
+function FragmentDetails (props) {
 
-class FragmentDetails extends Component{
-    constructor(props){
-        super(props)
+    const [fragment, setFragment] = useState(null)
+    const [book, setBook] = useState(null)
+    const [fragmentAudios, setFragmentAudios] = useState(null)
 
-        this.state = {
-            fragment: null,
-            book: null,
-            fragmentAudios: null
-        }
-
-    this.fragmentService = new FragmentsService();
-    this.bookService = new BooksService();
-    this.audioService = new AudiosService()
-
-    }
-
-    async componentDidMount(){
+    useEffect(() => {
         
-        await this.getFragmentAndBook()
-        this.state.fragment && this.getAudios()
-            
-    }
+        getFragmentAndBook()
+        getAudios()
+        
+    }, [])
 
-    getFragmentAndBook(){
 
-        const { id } = this.props.match.params
+    const getFragmentAndBook = () => {
+
+        const { id } = props.match.params
         const info = {fragment: null}
 
-        return this.fragmentService.getOneFragment(id)
+        fragmentService.getOneFragment(id)
         .then(res => {
             info.fragment = res.data.fragment
-            return this.bookService.getOneBook(res.data.fragment.bookId)
+            return bookService.getOneBook(res.data.fragment.bookId)
         })
         .then(res => {
-            this.setState({
-                ...this.state,
-                book: res.data.book,
-                fragment: info.fragment
-            })
+            setBook(res.data.book)
+            setFragment(info.fragment)
         })
         .catch(err => console.error(err))
 
     }
 
 
-        getAudios = () => {
-            this.audioService.getAudiosByFragment(this.state.fragment)
-            .then(res => {
-                this.setState({
-                    ...this.state,
-                    fragmentAudios: res.data
-                })
-        })
-        .catch(err => console.error(err))
+    const getAudios = () => {
+        audioService.getAudiosByFragment(fragment)
+        .then(res => {
+            setFragmentAudios(res.data)
+    })
+    .catch(err => console.error(err))
 
     }
 
 
-    displayAudios = () => {
+    const displayAudios = () => {
         return(
-        this.state.fragmentAudios ?
+        fragmentAudios ?
         
-            this.state.fragmentAudios.map(audio => {
+            fragmentAudios.map((audio, idx) => {
                 return (
-                    <Col>
+                    <Col key={`${idx}-${audio._id}`}>
                         <ReactAudioPlayer src={`${audio.audioFile}`} autoPlay={false} controls/>
                         <Link to={`/audios/${audio._id}`}>
                             <Button>Comentarios del audio</Button>
@@ -87,32 +74,30 @@ class FragmentDetails extends Component{
     }
 
 
-    render(){
 
         return (
             <>
             <Container>
-                    {this.state.fragment && 
+                    {fragment && 
                 <Row>
                     <Col>
-                        <h3 className='fragment-content'>{this.state.fragment.content}</h3>
-                        <p>Este fragmento es del Libro: {this.state.book.name}</p>
+                        <h3 className='fragment-content'>{fragment.content}</h3>
+                        <p>Este fragmento es del Libro: {book.name}</p>
                     </Col>
                 </Row>
                     }
                 <Row>
-                        {this.displayAudios()}
+                        {displayAudios()}
                 </Row>
-            <Link to={`/libros/${this.state.fragment?.bookId}`}>
+            <Link to={`/libros/${fragment?.bookId}`}>
                 <Button>Volver a libros</Button>
             </Link>    
-            <Link to={`/crear-audio/${this.state.fragment?._id}`}>
+            <Link to={`/crear-audio/${fragment?._id}`}>
                 <Button>Subir audio de este fragmento</Button>
             </Link>
             </Container>
             </>
         )
-    }
 }
 
 export default FragmentDetails

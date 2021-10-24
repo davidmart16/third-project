@@ -1,52 +1,40 @@
-import { Component } from "react";
+import { useEffect, useState } from "react";
 import { Button, Col, Container, Image, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import APIBooksService from '../../../services/apibooks.service'
 
+const apibookService = new APIBooksService()
+ 
+function BooksAPIPage(props){
 
-class BooksAPIPage extends Component{
-    constructor(props){
-        super()
+    const [booksApi, setBooksApi] = useState(null)
 
-        this.state={
-            booksApi: null
-        }
+    useEffect(() => {
+        getBooks()
+    })
 
-    }
+    // componentDidUpdate = (prevProps, prevState) => {
+    //     if (prevProps.match.params.text !== this.props.match.params.text) this.getBooks()
+    // }     
 
-    apibookService = new APIBooksService()
-    
-    componentDidMount(){
-        this.getBooks()
-    }
-    
-
-    componentDidUpdate = (prevProps, prevState) => {
-        if (prevProps.match.params.text !== this.props.match.params.text) this.getBooks()
-    }
-
-                    
-    getBooks(){
+    const getBooks = () => {
         
-        const searchValue = this.props.match.params.text
-        this.apibookService.getBooks(searchValue)
+        const searchValue = props.match.params.text
+        apibookService.getBooks(searchValue)
         .then(res => {
-            this.setState({
-                ...this.state,
-                booksApi: res.data
-            })
+            setBooksApi(res.data)
         })
         .catch(err => console.error(err))
         
     }
 
 
-    displayBooks = () => {
+    const displayBooks = () => {
         return(
-            this.state.booksApi ?
-                this.state.booksApi.map(book => {
+            booksApi ?
+                booksApi.map((book, idx) => {
                     return (
-                        <Col md={6}>
+                        <Col key={`${idx}-${book.volumeInfo.title}-${book.volumeInfo.pageCount}`} md={6}>
                             <h3>{book.volumeInfo.title}</h3>
 
                             <Image src={book.volumeInfo.imageLinks?.thumbnail ? book.volumeInfo.imageLinks.thumbnail : 'https://www.esferalibros.com/assets/corporativa/images/portada_no_disponible.png'}></Image>
@@ -59,7 +47,7 @@ class BooksAPIPage extends Component{
 
                             <h4>Paginas: {book.volumeInfo.pageCount}</h4>
                             <Link to={`/detalles/${book.id}`}>
-                                <Button>hara cosas, como llevarte a narnia</Button>
+                                <Button>Mostrar Detalles del libro</Button>
                             </Link>
                             <hr/>
                         </Col>
@@ -69,27 +57,14 @@ class BooksAPIPage extends Component{
         )
     }
 
-
-    render(){
-
         return (
-        <Container>
-            <Row>
-
-            {this.state.booksApi ? 
-            
-            this.displayBooks()
-            :
-            <p>cargando...</p>
-            }
-            <hr/>
-            
-
-            </Row>
-        </Container>
+            <Container>
+                <Row>
+                    {booksApi ? displayBooks() : <p>Cargando...</p> }
+                    <hr/>
+                </Row>
+            </Container>
         )
-    }
-
 }
 
 export default BooksAPIPage

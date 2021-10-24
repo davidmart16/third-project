@@ -1,45 +1,33 @@
-import { Component } from "react";
+import { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import CommentItem from "../CommentItem/CommentItem";
 
-class CommentList extends Component {
-    constructor(props){
-        super()
-        
-        this.state={
-            comments: null
-        }
+function CommentList(props) {
 
-    }
+    const [comments, setComments] = useState(null)
 
-    componentDidMount(){
+    useEffect(() => {
+        setComments(props.comments)
+    }, [])
 
-        this.setState({
-            ...this.state,
-            comments: this.props.comments
-        })
-    }
 
-    displayComments = () => {
+    const displayComments = () => {
 
         return (
-        this.state.comments ?
-             this.state.comments.map(comment => <CommentItem {...comment}/>) 
-             : <div>fallando</div>
+        comments ?
+             comments.map(comment => <CommentItem {...comment}/>) 
+             : <p>Cargando...</p>
         )
     }
     
-    
-    render(){
         
         return(
             <Container>
                 <Row>
-                    {this.displayComments()}
+                    {displayComments()}
                 </Row>
             </Container>
         )
-    }
 }
 
 export default CommentList

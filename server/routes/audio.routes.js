@@ -9,7 +9,6 @@ router.get("/", (req, res) => {
   Audio
   .find({isValidated: true}) //
   .populate('comments')
-  //.select('audioFile')//rate
   .then(audios => res.status(200).json(audios))
   .catch(err => res.status(500).json({ code: 500, message: "Error retrieving audios", err }))
 })
@@ -19,7 +18,6 @@ router.get("/validated", (req, res) => {
   Audio
   .find({isValidated: false})
   //.select('isValidated fragment book')
-  //.populate('fragment')
   .then(audios => res.status(200).json(audios))
   .catch(err => res.status(500).json({ code: 500, message: "Error retrieving audios", err }))
 })
@@ -76,10 +74,9 @@ router.put("/:id", (req, res) => {
 
   const { id } = req.params
 
-  // const { isValidated } = req.body
-  
   Audio
     .findByIdAndUpdate(id, {isValidated: true}, {new: true})
+    .populate('comments')
     .then(audio => res.status(200).json({ audio, message: "Audio updated and validated" }))
     .catch(err => res.status(500).json({ code: 500, message: "Error updating an audio", err }))
 })
@@ -88,9 +85,11 @@ router.put("/rate/:id", (req, res) => {
 
   const { id } = req.params
   const { rate } = req.body
+  console.log(req.body)
   
   Audio
     .findByIdAndUpdate(id, { rate },{new: true})
+    .populate('comments')
     .then(audio => res.status(200).json({ audio, message: "Audio rate updated" },))
     .catch(err => res.status(500).json({ code: 500, message: "Error updating an audio's rate", err }))
 })

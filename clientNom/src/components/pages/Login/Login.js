@@ -1,48 +1,44 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { Container, Form, Button } from 'react-bootstrap'
 import AuthService from '../../../services/auth.service'
 import './Login.css'
 
-class Login extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      username: "",
-      pwd: "",
-      email: ""
-    }
-    this.authService = new AuthService()
-  }
+const authService = new AuthService()
 
-  handleInput = (e) => {
+function Login(props) {
+
+  const [username, setUsername] = useState('')
+  const [pwd, setPwd] = useState('')
+  
+
+  const handleInput = (e) => {
     const { name, value } = e.target
-    this.setState({ [name]: value })
+    if (name === 'username') setUsername(value)
+    else if (name === 'pwd') setPwd(value)
   }
 
-  handleFormSubmit = (e) => {
-    e.preventDefault();
-    const { username, pwd } = this.state
+  const handleFormSubmit = (e) => {
+    e.preventDefault()
 
-    this.authService.login(username, pwd)
+    authService.login(username, pwd)
       .then(res => {
-        this.props.storeUser(res.data)
-        this.props.history.push("/")
+        props.storeUser(res.data)
+        props.history.push("/")
       })
       .catch(err => console.log(err))
   }
 
-  render() {
     return (
       <Container className='text'>
-        <Form onSubmit={this.handleFormSubmit}>
+        <Form onSubmit={handleFormSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Username</Form.Label>
-            <Form.Control name="username" value={this.state.username} onChange={this.handleInput} type="text" placeholder="Enter username" />
+            <Form.Control name="username" value={username} onChange={handleInput} type="text" placeholder="Enter username" />
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control name="pwd" value={this.state.pwd} onChange={this.handleInput} type="password" placeholder="Password" />
+            <Form.Control name="pwd" value={pwd} onChange={handleInput} type="password" placeholder="Password" />
           </Form.Group>
 
           <Button variant="primary" type="submit">
@@ -51,7 +47,6 @@ class Login extends Component {
         </Form>
       </Container>
     )
-  }
 }
 
 export default Login

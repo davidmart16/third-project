@@ -1,70 +1,58 @@
-import { Component } from "react";
+import { useEffect, useState } from "react";
 import { Button, Card, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import APIBooksService from '../../../../services/apibooks.service'
+// import APIBooksService from '../../../../services/apibooks.service'
 import './BookItem.css'
 
 
+// const apiBookService = new APIBooksService()
 
-class BookItem extends Component {
-    constructor(props) {
-        super(props)
+function BookItem (props) {
 
-        this.state = {
-            bookFromApi: null,
-            book: null
-        }
-        this.apiBookService = new APIBooksService()
-
-    }
+    const [book, setBook] = useState(null)
 
 
-    componentDidMount(){
-        this.setState({
-            ...this.state,
-            book: this.props.book
-        })
-        // this.getOneBook(this.state.book?._id)
-    }
 
-    // getOneBook(id) {
+    useEffect(() => {
+        if(book === props.book) return;
+        setBook(props.book)
+        // getOneBook(book?._id)
+    }, [])
 
-    //     this.apiBookService.getOneBook(id)
+    // const getOneBook = (id) => {
+
+    //     apiBookService.getOneBook(id)
     //     .then(res => {
-    //         this.setState({
-    //         ...this.state,
-    //         bookFromApi: res.data.book
-    //         })
+    //      setBookApi(res.data.book) 
     //     })
     //     .catch(err => console.log(err))
         
     // }
 
-    displayBook(){
+    const displayBook = () => {
 
         return (
-
-           <Col key={`${this.state.book?.name}-${this.state.book?._id}`} md={4}>
+            book ? 
+           <Col key={`${book.name}-${book._id}-${props.idx}`} md={4}>
                 <Card className= 'book-item' >
-                    <Card.Title className='card-title'>{this.state.book?.name}</Card.Title>
+                    <Card.Title className='card-title'>{book?.name}</Card.Title>
                         <Card.Body>
-                        {/* <img src= {this.state.bookFromApi.volumeInfo?.thumbnails?.thumbnails} alt=''/>  */}
-                        {this.state.book?.fragments.map(fragment => fragment.isValidated && <p>{fragment.content}</p>)}
-                        {this.props.loggedUser &&
-                        <Link to={`/libros/${this.state.book?._id}`}>
+                        {/* <img src= {bookFromApi.volumeInfo?.thumbnails?.thumbnails} alt=''/>  */}
+                        {book?.fragments.map(fragment => fragment.isValidated && <p>{fragment.content}</p>)}
+                        {props.loggedUser &&
+                        <Link to={`/libros/${book?._id}`}>
                             <Button>Detalles</Button>
                         </Link>
                         }
                         </Card.Body>
                 </Card>
-            </Col>
+            </Col> :
+            <p>Cargando...</p>
         )
     }
 
-    render(){
+        return displayBook()
 
-        return this.displayBook()
-    }
 }
 
 export default BookItem

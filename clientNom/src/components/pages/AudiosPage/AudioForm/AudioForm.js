@@ -1,98 +1,80 @@
 
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router'
 import AudiosService from '../../../../services/audios.service'
 import UploadsService from '../../../../services/uploads.service'
 
+const uploadService = new UploadsService()
+const audioService = new AudiosService()
 
-class AudioForm extends Component {
-    constructor(){
-        super()
+function AudioForm ({ loggedUser }) {
 
-        this.state = {
-          fragment: "",
-          audioFile: '',
-          userId: '',
-          isLoading: null
-        }
-    }
+  const [fragment, setFragment] = useState('')
+  const [audioFile, setAudioFile] = useState('')
+  const [userId, setUserId] = useState('')
+  const [isLoading, setIsLoading] = useState(null)
+  const { fragmentId } = useParams()
+  const history = useHistory()
 
-  uploadService = new UploadsService()
-  audioService = new AudiosService()
 
-  componentDidMount () {
-    const { fragmentId } = this.props.match.params;
-        this.setState({
-            ...this.state,
-            userId: this.props.loggedUser._id,
-            fragment: fragmentId
-        })
-  }
-  // handleChange = (e) => {
-  //   const { value, name } = e.target;
 
-  //   this.setState({
-  //     ...this.state,
-  //     [name]: value
-  //   })
-  // }
+  useEffect(() => {
+    
+    setUserId(loggedUser._id)
+    setFragment(fragmentId)
+    
+  }, [])
 
-  handleFile = (e) => {
-    this.setState({
-      ...this.state,
-      isLoading: true
-    })
+ 
+  const handleFile = (e) => {
+    
+    setIsLoading(true)
 
     const uploadData = new FormData()
+    
     uploadData.append('audioData', e.target.files[0])
-
-    this.uploadService.uploadAudio(uploadData)
+    uploadService.uploadAudio(uploadData)
       .then(res => {
-        this.setState({
-          ...this.state,
-          isLoading: false,
-          audioFile: res.data.fileUrl
+          setIsLoading(false)
+          setAudioFile(res.data.fileUrl)
         })
-      })
       .catch(err => alert("Error, no se ha subido el audio"))
   }
 
 
-
-    handleSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault()
-
-        this.audioService.createAudio({fragment: this.state.fragment, audioFile: this.state.audioFile, userId: this.state.userId})
+        audioService.createAudio({fragment: fragment, audioFile: audioFile, userId: userId})
         .then(() => {
-            // this.props.reloadFragments()
-            this.props.history.push(`/fragmentos/${this.state.fragment}`)
+            history.push(`/fragmentos/${fragment}`)
         })
     }
 
-  render() {
+
     return (
     <>
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={handleSubmit}>
 
         <Form.Group className="mb-3" controlId="audioFile">
           <Form.Label>Archivo de audio: </Form.Label>
-          <Form.Control onChange={(e) => this.handleFile(e)} name="audioFile" type="file" />
+          <Form.Control onChange={(e) => handleFile(e)} name="audioFile" type="file" />
         </Form.Group>
 
 
-        {this.state.isLoading && <p>Subiendo archivo</p>}
+        {isLoading && <p>Subiendo archivo</p>}
 
-        <Button disabled={this.state.isLoading} variant="primary" type="submit">
-          {this.state.isLoading ? "Loading..." : "Submit"}
+        <Button disabled={isLoading} variant="primary" type="submit">
+          {isLoading ? "Loading..." : "Submit"}
         </Button>
       </Form>
-      <Link to={`/fragmentos/${this.state?.fragment}`}>
+      <Link to={`/fragmentos/${fragment}`}>
           <Button>Volver a libros</Button>
       </Link> 
-      </>
+    </>
     )
-  }
+
 }
 
 export default AudioForm

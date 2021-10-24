@@ -1,50 +1,41 @@
-import React, { Component } from 'react'
+import { useEffect, useState } from 'react'
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { useParams } from "react-router";
 import BooksService from '../../../../services/books.service';
 import FragmentsList from '../../FragmentsPage/FragmentsList/FragmentsList';
 import './BookDetails.css'
 
-class BookDetails extends Component {
-  constructor(props){
-    super(props);
+const bookService = new BooksService();
 
-    this.state = {
-      book: null
-    }
+function BookDetails () {
 
-    this.bookService = new BooksService();
-  }
+  const [book, setBook] = useState(null)  
+  const { id } = useParams()
 
-  componentDidMount() {
-    const { id } = this.props.match.params;
-
-    this.bookService.getOneBook(id)
+  useEffect(() => {
+    bookService.getOneBook(id)
     .then(res => {
-      this.setState({
-        ...this.state,
-        book: res.data.book
-      })
+      setBook(res.data.book)
     })
     .catch(err => console.error(err))
+    
+  }, [])
 
-  }
-
-  render() {
 
     return (
       <Container className='book-details'>
         {
-          this.state.book ?
+          book ?
           <Row>
             <Col>
-                <h1>Libro: {this.state.book.name}</h1>
-                {this.state.book.fragments?.map(elem => {
+                <h1>Libro: {book.name}</h1>
+                {book.fragments?.map(elem => {
                     return (<p>{elem.content}</p>)
                 })}
-                  <FragmentsList book={this.state.book}/>
+                  <FragmentsList book={book}/>
             </Col>
-            <Link className='button-details' to={`/crear-fragmento/${this.state.book._id}`}>
+            <Link className='button-details' to={`/crear-fragmento/${book._id}`}>
               <Button variant='primary' >Añade otro fragmento</Button>
             </Link>
             <Link  className='button-details2' to="/">
@@ -58,7 +49,6 @@ class BookDetails extends Component {
         }
       </Container>
     )
-  }
 }
 
 export default BookDetails

@@ -1,39 +1,27 @@
   
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { Button, Container, FormControl, InputGroup } from "react-bootstrap"
 import { Link } from "react-router-dom";
 import './SeachBar.css'
 
 
-class SearchBar extends Component {
-    constructor(props){
-        super()
+function SearchBar () {
 
-        this.state={
-            searchValue: '',
-        }
+    const [searchValue, setSearchValue] = useState('')
 
-    }
-
-    handleChange = (e) => {
+    const handleChange = (e) => {
         const { value } = e.target
-
-        this.setState({
-            ...this.state,
-            searchValue: value
-        })
+        setSearchValue(value)
     }
-
-    render() {
 
         return(
             
         <Container>
 
                 <InputGroup className="mb-3 mt-4">
-                    <FormControl onChange={e => this.handleChange(e)} name="searchValue" value={this.state.searchValue} 
+                    <FormControl onChange={e => handleChange(e)} name="searchValue" value={searchValue} 
                     placeholder="Search for title..." aria-label="buscar"/>
-                <Link to={`/lista-libros/${this.state.searchValue}`}>
+                <Link to={`/lista-libros/${searchValue}`}>
                 <Button variant="primary" type="submit">Buscar</Button>
                 </Link>
                 </InputGroup>
@@ -41,7 +29,6 @@ class SearchBar extends Component {
         </Container>
 
         )
-    }
 }
 
 export default SearchBar

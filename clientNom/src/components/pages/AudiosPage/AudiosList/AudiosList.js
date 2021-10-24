@@ -1,71 +1,63 @@
-import { Component } from "react";
+import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import AudiosService from "../../../../services/audios.service"
 import AudioItem from "../AudioItem/AudioItem";
 import './AudiosList.css'
 
+const audioService = new AudiosService()
 
-class AudioList extends Component {
-    constructor(props){
-        super(props);
-        
-        this.state= {
-            audios: null
-        }
-        this.audioService = new AudiosService()
-    }
-
-
-    componentDidMount(){
-        this.audioService.getAudios()
+function AudioList (props) {
+    
+    const [audios, setAudios] = useState(null)
+    
+    useEffect(() => {
+        audioService.getAudios()
         .then(res => {
-            this.setState({
-                ...this.state,
-                audios: res.data
-            })
-            this.sortByRate()
+            sortByRate(res.data)
         })
+        .catch(err => console.log(err))
+    }, [])
+
+
+    const sortByRate = (audios) => {
+        setAudios(audios.sort(((audio1, audio2) => audio2.rate - audio1.rate)))
     }
+   
 
-    displayAudios = () => {
-
+    const displayAudios = () => {
+        
         return (
-
-            this.state.audios ?
-             this.state.audios.map(audio => {
+            audios ?
+                audios.map((audio, idx) => {
                     return (
-                        <AudioItem {...audio} loggedUser={this.props.loggedUser} storeUser={this.props.storeUser}></AudioItem>
+                        props ? 
+                        <AudioItem {...audio} 
+                        loggedUser={props?.loggedUser} 
+                        storeUser={props?.storeUser}
+                        key={`${idx}-${audio?._id}`} 
+                        /> :
+                        <AudioItem {...audio}
+                        key={`${idx}-${audio?._id}`} 
+                        />
                     )
                 }) : 
                 <p>Cargando...</p>
         )
     }
 
-    sortByRate= () => {
-
-        const newState = this.state.audios
-        this.setState({
-
-            ...this.state,
-            audios: newState.sort(((audio1, audio2) => audio2.rate - audio1.rate))
-        })
-    }
-
-    render() {
-
         return (
             <Container className='border'>
                 <Row>
                     <Col md={12}><h2>Los mejores audios</h2></Col>
-                    {this.displayAudios()}
+                    {displayAudios()}
                 </Row>
                 <hr/>
-                {!this.props.loggedUser 
+                {!props.loggedUser 
                 && <h5> Inicia sesion para poder comentar </h5>
                 }
             </Container>
         )
-    }   
+      
 }
 
 export default AudioList

@@ -5,12 +5,14 @@ import UsersService from "../../../../services/users.service";
 import rateStar from "../../../../utils";
 import './AudioItem.css'
 
-function AudioItem ({rate,audioFile, _id , loggedUser, storeUser }) {
+const userService = new UsersService()
 
-    const userService = new UsersService()
+function AudioItem ({rate, audioFile, _id , loggedUser, storeUser }) {
+
     
     const checkInclude = (audioId, arrAudios) => arrAudios.includes(audioId)
-    let audioInclude = checkInclude(_id, loggedUser ? loggedUser.favAudios : [])
+    let audioInclude
+    loggedUser ? audioInclude = checkInclude(_id, loggedUser ? loggedUser.favAudios : []) : audioInclude = null
 
     const handleClick = (e) => {
         e.preventDefault()

@@ -1,60 +1,47 @@
-import { Component } from "react";
+import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import FragmentsService from "../../../../services/fragments.service"
 import FragmentItem from "../FragmentItem/FragmentItem";
 import './FragmentsList.css'
 
+const fragmentService = new FragmentsService()
 
-class FragmentsList extends Component {
-    constructor(props){
-        super(props);
+function FragmentsList (props) {
 
-        this.state= {
-            fragments: null
-        }
-        this.fragmentService = new FragmentsService()
-    }
+    const [fragments, setFragments] = useState(null)
 
-    componentDidMount(){
-        this.fragmentService.getFragments()
+    useEffect(() => {
+
+        fragmentService.getFragments()
         .then(res => {
-            this.setState({
-                ...this.state,
-                fragments: res.data
-            })
-            this.filteredFragments(this.props.book._id)
+            setFragments(res.data)
+            filteredFragments(props.book._id)
         })
-    }
+        .catch(err => console.log(err))
+    }, [])
 
-        displayFragments = () => {
+
+
+    const displayFragments = () => {
         return(
-            this.state.fragments ?
-                this.state.fragments.map(fragment => {
+            fragments ?
+                fragments.map((fragment, idx) => {
                     return (
-                        <Col md={6}>
-                            <FragmentItem {...fragment} bookName= {this.props.book.name}/>
+                        <Col key={`${idx}-${fragment?._id}`} md={6}>
+                            <FragmentItem {...fragment} bookName= {props.book.name}/>
                         </Col>
                     )
                 }) : 
                 <p>Cargando...</p>
         )
-
     }
 
-    filteredFragments = (book) => {
-        const copyFragments = this.state.fragments
-        return(
-            copyFragments ?
-            this.setState({
-                ...this.state,
-                fragments: copyFragments.filter(fragment => fragment.bookId.includes(book))
-            }) :
-            <p>Cargando</p>
-        )
+    const filteredFragments = (book) => {
+        console.log('esto es una array de fragmentos',fragments)
+        const copyFragments = [...fragments]
+        setFragments(copyFragments.filter(fragment => fragment.bookId.includes(book)))
     }
 
-
-    render() {
 
         return (
             <>
@@ -62,13 +49,11 @@ class FragmentsList extends Component {
                 <hr/>
                 <Container className='list-fragments'>
                     <Row>
-                        {this.displayFragments()}
-                         
+                        {displayFragments()}
                     </Row>
                 </Container>
             </>
         )
-    }   
 }
 
 export default FragmentsList

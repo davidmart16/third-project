@@ -2,84 +2,66 @@ import { Button, Col, Container, Row } from "react-bootstrap";
 import ReactAudioPlayer from 'react-audio-player';
 import CommentList from "../../CommentsPage/CommentsList/CommentsList";
 import { Link } from "react-router-dom";
-import { Component } from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
 import AudiosService from "../../../../services/audios.service";
+import rateStar from "../../../../utils";
 
 
-class AudioDetails extends Component{
-    constructor(props){
-        super(props)
+const audioService = new AudiosService()
 
-        this.state = {
-            audio: null,
-            rate: 0
-        }
+function AudioDetails() {
+    const { id } = useParams()
 
-        this.audioService = new AudiosService()
-    }
+    const [audio, setAudio] = useState(null)
+    const [rate, setRate] = useState(0)
+
+
     
-    componentDidMount(){
-        const { id } = this.props.match.params
-
-        this.audioService.getOneAudio( id )
+    useEffect(() => {
+        audioService.getOneAudio( id )
         .then(res => {
-            this.setState({
-                ...this.state,
-                audio: res.data.audio
-            })
-
-            this.getRateComments()
-
+            setAudio(res.data.audio)
+            return audioService.updateAudioRate(res.data.audio._id, rate)
         })
+        .then(res => {
+            getRateComments(res.data.audio)
+            })
         .catch(err => console.error(err))
+    }, [rate])
 
 
-    }
-
-
-    getRateComments(){
+    const getRateComments = (audio) => {
+        console.log(audio.comments)
+        setAudio(audio)
         let rating = 0
-        this.state.audio.comments.map(comment => rating += comment.rate)
-        let rate = rating/this.state.audio?.comments?.length
-        this.updateRateAudio(rate)
+        audio.comments.map(comment => rating += comment.rate)
+        let rateAudio = rating/audio.comments.length
+        setRate(rateAudio)
     }
 
-    
-    updateRateAudio(rate){
-        this.audioService.updateAudioRate(this.state.audio._id, rate)
-        .then(res => {
-            this.setState({
-                ...this.state,
-                rate: rate
-            })
-        })
-        .catch(err => console.log(err))
-    }
-    
-
-
-    render(){
 
         return(
 
-        this.state.audio ? 
+        audio ? 
 
             <Container>
-            <h3>Audio de {this.state.audio.book.name}</h3>
-            <p>Del fragmento: {this.state.audio.fragment.content}</p>
+            <h3>Audio de {audio.book.name}</h3>
+            <p>Del fragmento: {audio.fragment.content}</p>
                 <Row>
                     <Col md={4}>
-                        <ReactAudioPlayer src={`${this.state.audio.audioFile}`} autoPlay={false} controls/>
+                        <ReactAudioPlayer src={`${audio.audioFile}`} autoPlay={false} controls/>
+                        <p>Valoracion del Audio: {audio.rate ? rateStar(audio.rate) : <p>Sin puntuacion</p>}</p>
                     
                     </Col>
                     <Col md={8}>
-                    {this.state.audio.comments.length > 0 ? 
-                        <CommentList comments={this.state.audio.comments}></CommentList>
+                    {audio.comments.length > 0 ? 
+                        <CommentList comments={audio.comments}></CommentList>
                     : <p>No hay comentarios aun</p>
                     }
                     </Col>
                 </Row>
-                <Link to={`/crear-comentario/${this.state.audio._id}`}>
+                <Link to={`/crear-comentario/${audio._id}`}>
                     <Button>Da tu opinion sobre este audio</Button>
                 </Link>
                 <Link to={`/audios`}>
@@ -87,9 +69,8 @@ class AudioDetails extends Component{
                 </Link>
             </Container>
 
-        : <p>cargando...</p>
+        : <p>Cargando...</p>
         )
-}
 }
 
 export default AudioDetails

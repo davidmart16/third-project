@@ -1,66 +1,51 @@
-import { Component } from "react"
+import { useEffect, useState } from "react"
 import { Button, Form } from "react-bootstrap"
 import FragmentsService from '../../../../services/fragments.service'
 
-class FragmentForm extends Component{
-    constructor(props){
-        super(props)
+const fragmentService = new FragmentsService()
 
-        this.state={
-            content: '',
-            bookId: ''
-        }
-    }
+function FragmentForm(props) {
 
-    fragmentService = new FragmentsService()
+    const [content, setContent] = useState('')
+    const [bookId, setBookId] = useState('')
 
-    componentDidMount = () => {
-        const { bookId } = this.props.match.params;
+    useEffect(() => {
+        const { bookId } = props.match.params;
         
-        this.setState({
-            ...this.state,
-            bookId: bookId
-        })
-    }
+        setBookId(bookId)
+    }, [])
 
-    handleSubmit = (e) => {
+
+    const handleSubmit = (e) => {
         e.preventDefault()
 
-        this.fragmentService.createFragment(this.state)
-        .then(()=> {
+        fragmentService.createFragment({bookId, content})
+        .then(() => {
             //cambiar el redirect?
-            this.props.history.push(`/libros`)
+            props.history.push(`/libros`)
         })
         .catch(err => console.log(err))
     }
 
-    handleChange = (e) => {
-
-    const { name, value } = e.target;
-        this.setState({
-          ...this.state,
-        [name]: value
-        })
+    const handleChange = (e) => {
+        const { name, value } = e.target
+        if (name === 'content') setContent(value)
     }
-
-
-    render() {
 
         return(
 
-            <Form onSubmit={this.handleSubmit}>
+            <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="content">
                     <Form.Label>Fragmento: </Form.Label>
-                    <Form.Control onChange={(e) => this.handleChange(e)} 
+                    <Form.Control onChange={(e) => handleChange(e)} 
                     name="content" 
-                    value={this.state.content} 
+                    value={content} 
                     type="text" 
                     placeholder="Introduce aqui el fragmento que vas a leer" />
                 </Form.Group>
                 <Button variant="primary" type="submit">Submit</Button>
             </Form>
         )
-    }   
 }
 
 export default FragmentForm

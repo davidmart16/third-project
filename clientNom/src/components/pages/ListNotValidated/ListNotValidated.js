@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { useEffect, useState } from "react";
 import FragmentsService from '../../../services/fragments.service'
 import AudiosService from '../../../services/audios.service'
 import CommentsService from '../../../services/comments.service'
@@ -7,62 +7,43 @@ import CommentsNotValidated from "./CommentsNotValidated/CommentsNotValidated";
 import AudiosNotValidated from "./AudiosNotValidated/AudiosNotValidated";
 import './ListNotValidated.css'
 
+const fragmentService = new FragmentsService()
+const audioService = new AudiosService()
+const commentService = new CommentsService()
 
-class ListNotValidated extends Component {
-    constructor(){
-        super()
-        
-        this.state={
-            fragmentsNotValidated: null,
-            audiosNotValidated: null,
-            commentsNotValidated: null
-        }
-        
-        this.fragmentService = new FragmentsService()
-        this.audioService = new AudiosService()
-        this.commentService = new CommentsService()
-    }
-    
-    componentDidMount(){
+function ListNotValidated() {
 
-        this.getNotValidated()
-    }
-    
+    const [fragmentsNotValidated, setFragmentsNotValidated] = useState(null)
+    const [audiosNotValidated, setAudiosNotValidated] = useState(null)
+    const [commentsNotValidated, setCommentsNotValidated] = useState(null)
+
+    useEffect(() => {
+        getNotValidated()
+    }, [])
 
     
-    getNotValidated(){
-        // const info = {fragments: null, audios: null, comments: null}
+    const getNotValidated = () => {
     
-        const promiseArray = [this.fragmentService.getFragmentsNotValidated(), this.audioService.getAudiosNotValidated(), this.commentService.getCommentsNotValidated()]
+        const promiseArray = [fragmentService.getFragmentsNotValidated(), audioService.getAudiosNotValidated(), commentService.getCommentsNotValidated()]
         
         Promise.all(promiseArray)
         .then((result) => {
             const [fragments, audios, comments] = result
-    
-            this.setState({
-                ...this.state,
-                fragmentsNotValidated:fragments.data.fragments,
-                audiosNotValidated: audios.data,
-                commentsNotValidated: comments.data
-            })
-    
+            setFragmentsNotValidated(fragments.data)
+            setAudiosNotValidated(audios.data)
+            setCommentsNotValidated(comments.data)
         })
         .catch(err => console.log(err))
-        
-
     }
 
-    
-    render(){
         return(
             <>
                 <h2>Validaciones</h2>
-                <FragmentsNotValidated  fragments={this.state.fragmentsNotValidated} getNotValidated={() => this.getNotValidated()}></FragmentsNotValidated>
-                <CommentsNotValidated comments={this.state.commentsNotValidated} getNotValidated={() => this.getNotValidated()}></CommentsNotValidated>
-                <AudiosNotValidated audios={this.state.audiosNotValidated} getNotValidated={() => this.getNotValidated()}></AudiosNotValidated>
+                <FragmentsNotValidated  fragments={fragmentsNotValidated} getNotValidated={() => getNotValidated()}></FragmentsNotValidated>
+                <CommentsNotValidated comments={commentsNotValidated} getNotValidated={() => getNotValidated()}></CommentsNotValidated>
+                <AudiosNotValidated audios={audiosNotValidated} getNotValidated={() => getNotValidated()}></AudiosNotValidated>
             </>
         )
-    }
 }
 
 export default ListNotValidated

@@ -1,35 +1,34 @@
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import BooksService from '../../../../services/books.service';
 import APIBooksService from '../../../../services/apibooks.service';
 
 
-class BookAPIDetails extends Component {
-  constructor(props){
-    super(props);
+const apiBookService = new APIBooksService();
+const bookService = new BooksService();
 
-    this.state = {
-      book: null,
-      bookFromApi: null
-    }
 
-    this.apiBookService = new APIBooksService();
-    this.bookService = new BooksService();
-  }
+function BookAPIDetails(props) {
 
-  async componentDidMount() { //cambiar lo de async? guardar y luego probar
+    const [book, setBook] = useState(null)
+    const [bookFromApi, setBookFromApi] = useState(null)
+
+    useEffect(() => {
+        getBook()
+    }, [])
+
+//   async componentDidMount() { //cambiar lo de async? guardar y luego probar
     
-    await this.getBook()
-    this.createTheBook()
+//     await this.getBook()
+//     this.createTheBook()
 
-  }
+//   }
 
+  const getBook = () => {
 
-  getBook() {
-
-    const { id } = this.props.match.params;
-    return this.apiBookService.getOneBook(id)
+    const { id } = props.match.params;
+    return apiBookService.getOneBook(id)
     .then(res => {
         let book = {}
 
@@ -39,68 +38,57 @@ class BookAPIDetails extends Component {
         } else {
             book = res.data[0]
         }
-
-        this.setState({
-            ...this.state,
-            bookFromApi: book
-        })
-        
+        setBookFromApi(book)
+        createTheBook()
     })
     .catch(err => console.error(err))
 
   }
 
-  createTheBook(){
-      const book = {bookIdApi: this.state.bookFromApi?.id, name: this.state.bookFromApi?.volumeInfo?.title}
-    this.bookService.createBook(book)
+  const createTheBook = () => {
+    const book = {bookIdApi: bookFromApi?.id, name: bookFromApi?.volumeInfo?.title}
+    bookService.createBook(book)
     .then(book => 
-        this.setState({
-            ...this.state,
-            book: book
-        })
+        setBook(book)
     )
     .catch(err => console.error(err))
 
   }
 
-    render(){
+    return (
+        <>
+            <Container>
+                {bookFromApi ?
+                <Row>
 
-        return (
-            <>
-                <Container>
-                    {this.state.bookFromApi ?
-                    <Row>
+                    <Col>
+                        <h3>{bookFromApi.volumeInfo.title}</h3>
+                        {bookFromApi.volumeInfo.description ? 
+                        <p>{bookFromApi.volumeInfo.description}</p>
+                        : <p>No hay descripcion</p>
+                        }
+                        <p>{bookFromApi.volumeInfo.authors[0]}</p>
+                        <h4>Paginas: {bookFromApi.volumeInfo.pageCount}</h4>
+                    </Col>
 
-                        <Col>
-                            <h3>{this.state.bookFromApi.volumeInfo.title}</h3>
-                            {this.state.bookFromApi.volumeInfo.description ? 
-                            <p>{this.state.bookFromApi.volumeInfo.description}</p>
-                            : <p>No hay descripcion</p>
-                            }
-                            <p>{this.state.bookFromApi.volumeInfo.authors[0]}</p>
-                            <h4>Paginas: {this.state.bookFromApi.volumeInfo.pageCount}</h4>
-                        </Col>
+                    <Link to={`/crear-fragmento/${bookFromApi.id}`}>
+                        <Button variant='primary' >Añade otro fragmento</Button>
+                    </Link>
+                    {/* <Link to="/fragmentos">
+                        <Button>Ver fragmentos</Button>
+                    </Link> */}
+                    <Link to="/">
+                        <Button>volver</Button>
+                    </Link>
+                    
+                </Row>
 
-                        <Link to={`/crear-fragmento/${this.state.bookFromApi.id}`}>
-                            <Button variant='primary' >Añade otro fragmento</Button>
-                        </Link>
-                        {/* <Link to="/fragmentos">
-                            <Button>Ver fragmentos</Button>
-                        </Link> */}
-                        <Link to="/">
-                            <Button>volver</Button>
-                        </Link>
-                        
-                    </Row>
-
-                    : 
-                    <h3>Cargando...</h3>
-                    }
-                </Container>
-        </>
-        )
-    }
-
+                : 
+                <h3>Cargando...</h3>
+                }
+            </Container>
+    </>
+    )
 }
 
 export default BookAPIDetails

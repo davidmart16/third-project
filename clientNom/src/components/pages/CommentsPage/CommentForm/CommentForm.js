@@ -1,63 +1,54 @@
-import { Component } from "react"
+import { useEffect, useState } from "react"
 import { Button, Form } from "react-bootstrap"
 import CommentsService from "../../../../services/comments.service"
 import { FaStar } from "react-icons/fa"
 import './CommentForm.css'
 
-class CommentForm extends Component{
-    constructor(props){
-        super(props)
+const commentService = new CommentsService()
 
-        this.state={
-            text: '',
-            userId: '',
-            audioId: '',
-            rate: null,
-            hover: null
-        }
-    }
+function CommentForm (props) {
 
-    commentService = new CommentsService()
+  const [text, setText] = useState('')
+  const [userId, setUserId] = useState('')
+  const [audioId, setAudioId] = useState('')
+  const [rate, setRate] = useState(null)
+  const [hover, setHover] = useState(null)
 
-    componentDidMount = () => {
-        const userId = this.props.loggedUser._id
+    useEffect(() => {
+      const userId = props.loggedUser._id
+      const { audioId } = props.match.params
 
-        const { audioId } = this.props.match.params;
-        
-        this.setState({
-            ...this.state,
-            audioId: audioId,
-            userId: userId
-        })
-    }
+      setAudioId(audioId)
+      setUserId(userId)
+      
+    }, [])
 
 
-    handleSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault()
 
-        this.commentService.createComment({text: this.state.text, user: this.state.userId, audioId: this.state.audioId, rate: this.state.rate})
+        commentService.createComment({text: text, user: userId, audioId: audioId, rate: rate})
         .then(()=> {
-            this.props.history.push(`/audios/${this.state.audioId}`)
+            props.history.push(`/audios/${audioId}`)
         })
         .catch(err => console.error(err))
         
     }
 
-    handleChange = (e) => {
+    const handleChange = (e) => {
 
     const { name, value } = e.target;
-        this.setState({
-          ...this.state,
-        [name]: value
-        })
+    if (name === 'rate') setRate(value)
+    else if (name === 'hover') setHover(value)
+    else if (name === 'text') setText(value)
+    
     }
 
 
-    render() {
 
         return(
 
-            <Form onSubmit={this.handleSubmit}>
+            <Form onSubmit={handleSubmit}>
             <h2>Valora el audio </h2>
           {[...Array(5)].map((star, idx) => {
             const rateValue = idx + 1;
@@ -69,22 +60,18 @@ class CommentForm extends Component{
                   type="radio"
                   name="rate"
                   value={rateValue}
-                  onClick={(e) => this.handleChange(e)}
+                  onClick={(e) => handleChange(e)}
                 />
                 <FaStar
                   className="star"
                   color={
-                    rateValue <= (this.state.hover || this.state.rate) ? "#ffc107" : "#e4e5e9"
+                    rateValue <= (hover || rate) ? "#ffc107" : "#e4e5e9"
                   }
                   size={30}
-                  onMouseEnter={() => 
-                  this.setState({
-                      ...this.state,
-                      rate: rateValue})
+                  onMouseEnter={() => setRate(rateValue)
                     }
-                  onMouseLeave={() => this.setState({
-                      ...this.state,
-                      hover: null})}
+                  onMouseLeave={() => setHover(null)
+                      }
                 />
               </label>
             );
@@ -92,12 +79,11 @@ class CommentForm extends Component{
                 <Form.Group className="mb-3" controlId="text">
                 
                     <Form.Label><h4>Comentario: </h4></Form.Label>
-                    <Form.Control onChange={(e) => this.handleChange(e)} name="text" value={this.state.text} type="text" placeholder="Deja tu comentario" />
+                    <Form.Control onChange={(e) => handleChange(e)} name="text" value={text} type="text" placeholder="Deja tu comentario" />
                 </Form.Group>
                 <Button variant="primary" type="submit">Submit</Button>
             </Form>
         )
-    }   
 }
 
 export default CommentForm

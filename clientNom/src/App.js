@@ -1,38 +1,36 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Component } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css'
-import Footer from './components/layout/Footer/Footer';
 import Navigator from './components/layout/Navigator/Navigator';
 import Routes from './components/routes';
 import AuthService from './services/auth.service';
+// import Footer from './components/layout/Footer/Footer';
 
-class App extends Component {
+const authService = new AuthService()
 
-  constructor() {
-    super()
-    this.state = {
-      loggedUser: undefined
-    }
-    this.authService = new AuthService()
-  }
+function App () {
 
-  componentDidMount = () => {
-    this.authService.isloggedin()
-      .then(res => this.storeUser(res.data))
-      .catch(err => this.storeUser(null))
-  }
+  const [loggedUser, setLoggedUser] = useState(undefined)
+  
+  useEffect(() => {
+    if (loggedUser !== undefined) return;
+    authService.isloggedin()
+      .then(res => storeUser(res.data))
+      .catch(() => storeUser(null))
 
-  storeUser = (user) => this.setState({ loggedUser: user })
+  }, [loggedUser])
+  
+  const storeUser = (user) => setLoggedUser(user)
 
-  render = () => {
+  
     return (
       <div className="App">
-        <Navigator loggedUser={this.state.loggedUser} storeUser={this.storeUser}/>
-        <Routes loggedUser={this.state.loggedUser} storeUser={this.storeUser}/>
-        <Footer></Footer>
+        <Navigator loggedUser={loggedUser} storeUser={storeUser}/>
+        <Routes loggedUser={loggedUser} storeUser={storeUser}/>
+        {/* <Footer></Footer> */}
       </div>
     );
-  }
+  
 }
 
 export default App;
