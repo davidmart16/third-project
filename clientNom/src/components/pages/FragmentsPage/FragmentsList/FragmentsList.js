@@ -15,7 +15,7 @@ function FragmentsList (props) {
         fragmentService.getFragments()
         .then(res => {
             setFragments(res.data)
-            filteredFragments(props.book._id)
+            filteredFragments(res.data, props.book._id)
         })
         .catch(err => console.log(err))
     }, [])
@@ -36,8 +36,7 @@ function FragmentsList (props) {
         )
     }
 
-    const filteredFragments = (book) => {
-        console.log('esto es una array de fragmentos',fragments)
+    const filteredFragments = (fragments, book) => {
         const copyFragments = [...fragments]
         setFragments(copyFragments.filter(fragment => fragment.bookId.includes(book)))
     }

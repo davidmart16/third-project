@@ -31,12 +31,11 @@ function BookAPIDetails(props) {
     return apiBookService.getOneBook(id)
     .then(res => {
         let book = {}
-
         if (res.data.length > 1){
             const filterBook = res.data.filter(book => book.id === id )
-            book = filterBook[0]
+            book = {...filterBook[0]}
         } else {
-            book = res.data[0]
+            book = {...res.data[0]}
         }
         setBookFromApi(book)
         createTheBook()
@@ -46,8 +45,8 @@ function BookAPIDetails(props) {
   }
 
   const createTheBook = () => {
-    const book = {bookIdApi: bookFromApi?.id, name: bookFromApi?.volumeInfo?.title}
-    bookService.createBook(book)
+    const bookModel = {bookIdApi: bookFromApi?.id, name: bookFromApi?.volumeInfo?.title}
+    bookService.createBook(bookModel)
     .then(book => 
         setBook(book)
     )

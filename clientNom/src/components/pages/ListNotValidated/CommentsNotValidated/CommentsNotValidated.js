@@ -25,10 +25,10 @@ function CommentsNotValidated (props){
 
         return (
             props.comments ?
-                props.comments.map(comment => {
+                props.comments.map((comment, idx) => {
 
                     return(
-                        <Col className='validated-items' md={3}>
+                        <Col key={`${idx}-${comment._id}`} className='validated-items' md={3}>
                             <p>-{comment.text}-</p>
                             <Form onSubmit={handleSubmit}>
                                 <Button type="submit" value={comment._id}>Validar</Button>

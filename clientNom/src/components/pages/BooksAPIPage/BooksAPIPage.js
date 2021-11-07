@@ -11,7 +11,7 @@ function BooksAPIPage(props){
 
     useEffect(() => {
         getBooks()
-    })
+    }, [])
 
     // componentDidUpdate = (prevProps, prevState) => {
     //     if (prevProps.match.params.text !== this.props.match.params.text) this.getBooks()
