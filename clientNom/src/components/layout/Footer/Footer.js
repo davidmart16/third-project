@@ -1,14 +1,26 @@
 import  './Footer.css'
+import { SocialIcon } from "react-social-icons";
 
-function Footer (){
 
-    return(
-
-        <footer className='footer'>
-            <h3> --  MI PROYECTO MAS PERSONAL  -- </h3>
-            <h5 className='footer-text'>Todos los derechos reservados © </h5>
-        </footer>
-    )
+const Footer = () => {
+  return (
+    <footer className="mt-5 d-flex justify-content-center">
+      <SocialIcon
+        bgColor="white"
+        className="m-2"
+        target="_blank"
+        network="github"
+        url="https://github.com/davidmart16"
+      />
+      <SocialIcon
+        bgColor="white"
+        className="m-2"
+        target="_blank"
+        network="linkedin"
+        url="https://www.linkedin.com/in/david-martinez-perez-636456221"
+      />
+    </footer>
+  )
 }
 
-export default Footer
+export default Footer;

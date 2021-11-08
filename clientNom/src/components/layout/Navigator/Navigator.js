@@ -3,6 +3,7 @@ import { Container, Nav, Navbar } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import AuthService from '../../../services/auth.service'
 import SearchBar from '../SearchBar/SearchBar'
+import './Navigator.css'
 
 const authService = new AuthService()
 
@@ -17,11 +18,11 @@ export default function Navigator(props) {
   return (
     <Navbar expand="md" className="mb-5">
       <Container>
-        <Navbar.Brand href="/">My App</Navbar.Brand>
+        {/* <Navbar.Brand href="/">La voz de las palabras</Navbar.Brand> */}
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Link className="nav-link" to="/">Home</Link>
+            <Link className="nav-link nav-title" to="/">LA VOZ DE LAS PALABRAS</Link>
 
             {props.loggedUser ?
               <>

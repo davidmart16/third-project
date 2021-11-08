@@ -4,7 +4,7 @@ import './App.css'
 import Navigator from './components/layout/Navigator/Navigator';
 import Routes from './components/routes';
 import AuthService from './services/auth.service';
-// import Footer from './components/layout/Footer/Footer';
+import Footer from './components/layout/Footer/Footer';
 
 const authService = new AuthService()
 
@@ -27,7 +27,7 @@ function App () {
       <div className="App">
         <Navigator loggedUser={loggedUser} storeUser={storeUser}/>
         <Routes loggedUser={loggedUser} storeUser={storeUser}/>
-        {/* <Footer></Footer> */}
+        <Footer></Footer>
       </div>
     );
   
