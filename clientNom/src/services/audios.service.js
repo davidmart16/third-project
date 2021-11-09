@@ -10,7 +10,9 @@ class AudiosService {
 
   getAudios = () => this.instance.get("/");
   getAudiosNotValidated = () => this.instance.get("/validated");
-  getAudiosByFragment = (fragment) => this.instance.get(`/by-fragment?fragment=${fragment._id}`);
+  //Ejemplo de como hacerlo con query? no se porq tengo esto
+  // getAudiosByFragment = (fragment) => this.instance.get(`/by-fragment?fragment=${fragment._id}`);
+  getAudiosByFragment = (id) => this.instance.get(`/by-fragment/${id}`);
   getOneAudio = (id) => this.instance.get(`/${id}`);
   createAudio = (audioFile, fragment, userId) => this.instance.post("/", {audioFile, fragment, userId});
   deleteAudio = (id) => this.instance.delete(`/${id}`)

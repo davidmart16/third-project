@@ -14,6 +14,7 @@ function AudioDetails() {
     const { id } = useParams()
 
     const [audio, setAudio] = useState(null)
+    const [comments, setComments] = useState(null)
     const [rate, setRate] = useState(0)
 
 
@@ -25,18 +26,18 @@ function AudioDetails() {
             return audioService.updateAudioRate(res.data.audio._id, rate)
         })
         .then(res => {
-            getRateComments(res.data.audio)
-            })
+            const commentsValidated = res.data.audio.comments.filter(comment => comment.isValidated === true)
+            setComments(commentsValidated)
+            getRateComments(commentsValidated)
+        })
         .catch(err => console.error(err))
     }, [rate])
 
 
-    const getRateComments = (audio) => {
-        console.log(audio.comments)
-        setAudio(audio)
+    const getRateComments = (comments) => {
         let rating = 0
-        audio.comments.map(comment => rating += comment.rate)
-        let rateAudio = rating/audio.comments.length
+        comments.map(comment => rating += comment.rate)
+        let rateAudio = rating/comments.length
         setRate(rateAudio)
     }
 
@@ -51,12 +52,12 @@ function AudioDetails() {
                 <Row>
                     <Col md={4}>
                         <ReactAudioPlayer src={`${audio.audioFile}`} autoPlay={false} controls/>
-                        <p>Valoracion del Audio: {audio.rate ? rateStar(audio.rate) : <p>Sin puntuacion</p>}</p>
+                        <p>Valoracion del Audio: {rate ? rateStar(rate) : <p>Sin puntuacion</p>}</p>
                     
                     </Col>
                     <Col md={8}>
-                    {audio.comments.length > 0 ? 
-                        <CommentList comments={audio.comments}></CommentList>
+                    {comments?.length > 0 ? 
+                        <CommentList comments={comments}></CommentList>
                     : <p>No hay comentarios aun</p>
                     }
                     </Col>

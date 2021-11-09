@@ -22,14 +22,16 @@ router.get("/validated", (req, res) => {
   .catch(err => res.status(500).json({ code: 500, message: "Error retrieving audios", err }))
 })
 
-router.get("/by-fragment", (req, res) => {
+router.get("/by-fragment/:id", (req, res) => {
   
-  const {fragment} = req.query
+  const { id } = req.params
   
   Audio
-    .find({fragment:  fragment})
-    //.populate('fragment')
-    .then(audios =>  res.status(200).json(audios))
+    .find({fragment: id})
+    .populate('fragment')
+    .then(audios => {
+      console.log('audios en el backend segun el fragment',audios)
+      return res.status(200).json(audios)})
     .catch(err => res.status(500).json({ code: 500, message: "Error retrieving audios", err }))
 })
 

@@ -1,3 +1,4 @@
+import { useParams } from "react-router";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import AudiosService from "../../../../services/audios.service";
 import ReactAudioPlayer from 'react-audio-player';
@@ -12,44 +13,37 @@ const fragmentService = new FragmentsService();
 const bookService = new BooksService()
 const audioService = new AudiosService()
 
-function FragmentDetails (props) {
-
+function FragmentDetails () {
+    
+    const { id } = useParams()
     const [fragment, setFragment] = useState(null)
     const [book, setBook] = useState(null)
     const [fragmentAudios, setFragmentAudios] = useState(null)
 
     useEffect(() => {
-        
         getFragmentAndBook()
-        getAudios()
-        
     }, [])
 
 
     const getFragmentAndBook = () => {
 
-        const { id } = props.match.params
-        const info = {fragment: null}
-
         fragmentService.getOneFragment(id)
         .then(res => {
-            info.fragment = res.data.fragment
+            setFragment(res.data.fragment)
+            getAudios(res.data.fragment)
             return bookService.getOneBook(res.data.fragment.bookId)
         })
         .then(res => {
             setBook(res.data.book)
-            setFragment(info.fragment)
         })
         .catch(err => console.error(err))
 
     }
 
 
-    const getAudios = () => {
-        audioService.getAudiosByFragment(fragment)
-        .then(res => {
-            setFragmentAudios(res.data)
-    })
+    const getAudios = (fragment) => {
+        audioService.getAudiosByFragment(fragment._id)
+        .then(res => setFragmentAudios(res.data))
     .catch(err => console.error(err))
 
     }
@@ -82,7 +76,7 @@ function FragmentDetails (props) {
                 <Row>
                     <Col>
                         <h3 className='fragment-content'>{fragment.content}</h3>
-                        <p>Este fragmento es del Libro: {book.name}</p>
+                        <p>Este fragmento es del Libro: {book?.name}</p>
                     </Col>
                 </Row>
                     }
