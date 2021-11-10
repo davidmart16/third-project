@@ -1,5 +1,5 @@
 import { Col } from "react-bootstrap";
-import rateStar from "../../../../utils";
+import {rateStar} from "../../../../utils";
 import './CommentItem.css'
 
 function CommentItem ({text, rate, _id}) {

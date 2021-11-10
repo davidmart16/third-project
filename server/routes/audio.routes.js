@@ -27,11 +27,9 @@ router.get("/by-fragment/:id", (req, res) => {
   const { id } = req.params
   
   Audio
-    .find({fragment: id})
+    .find({fragment: id, isValidated: true})
     .populate('fragment')
-    .then(audios => {
-      console.log('audios en el backend segun el fragment',audios)
-      return res.status(200).json(audios)})
+    .then(audios => res.status(200).json(audios))
     .catch(err => res.status(500).json({ code: 500, message: "Error retrieving audios", err }))
 })
 

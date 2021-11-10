@@ -1,14 +1,17 @@
 import React from "react";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { cutFragments } from "../../../../utils";
 import './FragmentItem.css'
 
 function FragmentItem({ _id, content, bookId}) {
 
+    const newContent = cutFragments(content)
+
     return(
         <Card className='fragment-item'>
         
-            <Card.Title className='content'>{content}</Card.Title>
+            <Card.Title className='content'>{newContent}</Card.Title>
 
             <Card.Body>
                 <p>Pertenece al libro con id: {bookId}</p>

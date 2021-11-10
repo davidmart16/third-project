@@ -34,7 +34,7 @@ function BookItem (props) {
         return (
             book ? 
            <Col key={`${book.name}-${book._id}-${props.idx}`} md={4}>
-                <Card className= 'book-item' >
+                <Card className='book-item'>
                     <Card.Title className='card-title'>{book?.name}</Card.Title>
                         <Card.Body>
                         {/* <img src= {bookFromApi.volumeInfo?.thumbnails?.thumbnails} alt=''/>  */}

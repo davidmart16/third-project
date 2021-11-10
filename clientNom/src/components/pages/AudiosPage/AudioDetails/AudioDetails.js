@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import AudiosService from "../../../../services/audios.service";
-import rateStar from "../../../../utils";
+import {rateStar} from "../../../../utils";
 
 
 const audioService = new AudiosService()

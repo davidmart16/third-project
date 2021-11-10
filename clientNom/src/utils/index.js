@@ -1,6 +1,6 @@
 import './index.css'
 
-export const rateStar = (rate) => {
+const rateStar = (rate) => {
 
     if(rate < 0.5)return <div className='rating'>☆☆☆☆☆</div>
     else if (rate > 0.5 && rate <= 1.5) return <div className='rating'>★☆☆☆☆</div>
@@ -11,4 +11,12 @@ export const rateStar = (rate) => {
     
 }
 
-export default rateStar;
+const cutFragments = (fragment) => {
+    
+    const editedFragment = fragment.slice(0,300)
+    let idx =  editedFragment.split('').reverse().findIndex((letter => letter === ' '))
+    
+    return editedFragment.slice(0, -idx) + '..."'
+}
+
+export {rateStar, cutFragments};

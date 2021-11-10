@@ -5,8 +5,40 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
   background-color: #ecb24fab !important;
 
+}
+
+body {
+    background: linear-gradient(180deg, #ecb24f, #6e4616);
+    background-size: 400% 400%;
+
+    -webkit-animation: gradientAnimate 15s ease infinite;
+    -moz-animation: gradientAnimate 15s ease infinite;
+    -o-animation: gradientAnimate 15s ease infinite;
+    animation: gradientAnimate 15s ease infinite;
+}
+
+@-webkit-keyframes gradientAnimate {
+    0%{background-position:50% 0%}
+    50%{background-position:50% 100%}
+    100%{background-position:50% 0%}
+}
+@-moz-keyframes gradientAnimate {
+    0%{background-position:50% 0%}
+    50%{background-position:50% 100%}
+    100%{background-position:50% 0%}
+}
+@-o-keyframes gradientAnimate {
+    0%{background-position:50% 0%}
+    50%{background-position:50% 100%}
+    100%{background-position:50% 0%}
+}
+@keyframes gradientAnimate {
+    0%{background-position:50% 0%}
+    50%{background-position:50% 100%}
+    100%{background-position:50% 0%}
 }
 
 code {

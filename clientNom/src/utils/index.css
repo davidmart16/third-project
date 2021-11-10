@@ -1,3 +1,21 @@
 .rating {
-    font-size: 30px;
+    font-size: 35px;
+    color: yellow;
+    animation: colorchange 10s infinite alternate;
+    /* background: linear-gradient(to bottom, #74ABE2, #5563DE);
+    border-radius: 1em; */
+}
+@keyframes colorchange {
+  0% {
+    color: yellow;
+  }
+  33% {
+    color: rgb(255, 255, 61);
+  }
+  66% {
+    color: rgb(255, 255, 158);
+  }
+  100% {
+    color: white;
+  }
 }

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import {Container, Row } from "react-bootstrap";
-// import { Link } from "react-router-dom";
 import BooksService from "../../../../services/books.service"
 import BookItem from "../BookItem/BookItem";
 
@@ -31,7 +30,7 @@ function BooksList (props) {
         return(
             books ?
                 books.map((book, idx) => {
-                    return (<BookItem key={`${idx}-${book._id}`} 
+                    return (<BookItem key={`${idx}-${book._id}`}
                     book={book} 
                     idx={idx}
                     loggedUser={props.loggedUser}/>)

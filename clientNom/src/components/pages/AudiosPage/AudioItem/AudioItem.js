@@ -2,7 +2,7 @@ import { Button, Col } from "react-bootstrap";
 import ReactAudioPlayer from 'react-audio-player';
 import { Link } from "react-router-dom";
 import UsersService from "../../../../services/users.service";
-import rateStar from "../../../../utils";
+import { rateStar } from "../../../../utils";
 import './AudioItem.css'
 
 const userService = new UsersService()

@@ -51,7 +51,9 @@ function HomePage(props) {
         <BooksList loggedUser= {props.loggedUser}/>
     
   
-        <AudioList loggedUser={props.loggedUser} storeUser={props.storeUser} ></AudioList>
+        <AudioList loggedUser={props.loggedUser} storeUser={props.storeUser}></AudioList>
+
+        <div className='margin-footer'></div>
     
 
     </>
