@@ -28,7 +28,7 @@ function FragmentsNotValidated(props) {
                 props.fragments.map((fragment, idx) => {
 
                     return(
-                        <Col key={`${idx}-${fragment._id}`} className='validated-items' md={4}>
+                        <Col key={`${idx}-${fragment._id}`} className='validated-items' lg={4} md={6}>
                             <p>-{fragment.content}-</p>
                             <Form onSubmit={handleSubmit}>
                                 <Button type="submit" value={fragment._id}>Validar</Button>
@@ -44,7 +44,6 @@ function FragmentsNotValidated(props) {
     return(
         <Row>
             <h3>Lista de Fragmentos a validar</h3>
-            <hr/>
             {displayFragments()}
         </Row>
         )

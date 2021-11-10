@@ -18,7 +18,7 @@ function AudiosNotValidated(props) {
                 props.audios.map((audio, idx) => {
 
                     return(
-                        <Col className='validated-items' key={audio._id + idx} md={3}>
+                        <Col className='' key={audio._id + idx} lg={4} md={6}>
                             <ReactAudioPlayer src={`${audio.audioFile}`} autoPlay={false} controls/>
                             <Form onSubmit={handleSubmit}>
                                 <Button type="submit" value={audio._id}>Validar</Button>
@@ -44,7 +44,6 @@ function AudiosNotValidated(props) {
         return(
             <Row className='center'>
             <h3>Lista de audios a validar</h3>
-                <hr/>
             {displayAudios()}
             </Row>
             )

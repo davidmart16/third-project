@@ -1,5 +1,6 @@
 .navbar {
-  background-color: #cb8f32;
+  background-image: url("https://lamenteesmaravillosa.com/wp-content/uploads/2020/01/muchos-libros.jpg");
+  /* background-color: #cb8f32; */
   font-size: 1.2rem;
 }
 .navbar .navbar-brand {
@@ -64,7 +65,7 @@
   background-color: #9f7431;
 }
 .navbar .navbar-toggler .navbar-toggler-icon {
-  color: #ecb34f;
+  color: #ecb34f; 
 }
 .navbar .navbar-collapse,
 .navbar .navbar-form {

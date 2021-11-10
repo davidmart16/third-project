@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import {Container, Row } from "react-bootstrap";
 import BooksService from "../../../../services/books.service"
 import BookItem from "../BookItem/BookItem";
+import './BooksList.css'
 
 const bookService = new BooksService()
 
@@ -21,8 +22,12 @@ function BooksList (props) {
         setBooks(books.sort(((book1, book2) => book2.fragments.length - book1.fragments.length)))
         
     }
+    const filterBooks = () => {
 
-    // const booksWithFragments = (books) => {
+        books.filter( book => book.fragments.map)
+    }
+
+    // const booksWithFragmentsValidated = (books) => {
     //     setBooks(books.filter(book => book.fragments.length !== 0 ))
     // }
     
@@ -41,14 +46,12 @@ function BooksList (props) {
     }
 
     return (
-        <Container>
-            <h2>Listado de Libros</h2>
-            <Row>
+        <Container className=''>
+            <h2 className='list-title'>Listado de Libros</h2>
+            <Row className='list'>
                 {displayBooks()}
-            </Row>
-            <hr/>
-            
-            {!props.loggedUser && <h5>Inicia sesion para subir tus audios de los fragmentos que tu quieras</h5>}
+            </Row>            
+            {!props.loggedUser && <h5 className='login-text'>Inicia sesion para subir tus audios de los fragmentos que tu quieras</h5>}
         </Container>
     )
 }

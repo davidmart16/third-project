@@ -8,7 +8,7 @@ const Profile = ({ loggedUser, storeUser }) => {
 
   return (
     <Container>
-      <h1>¡Bienvenid@, {loggedUser.username}!</h1>
+      <h1>¡Bienvenid@, {loggedUser.role === 'ADMIN' ? 'Administrador' : loggedUser.username}!</h1>
       {loggedUser.role === 'ADMIN' ?  
         <ListNotValidated loggedUser={loggedUser}></ListNotValidated>
         : <div>

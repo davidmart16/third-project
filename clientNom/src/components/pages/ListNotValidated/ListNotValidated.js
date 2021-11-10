@@ -38,7 +38,6 @@ function ListNotValidated() {
 
         return(
             <>
-                <h2>Validaciones</h2>
                 <FragmentsNotValidated  fragments={fragmentsNotValidated} getNotValidated={() => getNotValidated()}></FragmentsNotValidated>
                 <CommentsNotValidated comments={commentsNotValidated} getNotValidated={() => getNotValidated()}></CommentsNotValidated>
                 <AudiosNotValidated audios={audiosNotValidated} getNotValidated={() => getNotValidated()}></AudiosNotValidated>

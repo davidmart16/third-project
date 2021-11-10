@@ -1,18 +1,15 @@
 footer {
-    background-color: #cb8f32;
+    /* background-color: #cb8e32bd; */
+    background-color: #e4a84e;
     position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
     padding: 10px;
-    margin: 0;
-}
+    margin: 0;    
+}   
 
 
-h3{
-    font-size: 15px;
-    font-weight: 600;
-}
 
 .footer-text{
     font-size: 22px;
