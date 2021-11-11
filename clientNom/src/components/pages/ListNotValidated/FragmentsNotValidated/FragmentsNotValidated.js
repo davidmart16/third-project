@@ -28,11 +28,13 @@ function FragmentsNotValidated(props) {
                 props.fragments.map((fragment, idx) => {
 
                     return(
-                        <Col key={`${idx}-${fragment._id}`} className='validated-items' lg={4} md={6}>
-                            <p>-{fragment.content}-</p>
-                            <Form onSubmit={handleSubmit}>
-                                <Button type="submit" value={fragment._id}>Validar</Button>
-                            </Form>
+                        <Col key={`${idx}-${fragment._id}`} lg={4} md={6}>
+                            <div className='validated-items'>
+                                <p>-{fragment.content}-</p>
+                                <Form onSubmit={handleSubmit}>
+                                    <Button type="submit" value={fragment._id}>Validar</Button>
+                                </Form>
+                            </div>
                         </Col>
                     )
                 })

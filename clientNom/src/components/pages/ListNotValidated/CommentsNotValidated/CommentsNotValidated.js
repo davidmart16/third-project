@@ -28,11 +28,13 @@ function CommentsNotValidated (props){
                 props.comments.map((comment, idx) => {
 
                     return(
-                        <Col key={`${idx}-${comment._id}`} className='validated-items' lg={3} md={6}>
-                            <p>-{comment.text}-</p>
-                            <Form onSubmit={handleSubmit}>
-                                <Button type="submit" value={comment._id}>Validar</Button>
-                            </Form>
+                        <Col key={`${idx}-${comment._id}`} lg={3} md={6}>
+                            <div className='validated-items'>
+                                <p>-{comment.text}-</p>
+                                <Form onSubmit={handleSubmit}>
+                                    <Button type="submit" value={comment._id}>Validar</Button>
+                                </Form>
+                            </div>
                         </Col>
                     )
                 })
