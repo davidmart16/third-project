@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { Button, Form } from "react-bootstrap"
+import { useHistory, useParams } from 'react-router'
 import FragmentsService from '../../../../services/fragments.service'
 
 const fragmentService = new FragmentsService()
@@ -8,11 +9,12 @@ function FragmentForm(props) {
 
     const [content, setContent] = useState('')
     const [bookId, setBookId] = useState('')
+    const history = useHistory()
+    console.log('soy un clg del useparams del form de fragment',useParams())
+    const { bookIdParams } = useParams()
 
     useEffect(() => {
-        const { bookId } = props.match.params;
-        
-        setBookId(bookId)
+        setBookId(bookIdParams)
     }, [])
 
 
@@ -22,7 +24,7 @@ function FragmentForm(props) {
         fragmentService.createFragment({bookId, content})
         .then(() => {
             //cambiar el redirect?
-            props.history.push(`/libros`)
+            history.push(`/libros`)
         })
         .catch(err => console.log(err))
     }

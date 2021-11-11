@@ -13,14 +13,14 @@
     text-shadow: 2px 2px #250a0c;
     margin: 50px 0px;
 }
-.login-text {
+.login {
   color: #F6F5F3;
   font-size: 25px;
   font-weight: 500;
   text-shadow: 2px 2px #250a0c;
   margin: 20px;
 }
-.login-text:after{
+.login:after{
   content: "";
   height: 70px;
   /* background-image: url(http://placehold.it/350x65); */
@@ -28,7 +28,7 @@
   background-position: center bottom; */
 }
 
-.login-text:hover {
+.login:hover {
   cursor: pointer;
   box-shadow: 0 14px 28px #250a0c50, 0 10px 10px #250a0cef;
 }

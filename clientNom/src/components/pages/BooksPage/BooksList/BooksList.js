@@ -51,7 +51,7 @@ function BooksList (props) {
             <Row className='list'>
                 {displayBooks()}
             </Row>            
-            {!props.loggedUser && <h5 className='login-text'>Inicia sesion para subir tus audios de los fragmentos que tu quieras</h5>}
+            {!props.loggedUser && <h5 className='login'>Inicia sesion para subir tus audios de los fragmentos que tu quieras</h5>}
         </Container>
     )
 }

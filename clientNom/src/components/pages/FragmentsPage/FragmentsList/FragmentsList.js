@@ -6,7 +6,7 @@ import './FragmentsList.css'
 
 const fragmentService = new FragmentsService()
 
-function FragmentsList (props) {
+function FragmentsList ( {book} ) {
 
     const [fragments, setFragments] = useState(null)
 
@@ -15,7 +15,7 @@ function FragmentsList (props) {
         fragmentService.getFragments()
         .then(res => {
             setFragments(res.data)
-            filteredFragments(res.data, props.book._id)
+            filteredFragments(res.data, book._id)
         })
         .catch(err => console.log(err))
     }, [])
@@ -28,7 +28,7 @@ function FragmentsList (props) {
                 fragments.map((fragment, idx) => {
                     return (
                         <Col key={`${idx}-${fragment?._id}`} md={6}>
-                            <FragmentItem {...fragment} bookName= {props.book.name}/>
+                            <FragmentItem {...fragment} bookName={book.name}/>
                         </Col>
                     )
                 }) : 
@@ -45,7 +45,6 @@ function FragmentsList (props) {
         return (
             <>
                 <h2>Fragmentos</h2>
-                <hr/>
                 <Container className='list-fragments'>
                     <Row>
                         {displayFragments()}

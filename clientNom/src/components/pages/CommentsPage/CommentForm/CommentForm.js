@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { Button, Form } from "react-bootstrap"
+import { useHistory, useParams } from 'react-router'
 import CommentsService from "../../../../services/comments.service"
 import { FaStar } from "react-icons/fa"
 import './CommentForm.css'
@@ -13,12 +14,13 @@ function CommentForm (props) {
   const [audioId, setAudioId] = useState('')
   const [rate, setRate] = useState(null)
   const [hover, setHover] = useState(null)
+  const history = useHistory()
+  const { audioIdParams } = useParams()
 
     useEffect(() => {
       const userId = props.loggedUser._id
-      const { audioId } = props.match.params
 
-      setAudioId(audioId)
+      setAudioId(audioIdParams)
       setUserId(userId)
       
     }, [])
@@ -29,7 +31,7 @@ function CommentForm (props) {
 
         commentService.createComment({text: text, user: userId, audioId: audioId, rate: rate})
         .then(()=> {
-            props.history.push(`/audios/${audioId}`)
+            history.push(`/audios/${audioId}`)
         })
         .catch(err => console.error(err))
         

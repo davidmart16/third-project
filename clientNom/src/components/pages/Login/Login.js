@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Container, Form, Button } from 'react-bootstrap'
+import { useHistory } from 'react-router'
 import AuthService from '../../../services/auth.service'
 import './Login.css'
 
@@ -9,7 +10,7 @@ function Login(props) {
 
   const [username, setUsername] = useState('')
   const [pwd, setPwd] = useState('')
-  
+  const history = useHistory()
 
   const handleInput = (e) => {
     const { name, value } = e.target
@@ -23,28 +24,30 @@ function Login(props) {
     authService.login(username, pwd)
       .then(res => {
         props.storeUser(res.data)
-        props.history.push("/")
+        history.push("/")
       })
       .catch(err => console.log(err))
   }
 
     return (
-      <Container className='text'>
+      <Container className='login-text'>
+
         <Form onSubmit={handleFormSubmit}>
+
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Username</Form.Label>
+            <Form.Label classname=''>Username</Form.Label>
             <Form.Control name="username" value={username} onChange={handleInput} type="text" placeholder="Enter username" />
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
+            <Form.Label classname=''>Password</Form.Label>
             <Form.Control name="pwd" value={pwd} onChange={handleInput} type="password" placeholder="Password" />
           </Form.Group>
 
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
+          <Button className='darkness' variant="primary" type="submit">Submit</Button>
+
         </Form>
+
       </Container>
     )
 }

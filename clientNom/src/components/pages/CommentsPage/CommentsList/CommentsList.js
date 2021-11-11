@@ -15,7 +15,7 @@ function CommentList(props) {
 
         return (
         comments ?
-             comments.map(comment => <CommentItem {...comment}/>) 
+             comments.map((comment, idx) => <CommentItem key={`${comment._id}--${idx}`} {...comment}/>) 
              : <p>Cargando...</p>
         )
     }

@@ -1,18 +1,16 @@
-.text {
+.signup-text {
+    background: url('https://res.cloudinary.com/jerrick/image/upload/v1610450296/5ffd857883f7a1001c77a8bf.jpg') no-repeat center center; 
+    background-size: cover;
+    opacity: 0.8;
+    border-radius: 8px;
     font-size: 25px;
-    color: #477bbf;
-    text-shadow: 1px 1px #1c3257;
+    color: #250a0c;
+    text-shadow: 2px 2px #F6F5F3;
+    height: 20em;
+    width: 20em;
     font-weight: 500;
-    background-image: url('https://res.cloudinary.com/dvk0p9wev/image/upload/v1633626808/abierto-volando-libros-antiguos_1232-2096_lyjbdl.jpg');
-    object-fit: cover;
-    background-repeat: no-repeat;
-    height: 600px;
-    width: max-content;
-    padding: 200px;
     display: flex;
-}
-.form {
-    margin-bottom: 50px;
-    margin-top: 0px;
-    padding: 0;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px; 
 }

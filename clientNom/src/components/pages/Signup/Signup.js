@@ -1,15 +1,18 @@
 import React, { useState } from 'react'
 import { Container, Form, Button } from 'react-bootstrap'
 import AuthService from '../../../services/auth.service'
+import { useHistory } from 'react-router'
 import './Signup.css'
 
   const authService = new AuthService()
 
 function Signup(props) {
 
-const [username, setUsername] = useState('')
-const [password, setPassword] = useState('')
-const [email, setEmail] = useState('')
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('')
+  const history = useHistory()
+
 
   const handleInput = (e) => {
     const { name, value } = e.target
@@ -21,13 +24,14 @@ const [email, setEmail] = useState('')
   const handleFormSubmit = (e) => {
     e.preventDefault();
     authService.signup(username, password, email)
-      .then(res => props.history.push("/"))
+      .then(res => history.push("/"))
       .catch(err => console.log(err))
   }
 
     return (
-      <Container className='text'>
-        <Form className='form' onSubmit={handleFormSubmit}>
+      <Container className='signup-text'>
+
+        <Form onSubmit={handleFormSubmit}>
         
           <Form.Group className="mb-3" controlId="formBasicName">
             <Form.Label>Username</Form.Label>
@@ -44,10 +48,10 @@ const [email, setEmail] = useState('')
             <Form.Control name="password" value={password} onChange={handleInput} type="password" placeholder="Password" />
           </Form.Group>
 
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
+          <Button variant="primary" type="submit">Submit</Button>
+
         </Form>
+        
       </Container>
     )
 }

@@ -12,8 +12,6 @@ function BookItem (props) {
 
     const [book, setBook] = useState(null)
 
-
-
     useEffect(() => {
         if(book === props.book) return;
         setBook(props.book)
@@ -21,13 +19,11 @@ function BookItem (props) {
     }, [])
 
     // const getOneBook = (id) => {
-
     //     apiBookService.getOneBook(id)
     //     .then(res => {
     //      setBookApi(res.data.book) 
     //     })
     //     .catch(err => console.log(err))
-        
     // }
 
     const displayBook = () => {

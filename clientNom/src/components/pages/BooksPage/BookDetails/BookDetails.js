@@ -30,9 +30,6 @@ function BookDetails () {
           <Row>
             <Col>
                 <h1>Libro: {book.name}</h1>
-                {book.fragments?.map(elem => {
-                    return (<p>{elem.content}</p>)
-                })}
                   <FragmentsList book={book}/>
             </Col>
             <Link className='button-details' to={`/crear-fragmento/${book._id}`}>

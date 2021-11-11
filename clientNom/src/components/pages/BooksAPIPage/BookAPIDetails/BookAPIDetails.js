@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { useParams } from 'react-router';
 import BooksService from '../../../../services/books.service';
 import APIBooksService from '../../../../services/apibooks.service';
 
@@ -9,10 +10,11 @@ const apiBookService = new APIBooksService();
 const bookService = new BooksService();
 
 
-function BookAPIDetails(props) {
+function BookAPIDetails() {
 
     const [book, setBook] = useState(null)
     const [bookFromApi, setBookFromApi] = useState(null)
+    const { id } = useParams()
 
     useEffect(() => {
         getBook()
@@ -27,7 +29,6 @@ function BookAPIDetails(props) {
 
   const getBook = () => {
 
-    const { id } = props.match.params;
     return apiBookService.getOneBook(id)
     .then(res => {
         let book = {}

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Image, Row } from "react-bootstrap";
+import { useParams } from 'react-router'
 import { Link } from "react-router-dom";
 import APIBooksService from '../../../services/apibooks.service'
 
@@ -8,6 +9,7 @@ const apibookService = new APIBooksService()
 function BooksAPIPage(props){
 
     const [booksApi, setBooksApi] = useState(null)
+    const searchValue = useParams().text
 
     useEffect(() => {
         getBooks()
@@ -19,7 +21,6 @@ function BooksAPIPage(props){
 
     const getBooks = () => {
         
-        const searchValue = props.match.params.text
         apibookService.getBooks(searchValue)
         .then(res => {
             setBooksApi(res.data)

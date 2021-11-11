@@ -4,6 +4,7 @@
 }
 
 .nav-link{
+    z-index: 1;
     font-weight: 700;
     display: flex;
     text-align: center;
