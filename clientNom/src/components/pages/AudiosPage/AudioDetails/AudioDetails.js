@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import AudiosService from "../../../../services/audios.service";
 import {rateStar} from "../../../../utils";
+import './AudioDetails.css'
 
 
 const audioService = new AudiosService()
@@ -48,7 +49,7 @@ function AudioDetails() {
 
             <Container>
             <h3>Audio de {audio.book.name}</h3>
-            <p>Del fragmento: {audio.fragment.content}</p>
+            <p className='text-fragment'>Del fragmento: {audio.fragment.content}</p>
                 <Row>
                     <Col md={4}>
                         <ReactAudioPlayer src={`${audio.audioFile}`} autoPlay={false} controls/>

@@ -27,14 +27,14 @@ function BookItem (props) {
     // }
 
     const displayBook = () => {
-        
+        console.log(book)
         return (
             book ? 
-           <Col key={`${book.name}-${book._id}-${props.idx}`} md={6} lg={4}>
+           <Col key={`${book._id}-${props.idx}`} md={6} lg={4}>
                 <Card className='book-item'>
                     <Card.Title className='card-title'>{book?.name}</Card.Title>
                         <Card.Body>
-                        {book?.fragments.map(fragment => fragment.isValidated && <p>{cutFragments(fragment.content)}</p>)}
+                        {book.fragments.map(fragment => (fragment.isValidated) && <p>{cutFragments(fragment.content)}</p>)}
                         {props.loggedUser &&
                         <Link to={`/libros/${book?._id}`}>
                             <Button>Detalles</Button>

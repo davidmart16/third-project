@@ -1,0 +1,10 @@
+.text-fragment{
+    text-shadow: 2px 2px #250a0c;
+    /* border-bottom: 12
+px
+ solid #cb8f32; */
+    font-weight: 800;
+    margin-top: 0.4rem;
+    font-size: 18px;
+    color: rgb(255, 240, 218);
+}

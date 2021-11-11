@@ -44,7 +44,7 @@ function FragmentsList ( {book} ) {
 
         return (
             <>
-                <h2>Fragmentos</h2>
+                <h2 className='title-fragments'>Fragmentos del libro "{book.name}"</h2>
                 <Container className='list-fragments'>
                     <Row>
                         {displayFragments()}

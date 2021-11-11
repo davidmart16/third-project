@@ -11,12 +11,7 @@ function FragmentItem({ _id, content, bookName}) {
     return(
         <>
         <Card className='fragment-item'>
-        
             <Card.Title className='content'>{newContent}</Card.Title>
-
-            <Card.Body>
-                <p>Pertenece al libro : {bookName}</p>
-            </Card.Body>
         </Card>
         <Link to={`/crear-audio/${_id}`}>
         <Button variant="primary">Subir audio de este fragmento</Button>

@@ -22,10 +22,11 @@ function BooksList (props) {
         setBooks(books.sort(((book1, book2) => book2.fragments.length - book1.fragments.length)))
         
     }
-    const filterBooks = () => {
 
-        books.filter( book => book.fragments.map)
-    }
+    
+    // const filterBooks = () => {
+    //     books.filter( book => book.fragments.map)
+    // }
 
     // const booksWithFragmentsValidated = (books) => {
     //     setBooks(books.filter(book => book.fragments.length !== 0 ))
@@ -51,7 +52,7 @@ function BooksList (props) {
             <Row className='list'>
                 {displayBooks()}
             </Row>            
-            {!props.loggedUser && <h5 className='login'>Inicia sesion para subir tus audios de los fragmentos que tu quieras</h5>}
+            {!props.loggedUser && <h5 className='login'>Inicia sesion para subir audios de los fragmentos que tu quieras</h5>}
         </Container>
     )
 }

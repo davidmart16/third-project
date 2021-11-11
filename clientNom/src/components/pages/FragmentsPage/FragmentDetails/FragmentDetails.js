@@ -76,7 +76,7 @@ function FragmentDetails () {
                 <Row>
                     <Col>
                         <h3 className='fragment-content'>{fragment.content}</h3>
-                        <p>Este fragmento es del Libro: {book?.name}</p>
+                        <p className='fragment-content-p'>Este fragmento es del Libro: {book?.name}</p>
                     </Col>
                 </Row>
                     }
