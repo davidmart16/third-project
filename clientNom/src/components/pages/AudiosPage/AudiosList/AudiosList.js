@@ -48,12 +48,11 @@ function AudioList (props) {
         return (
             <Container className='border'>
                 <Row>
-                    <Col md={12}><h2>Los mejores audios</h2></Col>
+                    <Col md={12}><h2 className='list-title'>Los mejores audios</h2></Col>
                     {displayAudios()}
                 </Row>
-                <hr/>
                 {!props.loggedUser 
-                && <h5> Inicia sesion para poder comentar </h5>
+                && <h5 className='login'> Inicia sesion para poder comentar </h5>
                 }
             </Container>
         )

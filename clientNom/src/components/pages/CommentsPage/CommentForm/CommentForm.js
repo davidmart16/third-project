@@ -11,16 +11,15 @@ function CommentForm (props) {
 
   const [text, setText] = useState('')
   const [userId, setUserId] = useState('')
-  const [audioId, setAudioId] = useState('')
+  const [audioIdParams, setAudioIdParams] = useState('')
   const [rate, setRate] = useState(null)
   const [hover, setHover] = useState(null)
   const history = useHistory()
-  const { audioIdParams } = useParams()
+  const { audioId } = useParams()
 
     useEffect(() => {
       const userId = props.loggedUser._id
-
-      setAudioId(audioIdParams)
+      setAudioIdParams(audioId)
       setUserId(userId)
       
     }, [])
@@ -29,9 +28,9 @@ function CommentForm (props) {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        commentService.createComment({text: text, user: userId, audioId: audioId, rate: rate})
+        commentService.createComment({text: text, user: userId, audioId: audioIdParams, rate: rate})
         .then(()=> {
-            history.push(`/audios/${audioId}`)
+            history.push(`/audios/${audioIdParams}`)
         })
         .catch(err => console.error(err))
         

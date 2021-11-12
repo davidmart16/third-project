@@ -33,9 +33,10 @@ router.get('/by-user', (req, res) => {
 
 router.post("/", (req, res) => {
 
-  const { text, audioId, userId, rate } = req.body;
+  console.log(req.body)
+  const { text, audioId, user, rate } = req.body;
 
-  Comment.create({text, user: userId, rate})
+  Comment.create({text, user, rate})
   .then(comment => Audio.findByIdAndUpdate(audioId, {$push: {comments: comment.id}}))
   .then(audio => res.status(200).json({ audio, message: `Comment created and push in this audio ${audio._id}` }))
   .catch(err => res.status(500).json({ code: 500, message: "Error creating comment", err: err.message }))
