@@ -18,13 +18,15 @@
   border: 0px solid #cb8f32;
   text-shadow: 2px 2px #250a0c;
 }
-
 .btn-primary:hover{
   background-color: #523211;
   cursor: pointer;
   border: 2px solid #6e4616 ;
 }
 
+.btn:focus{
+  background-color: #523211 !important;
+}
 h1 {
   color: #F6F5F3;
   /* background-image: url("https://lamenteesmaravillosa.com/wp-content/uploads/2020/01/muchos-libros.jpg"); */

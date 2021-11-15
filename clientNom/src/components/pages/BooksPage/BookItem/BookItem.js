@@ -27,7 +27,6 @@ function BookItem (props) {
     // }
 
     const displayBook = () => {
-        console.log(book)
         return (
             book ? 
            <Col key={`${book._id}-${props.idx}`} md={6} lg={4}>

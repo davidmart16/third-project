@@ -35,12 +35,12 @@ function Login(props) {
         <Form onSubmit={handleFormSubmit}>
 
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label classname=''>Username</Form.Label>
+            <Form.Label>Username</Form.Label>
             <Form.Control name="username" value={username} onChange={handleInput} type="text" placeholder="Enter username" />
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label classname=''>Password</Form.Label>
+            <Form.Label>Password</Form.Label>
             <Form.Control name="pwd" value={pwd} onChange={handleInput} type="password" placeholder="Password" />
           </Form.Group>
 
